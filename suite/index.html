@@ -100,14 +100,15 @@ h1,h2,h3{color:var(--text);font-family:var(--display);font-weight:650;letter-spa
 /* Hero */
 .hero{position:relative;padding:56px 0 0;overflow-x:clip}
 .hero-top{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);align-items:center;gap:20px;min-height:600px}
-.hero-copy{position:relative;z-index:3}
+.hero-copy{position:relative;z-index:3;container-type:inline-size}
 .kicker{display:flex;align-items:center;gap:10px;margin-bottom:30px}
 .kicker .bars{display:flex;gap:4px}
 .kicker .bars i{display:block;width:18px;height:4px;border-radius:2px}
 .bars .b1{background:var(--orbit)}.bars .b2{background:var(--pulse)}.bars .b3{background:var(--cey)}
-.thesis{font-family:var(--display);font-weight:700;font-size:clamp(54px,6.3vw,96px);line-height:.93;letter-spacing:-.052em;color:#fff;font-variation-settings:'opsz' 96}
+.thesis{font-family:var(--display);font-weight:700;font-size:clamp(38px,12.4cqi,76px);line-height:1;letter-spacing:-.052em;color:#fff;font-variation-settings:'opsz' 96}
 .thesis .line{display:block}
-.thesis .w{position:relative;display:inline-block;padding-bottom:.06em;cursor:default;transition:opacity .35s;animation:rise 1s cubic-bezier(.16,.84,.24,1) both;animation-delay:calc(var(--i) * 110ms)}
+.thesis .line+.line{margin-top:.08em}
+.thesis .w{position:relative;display:inline-block;white-space:nowrap;padding-bottom:.06em;cursor:default;transition:opacity .35s;animation:rise 1s cubic-bezier(.16,.84,.24,1) both;animation-delay:calc(var(--i) * 110ms)}
 .thesis .w:after{content:'';position:absolute;left:.02em;right:.04em;bottom:-.01em;height:.055em;border-radius:.03em;background:var(--c);box-shadow:0 0 22px var(--c);transform-origin:left center;animation:draw 1.1s cubic-bezier(.65,0,.2,1) both;animation-delay:calc(450ms + var(--i) * 140ms);opacity:.8;transition:height .3s,opacity .3s}
 .w-orbit{--c:var(--orbit)}.w-pulse{--c:var(--pulse)}.w-cey{--c:var(--cey)}
 .thesis:hover .w{opacity:.35}
@@ -399,7 +400,6 @@ textarea{min-height:104px;resize:vertical}
   .orbit-chip{font-size:12px;padding:7px 11px 7px 8px}
   .orbit-chip span{display:none}
   .kicker{margin-bottom:22px}
-  .thesis{font-size:clamp(48px,14.5vw,76px)}
   .hero-actions{flex-direction:column;align-items:stretch}
   .stage-wrap{margin-top:40px}
   .rail{gap:6px;padding:10px}
@@ -455,7 +455,7 @@ textarea{min-height:104px;resize:vertical}
   .glass{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;border:1px solid #d8dee6}
   .glass:before,.col:after,.sheen:after{display:none}
   .site-header{position:static;background:none}
-  .thesis{color:#0b1a2c;font-size:60px}
+  .thesis{color:#0b1a2c;font-size:44px}
   .hero-top{grid-template-columns:1fr 220px;min-height:0}
   .object{max-width:220px}
   .emblem3d{animation:none;transform:none}
@@ -510,8 +510,7 @@ textarea{min-height:104px;resize:vertical}
         <div class="hero-copy">
           <p class="kicker label"><span class="bars" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></span>Digital Company Suite · Colombo</p>
           <h1 class="thesis" id="hero-title">
-            <span class="line"><span class="w w-orbit is-on" data-show="orbit" style="--i:0">Stock.</span></span>
-            <span class="line"><span class="w w-pulse" data-show="pulse" style="--i:1">People.</span></span>
+            <span class="line"><span class="w w-orbit is-on" data-show="orbit" style="--i:0">Stock.</span> <span class="w w-pulse" data-show="pulse" style="--i:1">People.</span></span>
             <span class="line"><span class="w w-cey" data-show="cey" style="--i:2">Business matters.</span></span>
           </h1>
           <p class="sub"><strong>Every angle of the business,</strong> one place to start.</p>
