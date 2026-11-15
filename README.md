@@ -1,11 +1,12 @@
-# Evokes Pulse & Orbit — website handoff
+# Evokes Pulse, Orbit & Digital Company Suite — website handoff
 
-Updated 15 November 2026. Current design files: Pulse and Orbit meeting-fix revision; existing visual directions retained.
+Updated 15 November 2026. Current design files: Pulse and Orbit meeting-fix revision; existing visual directions retained. Digital Company Suite page added (see "Digital Company Suite page" below).
 
 ## Current website addresses
 
 - Pulse: https://evokespulse.vercel.app/
 - Orbit: https://evokesorbit.vercel.app/
+- Digital Company Suite: new Vercel project to be created from the `suite/` folder (address to be confirmed when the project is created)
 
 Both pages now use these owner-supplied addresses for their canonical URL, social URL metadata and links to the other product. This revision applies the scoped meeting fixes below. No production deployment was performed.
 
@@ -20,6 +21,21 @@ Each HTML file includes its CSS, JavaScript and exact approved SVG artwork. Ther
 Use pulse/index.html to update the existing Pulse project and orbit/index.html to update the existing Orbit project. Do not upload the whole combined package as one site. Keep the existing project addresses when deploying these replacements. Vercel Drop creates a new project for every drop; use your existing project's connected Git workflow or the Vercel CLI linked to that project for updates. See https://vercel.com/i/deploy-to-vercel-without-git for the current Vercel guidance.
 
 If the project addresses or custom domains change later, update both pages' cross-links and their canonical/social URL metadata together. Proposed future custom addresses are pulse.evokestech.com and orbit.evokestech.com; they have not been configured by this work.
+
+
+## Digital Company Suite page
+
+`suite/index.html` is the complete Digital Company Suite page: the parent page for Evokes Orbit, Evokes Pulse and CeyDesk. Deploy it as its own Vercel project with Root Directory set to `suite` and Framework Preset set to Other (no build command). Do not combine it with the Orbit or Pulse projects.
+
+- Self-contained single file (about 490 KB): CSS, JavaScript, the Evokes glass emblem (WebP), the Orbit, Pulse and CeyDesk marks (SVG) and the fonts (Bricolage Grotesque, Geist and Geist Mono, SIL Open Font License) are embedded. No external requests, so it also works offline.
+- Branding: the glass emblem with "Digital Company Suite" and a small "by Evokes" line. The Evokes wordmark is not used.
+- Hero: the emblem in CSS 3D depth layers with a prism light sweep; Stock (Orbit), People (Pulse) and Business matters (CeyDesk) orbit it. Pointing at a hero word highlights that product. Reduced-motion preference is respected.
+- Content decisions: CeyDesk is shown as "coming soon" with no delivery partner named. No prices are shown. Orbit and Pulse are described only with claims taken from their own pages. Each product has its own sign-in today; integration, shared sign-in and combined offers are described as confirmed in writing, never assumed.
+- Product previews are labelled as illustrative sample data, reusing the Orbit and Pulse page examples.
+- The enquiry form prepares an email for the visitor to review and send; nothing is submitted or stored by the page.
+- Print: A4 with every preview, answer and FAQ shown; the dark theme switches to a light print layout.
+
+Follow-ups: the Orbit and Pulse pages still present CeyDesk as available ("Discuss support"); align them with "coming soon" before the suite is shared widely. When the Suite project address is known, consider linking "Evokes Digital Company Suite" on the Orbit and Pulse pages to it.
 
 
 ## Meeting fix list — 15 November 2026
