@@ -6,7 +6,7 @@ Updated 15 November 2026. Current design files: Pulse and Orbit meeting-fix revi
 
 - Pulse: https://evokespulse.vercel.app/
 - Orbit: https://evokesorbit.vercel.app/
-- Digital Company Suite: new Vercel project to be created from the `suite/` folder (address to be confirmed when the project is created)
+- Digital Company Suite: https://evokessuite.vercel.app/ (Vercel project `evokessuite`, Root Directory `suite`)
 
 Both pages now use these owner-supplied addresses for their canonical URL, social URL metadata and links to the other product. This revision applies the scoped meeting fixes below. No production deployment was performed.
 
@@ -27,7 +27,7 @@ If the project addresses or custom domains change later, update both pages' cros
 
 `suite/index.html` is the complete Digital Company Suite page: the parent page for Evokes Orbit, Evokes Pulse and CeyDesk. Deploy it as its own Vercel project with Root Directory set to `suite` and Framework Preset set to Other (no build command). Do not combine it with the Orbit or Pulse projects.
 
-- Self-contained single file (about 490 KB): CSS, JavaScript, the Evokes glass emblem (WebP), the Orbit, Pulse and CeyDesk marks (SVG) and the fonts (Bricolage Grotesque, Geist and Geist Mono, SIL Open Font License) are embedded. No external requests, so it also works offline.
+- Self-contained single file (about 450 KB): CSS, JavaScript, the Evokes glass emblem (WebP), the Orbit, Pulse and CeyDesk marks (SVG) and the fonts (Inter, matching evokestech.com, and Geist Mono for small labels; both SIL Open Font License) are embedded. No external requests, so it also works offline.
 - Branding: the glass emblem with "Digital Company Suite" and a small "by Evokes" line. The Evokes wordmark is not used.
 - Hero: the emblem in CSS 3D depth layers with a prism light sweep; Stock (Orbit), People (Pulse) and Business matters (CeyDesk) orbit it. Pointing at a hero word highlights that product. Reduced-motion preference is respected.
 - Content decisions: CeyDesk is shown as "coming soon" with no delivery partner named. No prices are shown. Orbit and Pulse are described only with claims taken from their own pages. Each product has its own sign-in today; integration, shared sign-in and combined offers are described as confirmed in writing, never assumed.
