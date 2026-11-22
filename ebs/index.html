@@ -194,6 +194,220 @@ a.tile:hover{transform:translateY(-3px);box-shadow:0 22px 46px -26px rgba(0,0,0,
   .body{padding-top:34px}
   .tile{padding:22px}
 }
+
+/* ===== Added: navigation, views, insights, admin ===== */
+:root{
+  --c-orbit:#6A88F0; --c-pulse:#1A9E8F; --c-compass:#C08638;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181;
+  --grid:#20262E; --axis:#343C46; --tick:#8C99A8;
+  --good:#3DBE5C; --bad:#F07373; --warn:#fab219;
+  --panel:#111419;
+}
+.nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav button{white-space:nowrap;min-height:40px;padding:8px 14px;border-radius:9px;border:1px solid transparent;background:transparent;
+  color:var(--muted);font-size:14.5px;font-weight:600}
+.nav button:hover{color:var(--ink);background:rgba(255,255,255,.05)}
+.nav button[aria-current="page"]{color:var(--ink);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12)}
+.sa-badge{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:100px;
+  color:#F4D9B0;background:rgba(192,134,56,.18);border:1px solid rgba(213,154,78,.36)}
+.view-head{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between;margin-bottom:26px}
+.view-head h2{font-size:24px;letter-spacing:-.025em;font-weight:650}
+.view-head p{font-size:14.5px;color:var(--muted);max-width:640px;margin-top:6px}
+.note{font-size:13.5px;line-height:1.6;color:var(--muted);padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.03);
+  border:1px solid var(--line);display:flex;gap:12px;align-items:flex-start}
+.note svg{flex:none;margin-top:2px}
+
+/* filter row, segmented, tabs, chips */
+.filters{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:22px}
+.seg{display:inline-flex;padding:4px;border-radius:11px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.seg button{min-height:36px;padding:6px 14px;border:0;border-radius:8px;background:transparent;color:var(--muted);font-size:14px;font-weight:600}
+.seg button[aria-pressed="true"]{background:rgba(255,255,255,.10);color:var(--ink)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:26px}
+.tabs button{display:inline-flex;align-items:center;gap:9px;min-height:46px;padding:10px 14px;border:0;background:transparent;
+  color:var(--muted);font-size:15px;font-weight:600;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--sky)}
+.tabs .k{width:9px;height:9px;border-radius:3px}
+.chip{min-height:36px;padding:6px 14px;border-radius:100px;border:1px solid var(--line-2);background:transparent;color:var(--muted);
+  font-size:13.5px;font-weight:600;display:inline-flex;align-items:center;gap:8px}
+.chip:hover{color:var(--ink)}
+.chip[aria-pressed="true"]{color:var(--ink);background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.22)}
+.chip .k{width:8px;height:8px;border-radius:50%}
+.select,.search{min-height:38px;padding:7px 12px;border-radius:9px;border:1px solid var(--line-2);background:rgba(255,255,255,.04);
+  color:var(--ink);font-size:14px}
+.select option{background:#121821}
+.search{min-width:220px}
+.search::placeholder{color:#5D6A77}
+.lbl{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+
+/* stat tiles */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-bottom:22px}
+.stat{padding:20px 20px 18px;border-radius:15px;background:rgba(255,255,255,.028);border:1px solid var(--line);min-width:0}
+.stat .l{display:block;font-size:13.5px;color:var(--muted);margin-bottom:8px}
+.stat .v{display:block;font-size:27px;font-weight:650;letter-spacing:-.025em;line-height:1.15}
+.stat .d{display:flex;flex-wrap:wrap;align-items:center;column-gap:6px;row-gap:2px;font-size:13px;font-weight:600;margin-top:8px}
+.stat .d .dn{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.stat .d.up-good,.stat .d.down-good{color:var(--good)}
+.stat .d.up-bad,.stat .d.down-bad{color:var(--bad)}
+.stat .d.flat{color:var(--muted)}
+.stat .d small{font-weight:500;color:var(--dim);font-size:12.5px}
+
+/* chart cards */
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-bottom:18px}
+.card{position:relative;padding:22px 22px 18px;border-radius:16px;background:rgba(255,255,255,.028);border:1px solid var(--line);min-width:0;margin-bottom:18px}
+.grid2 .card{margin-bottom:0}
+.card h3{font-size:16px;font-weight:650;letter-spacing:-.01em}
+.card .cs{font-size:13px;color:var(--muted);margin-top:3px}
+.card .plot{margin-top:16px;position:relative}
+.card svg{display:block;width:100%;height:auto;overflow:visible}
+.card svg text{font-family:Inter,"Segoe UI",system-ui,Arial,sans-serif}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.hit{fill:transparent;cursor:default;outline:none}
+.hit:focus-visible{stroke:var(--sky);stroke-width:2}
+.tip{position:absolute;z-index:5;pointer-events:none;min-width:150px;padding:10px 12px;border-radius:10px;background:#1A212B;
+  border:1px solid var(--line-2);box-shadow:0 14px 30px -14px rgba(0,0,0,.9);font-size:13px}
+.tip .th{color:var(--muted);font-size:12.5px;margin-bottom:6px}
+.tip .tr{display:flex;align-items:center;gap:8px;margin-top:3px}
+.tip .tr b{font-weight:650;color:var(--ink)}
+.tip .tr i{width:12px;height:2px;border-radius:1px;display:inline-block}
+.tip .tr span{color:var(--muted)}
+details.tv{margin-top:12px}
+details.tv summary{cursor:pointer;font-size:13px;color:var(--muted);font-weight:600;list-style:none;display:inline-flex;align-items:center;gap:6px;min-height:32px}
+details.tv summary::-webkit-details-marker{display:none}
+details.tv summary::before{content:"+";display:inline-block;width:14px;text-align:center;color:var(--dim)}
+details.tv[open] summary::before{content:"\2013"}
+.locked-card{padding:26px;border-radius:16px;border:1px dashed rgba(255,255,255,.16);background:rgba(255,255,255,.02);margin-bottom:18px}
+.locked-card h3{font-size:16px;font-weight:650;margin-bottom:6px}
+.locked-card p{font-size:14px;color:var(--muted)}
+
+/* highlights */
+.hl{display:flex;gap:14px;align-items:flex-start;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.hl:last-child{border-bottom:0}
+.hl .ic{width:30px;height:30px;border-radius:9px;flex:none;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.hl .t{display:block;font-size:15px;font-weight:550}
+.hl .s{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.hl button{margin-left:auto;flex:none}
+.linkbtn{background:transparent;border:0;color:#9FD4FF;font-size:13.5px;font-weight:600;padding:6px 0;min-height:32px}
+.linkbtn:hover{color:#CCE7FF}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--line)}
+table.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{text-align:left;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);
+  padding:12px 14px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02);white-space:nowrap}
+.tbl td{padding:13px 14px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td.n,.tbl th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl td.c,.tbl th.c{text-align:center}
+.tbl tbody tr.clickable{cursor:pointer}
+.tbl tbody tr.clickable:hover td{background:rgba(255,255,255,.035)}
+.tbl .sub{display:block;font-size:12.5px;color:var(--dim);margin-top:2px}
+.card .tbl-wrap{border:0;border-radius:0}
+.card table.tbl{font-size:13.5px}
+.card .tbl th,.card .tbl td{padding:9px 10px}
+.pos{color:var(--good)}.neg{color:var(--bad)}
+
+/* switches */
+.sw{position:relative;width:44px;height:26px;border-radius:100px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);
+  padding:0;flex:none;transition:background .15s,border-color .15s;vertical-align:middle}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#8C99A8;transition:transform .15s,background .15s}
+.sw[aria-checked="true"]{background:rgba(26,158,143,.55);border-color:rgba(95,207,191,.55)}
+.sw[aria-checked="true"]::after{transform:translateX(18px);background:#F4F7FA}
+.sw:disabled{opacity:.38;cursor:not-allowed}
+.sw[aria-checked="true"]:disabled{opacity:.62}
+.swrow{display:inline-flex;align-items:center;gap:10px}
+.swrow small{font-size:12.5px;color:var(--dim)}
+
+/* pills & status */
+.ppill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:100px;
+  border:1px solid var(--line-2);color:#C8D2DC;margin:2px 6px 2px 0;white-space:nowrap}
+.ppill i{width:7px;height:7px;border-radius:50%}
+.st{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;white-space:nowrap}
+.st svg{flex:none}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:100px;
+  border:1px solid rgba(255,255,255,.16);color:var(--muted);white-space:nowrap}
+.tag.new{color:#BFE6FF;border-color:rgba(126,186,255,.4);background:rgba(126,186,255,.10)}
+.tag.dev{color:#F4D9B0;border-color:rgba(213,154,78,.4);background:rgba(192,134,56,.12)}
+
+/* admin: customer detail modules */
+.prod{border:1px solid var(--line);border-radius:16px;margin-bottom:16px;background:rgba(255,255,255,.022);overflow:hidden}
+.prod-h{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.prod-h .nm{font-size:17px;font-weight:650}
+.prod-h .ds2{font-size:13px;color:var(--muted)}
+.prod-h .sp{margin-left:auto}
+.mod{border-bottom:1px solid rgba(255,255,255,.06)}
+.mod:last-child{border-bottom:0}
+.mod-h{display:flex;align-items:center;gap:12px;padding:13px 20px}
+.mod-h .exp{background:transparent;border:0;color:var(--ink);display:flex;align-items:center;gap:10px;font-size:14.5px;font-weight:600;
+  padding:6px 0;min-height:36px;text-align:left;flex:1;min-width:0}
+.mod-h .exp svg{flex:none;transition:transform .15s;color:var(--dim)}
+.mod-h .exp[aria-expanded="true"] svg{transform:rotate(90deg)}
+.mod-h .cnt{font-size:12.5px;color:var(--dim);font-weight:500}
+.feat{display:flex;align-items:center;gap:12px;padding:9px 20px 9px 54px;font-size:14px;color:#C8D2DC}
+.feat .fn{flex:1;min-width:0}
+.feat:last-child{padding-bottom:14px}
+.prod.off .mod,.prod.off .feat{opacity:.45}
+.dev-mark{font-size:12px;font-weight:600;color:#F4D9B0}
+
+/* admin: catalogue */
+.cat-group{margin-bottom:22px}
+.cat-gh{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.cat-gh h3{font-size:16px;font-weight:650}
+.cat-gh .k{width:10px;height:10px;border-radius:3px}
+.cat-gh .c{font-size:13px;color:var(--dim)}
+
+/* toast, demo dock */
+.toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);z-index:60;padding:12px 18px;border-radius:12px;background:#1A212B;
+  border:1px solid var(--line-2);font-size:14px;box-shadow:0 18px 40px -18px rgba(0,0,0,.9);max-width:min(560px,calc(100vw - 32px))}
+.dock{position:fixed;right:18px;bottom:18px;z-index:50;display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 8px 8px 14px;
+  border-radius:14px;background:rgba(18,24,33,.94);border:1px solid var(--line-2);box-shadow:0 18px 40px -18px rgba(0,0,0,.9);
+  backdrop-filter:blur(8px);max-width:calc(100vw - 36px)}
+.dock .lbl{margin-right:4px}
+.dock .sm{display:none}
+.dock button{min-height:36px;padding:6px 12px;border-radius:9px;border:1px solid transparent;background:transparent;color:var(--muted);
+  font-size:13.5px;font-weight:600}
+.dock button:hover{color:var(--ink);background:rgba(255,255,255,.06)}
+.dock button[aria-pressed="true"]{color:var(--ink);background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.14)}
+.demo-accts{margin-top:26px}
+.demo-accts .lbl{display:block;margin-bottom:10px}
+.demo-accts .row2{display:flex;flex-wrap:wrap;gap:8px}
+.demo-accts button{min-height:40px;padding:8px 13px;border-radius:10px;border:1px solid var(--line-2);background:rgba(255,255,255,.03);
+  color:#C8D2DC;font-size:13.5px;font-weight:600;text-align:left}
+.demo-accts button:hover{background:rgba(255,255,255,.07);color:var(--ink)}
+.demo-accts button small{display:block;font-size:12px;font-weight:500;color:var(--dim)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+body.has-dock .foot{margin-bottom:64px}
+
+@media(max-width:1060px){
+  .grid2{grid-template-columns:1fr}
+  .search{min-width:0;flex:1 1 180px}
+}
+@media(max-width:720px){
+  .nav{order:5;width:100%;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .tabs button{white-space:nowrap}
+  .dock{padding:6px;gap:4px;justify-content:center;flex-wrap:nowrap}
+  .dock .lbl{display:none}
+  .dock button{padding:6px 10px;font-size:13px}
+  .dock .lg{display:none}
+  .dock .sm{display:inline}
+  .tbl.cards,.tbl.cards tbody{display:block;width:100%}
+  .tbl.cards td[data-h="Products"]{flex-wrap:wrap;justify-content:flex-end}
+  .dock{left:12px;right:12px;bottom:12px}
+  .feat{padding-left:28px}
+  .tbl.cards thead{display:none}
+  .tbl.cards tr{display:block;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.07)}
+  .tbl.cards td{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border:0;text-align:right}
+  .tbl.cards td::before{content:attr(data-h);font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--dim);text-align:left}
+  .tbl.cards td.first{display:block;text-align:left}
+  .tbl.cards td.first::before{display:none}
+  body.has-dock .foot{margin-bottom:120px}
+}
+
+.cat-group .tbl td.first{min-width:190px}
 </style>
 </head>
 <body>
@@ -270,6 +484,15 @@ a.tile:hover{transform:translateY(-3px);box-shadow:0 22px 46px -26px rgba(0,0,0,
         </svg>
         <p style="font-size:13.5px;line-height:1.55;color:var(--muted)">Finance and administrator accounts are asked for a second factor after this step.</p>
       </div>
+
+      <div class="demo-accts">
+        <span class="lbl">Demo accounts</span>
+        <div class="row2">
+          <button type="button" data-persona="owner">Nuwan Perera<small>Managing Director, customer</small></button>
+          <button type="button" data-persona="staff">Dinithi Wickramasinghe<small>Accounts Executive, customer</small></button>
+          <button type="button" data-persona="admin">Vihan Nanayakkara<small>Evokes Super Admin</small></button>
+        </div>
+      </div>
     </div>
   </div>
 </main>
@@ -291,6 +514,12 @@ a.tile:hover{transform:translateY(-3px);box-shadow:0 22px 46px -26px rgba(0,0,0,
         <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#A9B6C4" stroke-width="2.4"><path d="M5 9l7 7 7-7"></path></svg>
       </button>
 
+      <nav class="nav" aria-label="Main" id="cust-nav">
+        <button type="button" data-view="home" aria-current="page">Home</button>
+        <button type="button" data-view="insights">Insights</button>
+        <button type="button" data-view="team" id="nav-team">Team &amp; access</button>
+      </nav>
+
       <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
         <button class="iconbtn" type="button" aria-label="Search">
           <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#A9B6C4" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5L21 21"></path></svg>
@@ -300,12 +529,12 @@ a.tile:hover{transform:translateY(-3px);box-shadow:0 22px 46px -26px rgba(0,0,0,
           <span style="position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--compass);border:1.5px solid var(--bg)"></span>
         </button>
         <button class="chipbtn" type="button" id="acct" aria-expanded="false" aria-controls="acct-menu" style="padding:5px 12px 5px 5px">
-          <span class="avatar">NP</span> Nuwan
+          <span class="avatar" id="cust-av">NP</span> <span id="cust-name">Nuwan</span>
         </button>
       </div>
     </div>
     <div class="menu" id="acct-menu" hidden>
-      <p>Signed in as<br><strong style="color:var(--ink);font-weight:600">nuwan@acmetraders.lk</strong></p>
+      <p>Signed in as<br><strong style="color:var(--ink);font-weight:600" id="cust-email">nuwan@acmetraders.lk</strong></p>
       <button type="button">Account settings</button>
       <button type="button" id="signout">Sign out</button>
     </div>
@@ -322,25 +551,26 @@ a.tile:hover{transform:translateY(-3px);box-shadow:0 22px 46px -26px rgba(0,0,0,
     <div class="inner">
       <div>
         <h1 id="greeting" tabindex="-1">Good afternoon, Nuwan.</h1>
-        <p class="sub">Three products, one sign-in. Four things are waiting for you today.</p>
-        <p style="font-size:13px;color:var(--dim);margin-top:18px">Last signed in yesterday, 4:12 PM · Colombo</p>
+        <p class="sub" id="hero-sub">Three products, one sign-in. Four things are waiting for you today.</p>
+        <p style="font-size:13px;color:var(--dim);margin-top:18px" id="hero-meta">Last signed in yesterday, 4:12 PM · Colombo</p>
       </div>
     </div>
   </section>
 
-  <main class="body">
+  <main class="body" id="cust-main">
+  <div id="view-home">
     <h2 class="sechead">Your products</h2>
 
     <div class="tiles">
 
-      <a class="tile o rise" href="#top">
+      <a class="tile o rise" id="tile-orbit" href="#top">
         <span class="tile-head">
           <span class="mark" style="background:rgba(50,88,209,.18);border-color:rgba(108,140,240,.30)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="24 24 244 250" width="32" height="32" aria-hidden="true" focusable="false" style="display:block"><g transform="scale(0.3333333333333333)"><g class="orbit-ring"><path fill="#3258D1" fill-rule="evenodd" d="M0 0 C0.8455 0.3144 1.6909 0.6287 2.562 0.9526 C13.8659 5.1824 24.4901 10.0828 35 16 C36.8743 17.0013 38.7493 18.0014 40.625 19 C62.8694 31.2081 83.8076 46.2973 102 64 C102.5517 64.5313 103.1034 65.0625 103.6719 65.6099 C110.1813 71.8935 116.2702 78.2869 121.8906 85.3945 C123.9966 87.9958 126.2161 90.4296 128.5 92.875 C133.6179 98.5002 137.8011 104.6829 142 111 C142.6922 112.0261 143.3845 113.0522 144.0977 114.1094 C146.0825 117.0618 148.0443 120.0283 150 123 C150.5968 123.892 151.1937 124.7841 151.8086 125.7031 C156.12 132.271 159.6778 139.1021 163.0952 146.1641 C163.9789 147.9571 164.905 149.729 165.832 151.5 C170.3054 160.0495 174.1023 168.8175 177.75 177.75 C178.2099 178.8743 178.6697 179.9986 179.1436 181.157 C188.2729 203.8126 188.2729 203.8126 186 210 C183.229 213.3071 181.5083 214.7538 177.2126 215.455 C173.6176 215.6315 170.054 215.6408 166.4548 215.5994 C165.0729 215.6012 163.691 215.6053 162.3091 215.6113 C158.5672 215.6213 154.8261 215.6001 151.0843 215.5728 C147.1642 215.549 143.2441 215.5519 139.324 215.5515 C132.7426 215.5469 126.1616 215.5233 119.5803 215.4871 C111.9754 215.4453 104.3707 215.4277 96.7656 215.4244 C88.662 215.4208 80.5584 215.402 72.4548 215.3773 C70.1225 215.3711 67.7902 215.3675 65.4579 215.3643 C61.7913 215.3584 58.1249 215.342 54.4584 215.3177 C52.4734 215.3067 50.4885 215.3054 48.5035 215.3044 C47.3189 215.2944 46.1343 215.2844 44.9138 215.2742 C43.8864 215.2695 42.859 215.2649 41.8005 215.2601 C37.9857 214.9058 35.0657 214.0682 32.332 211.3281 C31.8306 210.6423 31.3291 209.9566 30.8125 209.25 C30.2144 208.4443 29.6163 207.6387 29 206.8086 C27.5746 204.807 26.159 202.7984 24.75 200.7852 C20.28 194.4052 15.6878 188.2394 10.625 182.3125 C10.1252 181.7244 9.6255 181.1364 9.1106 180.5305 C6.5969 177.6333 4.0617 175.2854 1 173 C1 172.34 1 171.68 1 171 C0.4534 170.7654 -0.0931 170.5308 -0.6562 170.2891 C-3.624 168.6568 -5.9424 166.5957 -8.5 164.375 C-46.2048 132.3427 -96.3396 118.8585 -145.1265 122.7095 C-153.8357 123.59 -162.4316 125.2402 -171 127 C-172.1602 127.2372 -173.3203 127.4744 -174.5156 127.7188 C-187.8787 130.7857 -200.7209 135.9867 -213 142 C-213.9823 142.4602 -214.9645 142.9204 -215.9766 143.3945 C-244.3813 156.9973 -269.3176 178.8159 -288 204 C-288.611 204.8044 -289.222 205.6087 -289.8516 206.4375 C-324.1253 253.2188 -335.7017 312.1117 -328 369 C-322.2506 406.244 -303.9458 441.3241 -280 470 C-279.7074 470.3545 -279.7074 470.3545 -278.2266 472.1484 C-274.78 476.2188 -271.136 479.8013 -267.0625 483.2422 C-265.7233 484.3835 -264.4086 485.5544 -263.125 486.7578 C-250.9207 498.1517 -236.7908 507.3478 -222 515 C-221.6237 515.1982 -221.6237 515.1982 -219.7195 516.2012 C-202.2389 525.2167 -183.2959 530.5859 -164 534 C-163.6537 534.0649 -163.6537 534.0649 -161.9014 534.3936 C-143.2192 537.8051 -122.6565 537.2526 -104 534 C-102.7419 533.8054 -101.4837 533.6107 -100.1875 533.4102 C-53.7452 525.6237 -7.6719 498.5763 20 460 C22.2062 456.7512 24.3796 453.4812 26.5007 450.1763 C31.7009 442.1496 31.7009 442.1496 36 440 C37.8638 439.9 39.7312 439.8649 41.5977 439.8596 C42.1929 439.8567 42.1929 439.8567 45.2048 439.8423 C46.5176 439.8411 47.8303 439.84 49.1829 439.8389 C50.574 439.8342 51.9652 439.8292 53.3564 439.8238 C57.1416 439.8107 60.9268 439.8043 64.7121 439.7998 C67.0763 439.7969 69.4406 439.7928 71.8049 439.7883 C79.2005 439.7746 86.596 439.765 93.9916 439.7611 C102.5317 439.7566 111.0717 439.7391 119.6118 439.7101 C126.2106 439.6885 132.8094 439.6784 139.4082 439.6771 C143.3504 439.676 147.2925 439.6701 151.2347 439.6522 C154.9439 439.6358 158.6528 439.6336 162.362 439.6424 C164.3709 439.6435 166.3798 439.6298 168.3886 439.6156 C169.5874 439.6212 170.7862 439.6268 172.0213 439.6325 C173.0613 439.631 174.1012 439.6296 175.1727 439.6281 C178.4822 440.0634 180.328 441.0245 183 443 C185.5284 446.7926 185.2746 448.4505 184.7266 452.8472 C183.1356 459.7511 179.9371 466.1453 177 472.5625 C176.3049 474.1039 175.6103 475.6455 174.916 477.1873 C170.3196 487.3411 165.6002 497.356 160 507 C159.4644 507.9357 158.9288 508.8714 158.377 509.8354 C150.8451 522.9386 142.9634 535.3976 133.4683 547.1626 C131.5987 549.5022 129.7995 551.8909 127.9985 554.2834 C123.9275 559.6767 119.6444 564.7819 115.0664 569.75 C113.2439 571.7345 111.4922 573.7579 109.75 575.8125 C106.3736 579.6838 102.7965 583.3471 99.1875 587 C98.6116 587.5889 98.0357 588.1777 97.4424 588.7844 C96.0005 590.2295 94.5042 591.6199 93 593 C92.34 593 91.68 593 91 593 C90.67 593.99 90.34 594.98 90 596 C88.0234 597.8398 88.0234 597.8398 85.375 599.9375 C84.376 600.7329 83.377 601.5282 82.3477 602.3477 C81.8051 602.7758 81.2626 603.2039 80.7036 603.645 C78.9535 605.037 77.2235 606.451 75.4961 607.8711 C67.2174 614.6446 58.6882 620.8977 49.7793 626.8174 C48.2165 627.8561 46.6622 628.9075 45.1094 629.9609 C38.0829 634.6102 30.6649 638.2936 23.1025 641.9707 C20.3015 643.342 17.5188 644.7485 14.7354 646.155 C-2.248 654.7176 -19.3737 661.1163 -37.6565 666.3079 C-39.4332 666.8326 -41.2019 667.3841 -42.9666 667.948 C-115.8038 691.1628 -209.8971 682.5081 -278.1992 647.9258 C-281.8398 646.0206 -285.421 644.0182 -289 642 C-290.957 640.9351 -292.9152 639.8723 -294.875 638.8125 C-296.5852 637.8784 -298.2933 636.9404 -300 636 C-300.6616 635.6389 -301.3232 635.2778 -302.0049 634.9058 C-320.1511 624.9359 -337.4662 613.3548 -352.6289 599.1953 C-354.6082 597.3627 -356.6204 595.5991 -358.6641 593.8398 C-370.6645 583.3651 -382.0999 571.9519 -391.6211 559.1641 C-394.0384 555.9489 -396.5711 552.9294 -399.1875 549.875 C-403.9478 544.1987 -408.0165 538.2375 -412 532 C-412.7077 530.9211 -413.4154 529.8421 -414.1445 528.7305 C-423.1479 514.9813 -431.3032 501.0266 -438.0708 486.0391 C-438.9738 484.0575 -439.9011 482.0898 -440.8398 480.125 C-462.2175 435.3614 -472.4964 386.3559 -472.3125 336.875 C-472.3113 335.8999 -472.3102 334.9247 -472.309 333.92 C-472.272 318.0964 -471.4467 302.656 -469 287 C-468.8879 286.2203 -468.7757 285.4406 -468.6602 284.6372 C-463.4407 248.4149 -450.7473 212.0566 -433.1211 180.0767 C-431.4226 176.9304 -429.8726 173.7164 -428.3125 170.5 C-425.2683 164.3691 -421.7654 158.7075 -418 153 C-417.6784 152.4844 -417.6784 152.4844 -416.0508 149.875 C-403.988 130.6102 -389.8454 113.2195 -374.375 96.6211 C-372 94 -372 94 -369.8125 91.1602 C-369.2144 90.4473 -368.6162 89.7345 -368 89 C-367.34 89 -366.68 89 -366 89 C-365.67 88.34 -365.67 88.34 -364 85 C-363.34 85 -362.68 85 -362 85 C-362 84.34 -362 83.68 -362 83 C-360.6016 81.5898 -360.6016 81.5898 -358.625 79.9375 C-355.4245 77.2208 -352.2869 74.4566 -349.1875 71.625 C-343.9356 66.8975 -338.5245 62.4038 -333 58 C-332.3287 57.4615 -331.6574 56.923 -330.9658 56.3682 C-322.6676 49.7289 -314.4378 43.3101 -305.2617 37.9219 C-302.8725 36.5141 -300.5365 35.0785 -298.207 33.5781 C-289.0834 27.7091 -279.8136 22.6159 -270 18 C-269.5994 17.8094 -269.5994 17.8094 -267.5723 16.8447 C-237.4409 2.5617 -206.1568 -8.8151 -173.2109 -14.4487 C-171.0805 -14.8145 -168.9528 -15.1962 -166.8281 -15.5942 C-112.2868 -25.6643 -51.823 -19.6504 0 0 Z " transform="translate(569,115)" /></g><g class="orbit-core"><path fill="#619FF6" fill-rule="evenodd" d="M0 0 C3.3362 0.0249 6.6724 0.043 10.0086 0.0609 C16.1639 0.0969 22.3185 0.1573 28.4734 0.2324 C30.8909 0.2591 33.3084 0.2795 35.7259 0.2933 C39.1213 0.3145 42.5154 0.361 45.9105 0.4135 C46.4153 0.4141 46.4153 0.4141 48.9702 0.4172 C56.4688 0.5728 61.8337 2.2038 67.5237 7.1713 C68.1554 7.906 68.787 8.6408 69.4378 9.3978 C70.0849 10.1274 70.732 10.857 71.3987 11.6088 C75.5997 17.7032 75.3646 23.9773 75.3692 31.1019 C75.3775 32.2084 75.3858 33.3149 75.3944 34.4549 C75.4185 38.1078 75.4273 41.7605 75.4339 45.4135 C75.4429 47.9592 75.452 50.505 75.4613 53.0508 C75.4777 58.3871 75.4855 63.7232 75.4883 69.0594 C75.492 75.2069 75.5218 81.3538 75.5637 87.5011 C75.6028 93.4363 75.6139 99.3714 75.6151 105.3068 C75.6193 107.8217 75.6317 110.3366 75.6526 112.8514 C75.6796 116.3767 75.6747 119.9007 75.6622 123.4261 C75.6696 123.9411 75.6696 123.9411 75.7071 126.5472 C75.6303 134.1972 73.7693 140.7601 68.6555 146.6413 C55.9958 158.0185 33.5982 154.1859 17.8362 154.1908 C15.3964 154.194 12.9565 154.1974 10.5166 154.2009 C5.4249 154.2068 0.3332 154.2087 -4.7585 154.2081 C-11.2588 154.208 -17.7589 154.2217 -24.2592 154.2389 C-29.29 154.2501 -34.3208 154.252 -39.3516 154.2515 C-41.7476 154.2527 -44.1436 154.2571 -46.5396 154.2649 C-49.8957 154.2747 -53.2515 154.2717 -56.6076 154.2657 C-57.5804 154.2714 -58.5532 154.277 -59.5555 154.2828 C-70.4074 154.2338 -79.7502 153.6547 -87.9372 146.0228 C-88.7003 145.3835 -89.4634 144.7441 -90.2497 144.0853 C-95.3783 137.817 -95.3746 131.471 -95.3412 123.7067 C-95.3447 123.1469 -95.3447 123.1469 -95.362 120.314 C-95.3803 116.6244 -95.3765 112.9351 -95.3708 109.2455 C-95.3754 106.6739 -95.3807 104.1023 -95.3867 101.5307 C-95.3956 96.145 -95.3934 90.7594 -95.3832 85.3737 C-95.3718 79.1632 -95.3858 72.9531 -95.4126 66.7426 C-95.4375 60.7492 -95.44 54.7559 -95.4335 48.7624 C-95.4334 46.2207 -95.4394 43.6791 -95.4518 41.1374 C-95.4667 37.5808 -95.456 34.025 -95.4389 30.4684 C-95.4486 29.4235 -95.4582 28.3785 -95.4682 27.3019 C-95.3894 19.4747 -93.6931 14.2139 -88.5622 8.2728 C-81.7875 2.466 -77.4468 0.9519 -68.6755 0.7064 C-68.313 0.696 -68.313 0.696 -66.4786 0.6432 C-64.0691 0.5764 -61.6595 0.5175 -59.2497 0.4603 C-58.8289 0.4499 -58.8289 0.4499 -56.6994 0.3972 C-37.7979 -0.0626 -18.9059 -0.1519 0 0 Z " transform="translate(700.9371948242188,366.9771728515625)" /></g></g></svg></span>
           <span style="flex:1;min-width:0">
             <span class="tile-name">Orbit</span>
             <span class="tile-desc">Inventory &amp; Trading</span>
           </span>
-          <span class="badge" style="color:var(--orbit);background:rgba(50,88,209,.22)">Business</span>
+          <span class="badge" style="color:var(--orbit);background:rgba(50,88,209,.22)" title="Seat band for this product">21–50 seats</span>
         </span>
         <p>12 purchase orders open, 3 waiting on your approval.</p>
         <span class="go" style="color:var(--orbit)">Open Orbit
@@ -348,14 +578,14 @@ a.tile:hover{transform:translateY(-3px);box-shadow:0 22px 46px -26px rgba(0,0,0,
         </span>
       </a>
 
-      <a class="tile p rise rise-2" href="#top">
+      <a class="tile p rise rise-2" id="tile-pulse" href="#top">
         <span class="tile-head">
           <span class="mark" style="background:rgba(3,125,118,.20);border-color:rgba(47,185,168,.30)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="24 24 223 268" width="32" height="32" aria-hidden="true" focusable="false" style="display:block"><g transform="scale(0.3333333333333333)"><g class="pulse-body"><path fill="#037D76" fill-rule="evenodd" d="M0 0 C2.7142 0.0092 5.4275 0.0023 8.1416 -0.0205 C68.6228 -0.5249 130.4816 17.3708 179.0684 54.1155 C181.0239 55.5912 182.9961 57.0434 184.9683 58.4968 C196.6409 67.1768 207.9339 76.412 217.269 87.6375 C218.9791 89.6168 220.8153 91.3897 222.7065 93.196 C227.7067 98.1385 231.7434 103.7474 235.8315 109.446 C236.2579 110.0382 236.6843 110.6304 237.1235 111.2405 C239.6406 114.7397 242.1453 118.2474 244.6357 121.7656 C245.4705 122.9386 246.3111 124.1074 247.1562 125.2729 C249.3578 128.3154 251.4421 131.3102 253.2065 134.6335 C255.0725 138.093 257.0463 141.4586 259.0815 144.821 C263.9143 153.0758 267.8664 161.7496 271.8315 170.446 C272.1245 171.0833 272.4174 171.7206 272.7192 172.3772 C277.187 182.1582 280.6387 192.1941 283.8315 202.446 C284.079 203.233 284.3265 204.02 284.5815 204.8308 C287.9561 215.6838 290.6616 226.6413 293.019 237.7585 C293.2569 238.8585 293.4947 239.9585 293.7397 241.0918 C298.1235 262.4996 299.3778 283.6913 299.269 305.5085 C299.2675 306.1567 299.2675 306.1567 299.2598 309.4368 C299.1928 328.7635 298.5428 347.4441 294.8315 366.446 C294.6066 367.6455 294.3817 368.845 294.1499 370.0808 C283.2483 427.352 259.0046 483.0322 218.4839 525.6453 C216.2626 527.9908 214.1226 530.3708 212.019 532.821 C206.4126 539.261 200.3719 544.7743 193.7144 550.1257 C191.8405 551.634 189.9802 553.1592 188.1362 554.7039 C167.5989 571.8881 144.3964 585.0173 119.8315 595.446 C118.1837 596.1707 116.5375 596.899 114.894 597.6335 C114.2044 597.9378 113.5147 598.242 112.8042 598.5554 C111.4898 599.1489 110.1847 599.7636 108.8901 600.3992 C101.2014 604.0757 93.022 606.2054 84.8315 608.446 C83.9558 608.6915 83.08 608.9369 82.1777 609.1897 C22.4428 625.788 -42.497 624.1787 -102.1685 608.446 C-103.1059 608.201 -104.0434 607.9559 -105.0093 607.7034 C-116.7676 604.5943 -128.0821 600.8127 -139.3325 596.1951 C-141.6609 595.2451 -144.0091 594.3493 -146.356 593.446 C-150.5348 591.7716 -154.5977 589.8645 -158.6685 587.946 C-167.7233 583.6956 -167.7233 583.6956 -171.7935 581.946 C-172.5282 581.6264 -173.263 581.3067 -174.02 580.9773 C-176.6827 580.3189 -178.5447 580.7464 -181.1685 581.446 C-182.3919 585.1163 -182.2922 588.4805 -182.2661 592.3003 C-182.2647 593.101 -182.2632 593.9017 -182.2617 594.7266 C-182.2579 596.4699 -182.2518 598.2132 -182.2436 599.9565 C-182.2308 602.74 -182.2243 605.5234 -182.2195 608.3068 C-182.2061 615.2401 -182.1823 622.1734 -182.1581 629.1066 C-182.0153 670.6967 -182.0153 670.6967 -182.5435 684.6531 C-182.5589 685.1027 -182.5589 685.1027 -182.637 687.3783 C-183.3439 702.4081 -188.9902 715.587 -198.1685 727.446 C-198.7872 728.3329 -199.406 729.2198 -200.0435 730.1335 C-203.3637 733.7468 -207.2013 736.5765 -211.1685 739.446 C-211.7975 739.9024 -212.4266 740.3587 -213.0747 740.8289 C-228.4558 751.1916 -247.2975 753.4961 -265.231 750.1335 C-282.988 745.9777 -298.7249 735.5596 -308.6763 720.1375 C-316.6994 705.6663 -318.4731 692.5606 -318.4224 676.2823 C-318.4247 674.6599 -318.4279 673.0375 -318.4319 671.4151 C-318.4402 666.9807 -318.4361 662.5464 -318.4299 658.112 C-318.4254 653.3196 -318.4324 648.5272 -318.4379 643.7348 C-318.4468 634.3526 -318.4448 624.9703 -318.439 615.588 C-318.4345 607.954 -318.4339 600.3201 -318.4361 592.6861 C-318.4364 591.598 -318.4367 590.5098 -318.437 589.3887 C-318.4377 587.1778 -318.4383 584.9668 -318.439 582.7559 C-318.4447 562.0289 -318.4381 541.3019 -318.4274 520.5749 C-318.4184 502.8296 -318.42 485.0844 -318.4292 467.3391 C-318.4399 446.703 -318.4441 426.0669 -318.438 405.4307 C-318.4373 403.2244 -318.4367 401.0181 -318.4361 398.8118 C-318.4358 397.7264 -318.4355 396.6411 -318.4352 395.5229 C-318.4334 387.9132 -318.4363 380.3036 -318.441 372.694 C-318.4467 363.3976 -318.4451 354.1013 -318.4345 344.8049 C-318.4293 340.0709 -318.4271 335.337 -318.4338 330.603 C-318.4826 292.7927 -315.9709 255.8768 -303.3521 219.8679 C-302.1874 216.5009 -301.1678 213.1153 -300.1685 209.696 C-298.6541 204.7073 -296.7842 200.0616 -294.5122 195.3718 C-293.3501 192.8416 -292.3065 190.3085 -291.2856 187.7195 C-282.7478 166.2133 -271.2888 145.789 -257.1685 127.446 C-256.2221 126.1639 -255.2783 124.8799 -254.3364 123.5945 C-248.6316 115.8384 -242.735 108.5 -236.1685 101.446 C-235.06 100.158 -233.9557 98.8665 -232.856 97.571 C-225.6238 89.2793 -217.6597 81.4405 -209.1685 74.446 C-208.9063 74.2296 -208.9063 74.2296 -207.5796 73.1345 C-195.0471 62.8319 -182.0283 53.7003 -168.0107 45.5237 C-166.259 44.499 -164.5162 43.4593 -162.7739 42.4187 C-153.196 36.7879 -143.2734 32.0469 -133.1685 27.446 C-132.5341 27.1546 -131.8997 26.8631 -131.2461 26.5627 C-121.4609 22.0928 -111.4228 18.6454 -101.1685 15.446 C-100.3868 15.1985 -99.6051 14.951 -98.7998 14.696 C-87.7637 11.2373 -76.6256 8.5637 -65.2935 6.2585 C-64.1375 6.0207 -62.9815 5.7829 -61.7905 5.5378 C-57.9258 4.7791 -54.0534 4.0912 -50.1685 3.446 C-49.3749 3.3119 -48.5813 3.1777 -47.7637 3.0395 C-31.8588 0.4321 -16.0918 -0.0568 0 0 Z M-50.1685 127.446 C-50.7298 127.5653 -50.7298 127.5653 -53.5708 128.1687 C-79.3178 133.9402 -104.3291 145.2897 -125.1685 161.446 C-126.1082 162.1744 -127.0479 162.9027 -128.0161 163.6531 C-150.031 181.2333 -167.6188 201.7003 -181.1685 226.446 C-181.5354 227.1117 -181.9023 227.7773 -182.2803 228.4631 C-187.8002 238.6966 -191.6622 249.3448 -195.0435 260.446 C-195.4128 261.643 -195.7821 262.84 -196.1626 264.0732 C-201.2984 281.617 -202.6218 298.7628 -202.5317 316.9734 C-202.5312 319.0988 -202.5317 321.2241 -202.5332 323.3495 C-202.5332 327.7793 -202.5229 332.2089 -202.5046 336.6387 C-202.4821 342.2291 -202.4816 347.8192 -202.4879 353.4097 C-202.5345 407.7989 -202.5345 407.7989 -198.1685 434.446 C-195.8052 435.071 -195.8052 435.071 -193.1685 435.446 C-190.981 433.446 -190.981 433.446 -189.7075 432.0242 C-169.417 411.2187 -132.2141 399.539 -103.9536 399.1804 C-101.779 399.1702 -99.605 399.1727 -97.4304 399.1853 C-95.2367 399.196 -93.0438 399.1853 -90.8501 399.1726 C-67.0446 399.1492 -45.2019 405.0548 -24.4731 416.614 C-22.3338 417.8 -20.1674 418.9392 -17.9731 420.0203 C-8.7338 424.7172 -0.2429 432.5872 6.3315 440.5085 C7.1565 441.4779 7.9815 442.4473 8.8315 443.446 C9.4915 443.446 10.1515 443.446 10.8315 443.446 C11.0919 444.0042 11.3523 444.5624 11.6206 445.1375 C14.8723 451.3366 19.3606 457.081 23.8315 462.446 C24.8215 462.116 25.8115 461.786 26.8315 461.446 C26.8315 460.786 26.8315 460.126 26.8315 459.446 C27.4915 459.446 28.1515 459.446 28.8315 459.446 C30.2065 458.0125 30.2065 458.0125 31.8315 456.0085 C47.5649 437.6959 69.7333 426.603 93.8315 424.446 C108.3303 423.5335 121.9576 424.0017 135.8315 428.446 C136.9414 428.7967 138.0513 429.1473 139.1948 429.5085 C162.452 437.6869 162.452 437.6869 165.8315 444.446 C166.8215 444.446 167.8115 444.446 168.8315 444.446 C172.2367 436.7732 175.4036 429.1982 177.8745 421.1648 C178.8315 418.446 178.8315 418.446 180.2573 415.8289 C182.5082 410.9921 183.6189 406.0025 184.8315 400.821 C185.0928 399.7138 185.3541 398.6066 185.6233 397.4658 C194.5928 358.5065 195.9295 314.0889 184.4248 275.4553 C183.7693 273.2353 183.1462 271.0073 182.5229 268.7781 C175.2864 243.2958 164.8052 219.9764 147.8315 199.446 C146.5189 197.7587 145.2064 196.0712 143.894 194.3835 C118.4017 162.824 83.745 139.6166 44.394 129.196 C43.5142 128.9619 42.6343 128.7278 41.7278 128.4866 C25.8613 124.4909 10.4821 122.8983 -5.856 123.0085 C-6.3141 123.0096 -6.3141 123.0096 -8.6329 123.0147 C-22.8245 123.0662 -36.3429 124.0508 -50.1685 127.446 Z " transform="translate(415.16845703125,98.553955078125)" /></g><g class="pulse-person"><path fill="#037D76" fill-rule="evenodd" d="M0 0 C0.7021 0.1368 1.4041 0.2736 2.1274 0.4146 C7.0599 1.4139 11.4155 2.6324 16 4.6875 C16.7618 5.0123 17.5237 5.3372 18.3086 5.6719 C35.2785 13.4023 47.2665 27.5981 54 44.6875 C59.9472 61.4142 59.8845 79.5079 52.4365 95.7756 C43.8566 113.2689 31.4484 126.3748 13 133.6875 C-6.6463 140.3823 -25.7358 139.1426 -44.5078 130.0352 C-51.089 126.4764 -57.8506 122.1846 -63 116.6875 C-63 116.0275 -63 115.3675 -63 114.6875 C-63.66 114.6875 -64.32 114.6875 -65 114.6875 C-76.617 102.7906 -81.8555 84.4464 -82.0391 68.2383 C-80.9992 46.5247 -73.0872 29.5998 -56.9375 14.875 C-41.2471 1.7123 -20.122 -3.9854 0 0 Z " transform="translate(338,341.3125)" /></g><g class="pulse-person"><path fill="#037D76" fill-rule="evenodd" d="M0 0 C1.7506 1.3688 3.4819 2.763 5.1875 4.1875 C5.8462 4.7328 6.5049 5.278 7.1836 5.8398 C16.0411 13.9083 20.2555 24.8378 23.1875 36.1875 C23.2842 36.5072 23.2842 36.5072 23.7734 38.125 C26.3146 50.783 23.5185 65.0425 17.1875 76.1875 C7.7272 90.1302 -3.5518 98.539 -19.8125 103.1875 C-35.154 105.8212 -51.9801 104.0308 -65.3477 95.5859 C-67.6129 93.8841 -69.7137 92.0897 -71.8125 90.1875 C-72.4764 89.6384 -73.1402 89.0892 -73.8242 88.5234 C-78.504 84.3494 -81.6057 79.5849 -84.6875 74.1875 C-84.8783 73.8553 -84.8783 73.8553 -85.8438 72.1741 C-92.7119 59.6098 -92.6495 44.7309 -88.6875 31.1875 C-86.624 24.617 -83.8644 18.791 -79.8125 13.1875 C-79.07 12.1562 -78.3275 11.125 -77.5625 10.0625 C-76.985 9.4438 -76.4075 8.825 -75.8125 8.1875 C-75.1525 8.1875 -74.4925 8.1875 -73.8125 8.1875 C-73.4825 7.1975 -73.1525 6.2075 -72.8125 5.1875 C-54.4013 -13.2754 -20.8301 -14.7321 0 0 Z " transform="translate(535.8125,402.8125)" /></g><g class="pulse-person"><path fill="#88DEC4" fill-rule="evenodd" d="M0 0 C1.7506 1.3688 3.4819 2.763 5.1875 4.1875 C5.8462 4.7328 6.5049 5.278 7.1836 5.8398 C16.0411 13.9083 20.2555 24.8378 23.1875 36.1875 C23.2842 36.5072 23.2842 36.5072 23.7734 38.125 C26.3146 50.783 23.5185 65.0425 17.1875 76.1875 C7.7272 90.1302 -3.5518 98.539 -19.8125 103.1875 C-35.154 105.8212 -51.9801 104.0308 -65.3477 95.5859 C-67.6129 93.8841 -69.7137 92.0897 -71.8125 90.1875 C-72.4764 89.6384 -73.1402 89.0892 -73.8242 88.5234 C-78.504 84.3494 -81.6057 79.5849 -84.6875 74.1875 C-84.8783 73.8553 -84.8783 73.8553 -85.8438 72.1741 C-92.7119 59.6098 -92.6495 44.7309 -88.6875 31.1875 C-86.624 24.617 -83.8644 18.791 -79.8125 13.1875 C-79.07 12.1562 -78.3275 11.125 -77.5625 10.0625 C-76.985 9.4438 -76.4075 8.825 -75.8125 8.1875 C-75.1525 8.1875 -74.4925 8.1875 -73.8125 8.1875 C-73.4825 7.1975 -73.1525 6.2075 -72.8125 5.1875 C-54.4013 -13.2754 -20.8301 -14.7321 0 0 Z " transform="translate(535.8125,402.8125)" /></g><g class="pulse-person"><path fill="#88DEC4" fill-rule="evenodd" d="M0 0 C0.66 0 1.32 0 2 0 C-3.928 26.9456 -20.5447 51.7589 -40 71 C-40.6252 71.6716 -41.2504 72.3432 -41.8945 73.0352 C-48.8286 80.3647 -56.8267 86.1479 -65 92 C-65.5002 92.3616 -65.5002 92.3616 -68.0312 94.1914 C-82.8515 104.4948 -98.804 111.706 -116 117 C-116.7776 117.2409 -117.5553 117.4818 -118.3564 117.73 C-139.9158 124.3036 -162.4411 127.6723 -185 127 C-186.2788 122.5199 -185.6759 118.6698 -184.8125 114.1875 C-184.7435 113.8169 -184.7435 113.8169 -184.3943 111.9414 C-182.2923 100.9605 -180.1064 90.0219 -175 80 C-174.4033 78.7638 -173.8084 77.5267 -173.2148 76.2891 C-164.2642 57.8009 -164.2642 57.8009 -157.7344 50.4492 C-156 48 -156 48 -156.0195 46.082 C-163.6692 29.838 -178.171 13.3512 -193.8086 4.3906 C-194.5318 3.9317 -195.2549 3.4728 -196 3 C-196 2.34 -196 1.68 -196 1 C-189.8528 3.8372 -184.8316 7.8465 -179.9375 12.4375 C-179.4341 12.9022 -178.9307 13.3669 -178.4121 13.8457 C-176.9308 15.2197 -175.4634 16.607 -174 18 C-173.5263 18.4492 -173.5263 18.4492 -171.1289 20.7227 C-169 23 -169 23 -169 25 C-168.34 25 -167.68 25 -167 25 C-165.2712 27.2181 -163.6533 29.4361 -162.0625 31.75 C-161.1787 33.0159 -160.2946 34.2815 -159.4102 35.5469 C-158.0372 37.5118 -156.6693 39.4796 -155.3086 41.4531 C-154.8768 41.9636 -154.4449 42.4741 -154 43 C-153.34 43 -152.68 43 -152 43 C-151.835 42.67 -151.835 42.67 -151 41 C-150.34 41 -149.68 41 -149 41 C-148.7628 40.4393 -148.5256 39.8785 -148.2812 39.3008 C-143.6655 31.012 -134.8319 25.0109 -127 20 C-126.2562 19.4882 -125.5124 18.9765 -124.7461 18.4492 C-104.2706 5.0414 -75.5567 1.3127 -51.8569 6.1821 C-48.5159 6.9835 -45.2737 7.9513 -42 9 C-40.8901 9.3506 -39.7802 9.7012 -38.6367 10.0625 C-32.1911 12.3291 -26.2233 15.3396 -20.25 18.625 C-19.8977 18.8172 -19.8977 18.8172 -18.115 19.7898 C-13.1224 22.6327 -13.1224 22.6327 -12 26 C-11.01 26 -10.02 26 -9 26 C-8.6287 24.8656 -8.2575 23.7313 -7.875 22.5625 C-5.3596 15.0041 -2.6633 7.5072 0 0 Z " transform="translate(593,517)" /></g></g></svg></span>
           <span style="flex:1;min-width:0">
             <span class="tile-name">Pulse</span>
             <span class="tile-desc">HR &amp; Payroll</span>
           </span>
-          <span class="badge" style="color:var(--pulse);background:rgba(3,125,118,.24)">Growth</span>
+          <span class="badge" style="color:var(--pulse);background:rgba(3,125,118,.24)" title="Seat band for this product">21–50 seats</span>
         </span>
         <p>Payroll runs in 3 days. 2 leave requests need a decision.</p>
         <span class="go" style="color:var(--pulse)">Open Pulse
@@ -370,7 +600,7 @@ a.tile:hover{transform:translateY(-3px);box-shadow:0 22px 46px -26px rgba(0,0,0,
             <span class="tile-name">Compass</span>
             <span class="tile-desc">Import &amp; Export</span>
           </span>
-          <span class="badge" style="color:var(--compass);background:rgba(169,113,42,.24)">Growth +2</span>
+          <span class="badge" style="color:var(--compass);background:rgba(169,113,42,.24)" title="Seat band for this product">21–50 seats</span>
         </span>
         <p>4 shipments in transit. SHP-0142 free time ends in 2 days.</p>
         <span class="go" style="color:var(--compass)">Open Compass
@@ -409,27 +639,29 @@ a.tile:hover{transform:translateY(-3px);box-shadow:0 22px 46px -26px rgba(0,0,0,
       </div>
     </div>
 
-    <p style="font-size:13px;color:var(--dim);margin-bottom:46px">Your administrator decides which products and features your organisation sees. Each product checks that on every request.</p>
+    <p style="font-size:13px;color:var(--dim);margin-bottom:46px">Evokes sets which products and features your organisation holds. Your administrator decides who uses them. Each product checks both on every request.</p>
+
+    <div id="home-insights"></div>
 
     <div class="panels">
-      <section class="panel wide">
+      <section class="panel wide" id="waiting">
         <h2 class="sechead">Waiting for you</h2>
-        <div class="row">
+        <div class="row" data-product="compass">
           <span class="dot" style="background:var(--compass)"></span>
           <span style="flex:1;min-width:0"><span class="t">Cost sheet SHP-0142 needs final approval</span><span class="s">Compass · variance +3.0% against estimate</span></span>
           <span class="when">2d</span>
         </div>
-        <div class="row">
+        <div class="row" data-product="orbit">
           <span class="dot" style="background:#6C8CF0"></span>
           <span style="flex:1;min-width:0"><span class="t">Purchase order PO-2291 is over your approval limit</span><span class="s">Orbit · escalated to Finance</span></span>
           <span class="when">4h</span>
         </div>
-        <div class="row">
+        <div class="row" data-product="pulse">
           <span class="dot" style="background:#2FB9A8"></span>
           <span style="flex:1;min-width:0"><span class="t">Two leave requests before payroll closes</span><span class="s">Pulse · payroll runs Monday</span></span>
           <span class="when">1d</span>
         </div>
-        <div class="row">
+        <div class="row" data-product="compass">
           <span class="dot" style="background:var(--compass)"></span>
           <span style="flex:1;min-width:0"><span class="t">Free time on container MSKU-7741 ends Friday</span><span class="s">Compass · demurrage starts after that</span></span>
           <span class="when">3d</span>
@@ -439,12 +671,14 @@ a.tile:hover{transform:translateY(-3px);box-shadow:0 22px 46px -26px rgba(0,0,0,
       <section class="panel side">
         <h2 class="sechead">Your access</h2>
         <p style="font-size:15px;line-height:1.6;color:#C8D2DC;margin-bottom:18px">You reach every product your organisation holds with this one account. Your role differs in each.</p>
-        <div class="kv"><span style="color:var(--muted)">Orbit</span><span style="font-weight:550">Approver</span></div>
-        <div class="kv"><span style="color:var(--muted)">Pulse</span><span style="font-weight:550">Read only</span></div>
-        <div class="kv" style="margin-bottom:20px"><span style="color:var(--muted)">Compass</span><span style="font-weight:550">Finance</span></div>
-        <p style="font-size:13px;line-height:1.6;color:var(--dim)">Priya Jayasuriya administers this organisation. Ask her for a change of access.</p>
+        <div id="access-kv"></div>
+        <p id="access-note" style="font-size:13px;line-height:1.6;color:var(--dim)"></p>
       </section>
     </div>
+
+  </div>
+  <div id="view-insights" hidden></div>
+  <div id="view-team" hidden></div>
 
     <div class="foot">
       <p>Demonstration only. Names, figures and activity on this page are illustrative. Nothing here connects to a live system, and the page makes no network requests.</p>
@@ -453,79 +687,1101 @@ a.tile:hover{transform:translateY(-3px);box-shadow:0 22px 46px -26px rgba(0,0,0,
   </main>
 </div>
 
+<!-- ============ SUPER ADMIN ============ -->
+<div id="admin" hidden>
+  <header class="topbar">
+    <div class="inner">
+      <span class="lock" id="sa-lock"></span>
+      <span class="sa-badge">Super Admin</span>
+      <nav class="nav" aria-label="Super Admin" id="sa-nav">
+        <button type="button" data-view="overview" aria-current="page">Overview</button>
+        <button type="button" data-view="customers">Customers</button>
+        <button type="button" data-view="catalogue">Feature catalogue</button>
+        <button type="button" data-view="activity">Activity</button>
+      </nav>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <button class="chipbtn" type="button" id="sa-acct" aria-expanded="false" aria-controls="sa-menu" style="padding:5px 12px 5px 5px">
+          <span class="avatar" style="background:linear-gradient(140deg,#A9712A,#3258D1)">VN</span> Vihan
+        </button>
+      </div>
+    </div>
+    <div class="menu" id="sa-menu" hidden>
+      <p>Signed in as<br><strong style="color:var(--ink);font-weight:600">Vihan Nanayakkara</strong><br>Evokes Super Admin</p>
+      <button type="button" id="sa-signout">Sign out</button>
+    </div>
+  </header>
+
+  <section class="hero scene">
+    <div class="layer">
+      <div class="glow bloom" style="top:-220px;right:-40px;width:600px;height:600px;background:radial-gradient(circle,rgba(224,172,105,.16) 0%,rgba(224,172,105,0) 66%)"></div>
+      <div class="pane p1" style="top:-40%;height:190%;width:250px;right:5%"></div>
+      <div class="pane p2" style="top:-50%;height:190%;width:150px;right:22%"></div>
+      <div class="sheen" style="height:200%;width:170px"></div>
+    </div>
+    <div class="inner">
+      <div>
+        <h1 id="sa-title" tabindex="-1">Super Admin</h1>
+        <p class="sub" id="sa-sub"></p>
+        <p style="font-size:13px;color:var(--dim);margin-top:18px">Evokes Business Software &middot; internal</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="body">
+    <div id="sa-view"></div>
+    <div class="foot">
+      <p>Demonstration only. Companies, names and figures on this page are illustrative. Nothing here connects to a live system, and the page makes no network requests.</p>
+    </div>
+  </main>
+</div>
+
+<div class="dock" id="dock" role="group" aria-label="Demo view" hidden>
+  <span class="lbl">Demo view</span>
+  <button type="button" data-persona="owner" aria-pressed="false"><span class="lg">Managing Director</span><span class="sm">Director</span></button>
+  <button type="button" data-persona="staff" aria-pressed="false"><span class="lg">Staff member</span><span class="sm">Staff</span></button>
+  <button type="button" data-persona="admin" aria-pressed="false">Super Admin</button>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
 <script>
 (function () {
   'use strict';
-  var signin = document.getElementById('signin');
-  var app = document.getElementById('app');
-  var form = document.getElementById('signin-form');
-  var msg = document.getElementById('signin-msg');
 
-  function show(which) {
-    var toApp = which === 'app';
-    signin.hidden = toApp;
-    app.hidden = !toApp;
-    window.scrollTo(0, 0);
-    if (toApp) {
-      document.title = 'Evokes Business Software — your products';
-      document.getElementById('greeting').focus();
-    } else {
-      document.title = 'Evokes Business Software — sign in';
-      document.getElementById('email').focus();
+  /* ---------- helpers ---------- */
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function sum(a, i, j) { var t = 0; for (var k = i; k < j; k++) t += a[k]; return t; }
+  function fmtInt(n) { return Math.round(n).toLocaleString('en-US'); }
+  function lkr(k) { /* k = LKR thousands */
+    var r = k * 1000;
+    if (Math.abs(r) >= 1e6) {
+      var m = r / 1e6;
+      return 'LKR ' + String(+(m >= 100 ? m.toFixed(0) : m >= 10 ? m.toFixed(1) : m.toFixed(2))) + 'M';
     }
+    return 'LKR ' + fmtInt(r);
+  }
+  function tickK(v, top) {
+    if (v === 0) return '0';
+    if (top >= 1000) { var m = v / 1000; return (m % 1 === 0 ? m.toFixed(0) : m.toFixed(1)) + 'M'; }
+    return fmtInt(v) + (top >= 10 ? 'K' : '');
+  }
+  function word(n) { return ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six'][n] || String(n); }
+  function nowStr() {
+    return new Date().toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true });
   }
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var email = document.getElementById('email').value.trim();
-    if (!email || email.indexOf('@') < 1) {
-      msg.textContent = 'Enter a work email address to continue.';
-      document.getElementById('email').focus();
+  /* ---------- illustrative data (LKR thousands) ---------- */
+  var MONTHS = ['Nov 2025', 'Dec 2025', 'Jan 2026', 'Feb 2026', 'Mar 2026', 'Apr 2026', 'May 2026', 'Jun 2026', 'Jul 2026', 'Aug 2026', 'Sep 2026', 'Oct 2026'];
+  var MS = MONTHS.map(function (m) { return m.slice(0, 3); });
+  function rangeLabel(i, j) {
+    var a = MONTHS[i], b = MONTHS[j - 1];
+    return a.slice(4) === b.slice(4) ? a.slice(0, 3) + '–' + b : a + ' – ' + b;
+  }
+
+  function rangeShort(i, j) { return MONTHS[i].slice(0, 3) + '–' + MONTHS[j - 1].slice(0, 3); }
+
+  var DEPTS = [
+    { name: 'Sales', head: [11, 11, 11, 12, 12, 12, 12, 12, 13, 13, 13, 13],
+      cost: [1460, 1465, 1470, 1590, 1600, 1605, 1610, 1620, 1735, 1770, 1790, 1815],
+      ot: [20, 25, 18, 16, 18, 20, 20, 22, 22, 20, 18, 16], abs: [8, 10, 7, 9, 8, 7, 8, 9, 7, 7, 6, 6] },
+    { name: 'Warehouse', head: [15, 15, 15, 15, 15, 16, 16, 16, 16, 17, 16, 16],
+      cost: [1500, 1510, 1505, 1560, 1570, 1575, 1590, 1600, 1610, 1640, 1600, 1620],
+      ot: [190, 220, 185, 178, 180, 182, 185, 190, 195, 192, 140, 118], abs: [16, 18, 15, 17, 16, 15, 16, 17, 18, 17, 14, 13] },
+    { name: 'Finance', head: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
+      cost: [960, 960, 965, 970, 975, 980, 985, 990, 1000, 1010, 1015, 1020],
+      ot: [10, 15, 10, 10, 10, 8, 10, 10, 8, 10, 10, 8], abs: [2, 3, 2, 2, 3, 2, 2, 2, 2, 2, 3, 2] },
+    { name: 'Admin & HR', head: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+      cost: [640, 640, 645, 650, 655, 660, 665, 670, 675, 680, 685, 690],
+      ot: [5, 5, 4, 4, 5, 4, 4, 5, 5, 4, 4, 4], abs: [2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2] },
+    { name: 'Shipping', head: [7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8],
+      cost: [940, 945, 950, 955, 960, 1010, 1015, 1020, 1030, 1060, 1070, 1080],
+      ot: [35, 35, 33, 32, 32, 36, 36, 38, 40, 36, 33, 32], abs: [5, 6, 5, 5, 5, 6, 6, 6, 6, 5, 6, 5] }
+  ];
+  var JOINERS = [0, 1, 0, 1, 1, 2, 0, 1, 1, 1, 1, 0];
+  var LEAVERS = [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 2, 0];
+  var WORKDAYS = 21;
+  function deptTotal(key) { return MONTHS.map(function (_, i) { return DEPTS.reduce(function (t, d) { return t + d[key][i]; }, 0); }); }
+  var STAFF = deptTotal('cost'), HEAD = deptTotal('head'), OT = deptTotal('ot'), ABS = deptTotal('abs');
+
+  var SALES = [44800, 52600, 40300, 41900, 44100, 43200, 45700, 47200, 48100, 50600, 52800, 54400];
+  var GP = [9770, 11570, 8660, 9090, 9660, 9420, 10050, 10430, 10680, 11440, 12040, 12460];
+  var TOP_ITEMS = [['Steel roofing sheets', .18], ['PVC pipes and fittings', .14], ['Cement, 50 kg', .12], ['Wall and floor tiles', .10], ['Emulsion paint, 20 L', .08]];
+  var STOCK_AGE = [['0–30 days', 28400], ['31–60 days', 11200], ['61–90 days', 5600], ['Over 90 days', 4300]];
+  var RECV_AGE = [['Not yet due', 18600], ['1–30 days overdue', 7200], ['31–60 days overdue', 2700], ['Over 60 days overdue', 1800]];
+
+  var SHIP = { count: [2, 3, 1, 2, 2, 2, 2, 3, 2, 3, 2, 3],
+    days: [5.0, 5.3, 6.0, 4.5, 5.0, 4.5, 4.5, 4.7, 5.0, 4.3, 3.5, 3.7],
+    est: [9800, 15200, 4900, 10100, 9900, 10400, 10200, 15600, 10300, 15900, 10800, 16200],
+    act: [10100, 15900, 5100, 10300, 10200, 10600, 10400, 16300, 10500, 16500, 10900, 16450],
+    dem: [0, 120, 0, 0, 60, 0, 0, 95, 0, 186, 0, 0] };
+  var MIX = [['Supplier invoice', .68, 'var(--s1)'], ['Freight and insurance', .11, 'var(--s2)'], ['Duties and levies', .15, 'var(--s3)'], ['Clearing and transport', .05, 'var(--s4)'], ['Bank charges', .01, 'var(--s5)']];
+
+  /* ---------- catalogue (feature names follow the product pages) ---------- */
+  var CAT = [
+    { id: 'orbit', name: 'Orbit', desc: 'Inventory & Trading', color: 'var(--c-orbit)', modules: [
+      { id: 'orbit.avail', name: 'Availability', f: [['items', 'Items and categories'], ['grn', 'Goods received'], ['reorder', 'Stock reports and reorder needs']] },
+      { id: 'orbit.move', name: 'Movement', f: [['sales', 'Sales and invoicing'], ['issues', 'Stock issues'], ['returns', 'Customer and supplier returns']] },
+      { id: 'orbit.follow', name: 'Follow-up', f: [['receipts', 'Customer receipts'], ['payments', 'Supplier payments'], ['balances', 'Account balances and reports']] },
+      { id: 'orbit.ins', name: 'Insights', isNew: true, ins: true, f: [['margin', 'Sales and gross profit trend'], ['top', 'Top items by gross profit'], ['ageing', 'Stock ageing'], ['recv', 'Receivables ageing']] }
+    ] },
+    { id: 'pulse', name: 'Pulse', desc: 'HR & Payroll', color: 'var(--c-pulse)', modules: [
+      { id: 'pulse.emp', name: 'Employee records', f: [['info', 'Employee information and dated changes'], ['branch', 'Company and branch details']] },
+      { id: 'pulse.att', name: 'Attendance & shifts', f: [['import', 'Imports from device exports'], ['shifts', 'Shift management'], ['otnp', 'Overtime and no-pay review']] },
+      { id: 'pulse.leave', name: 'Leave management', f: [['req', 'Leave requests and approvals'], ['bal', 'Leave balances']] },
+      { id: 'pulse.pay', name: 'Monthly payroll', f: [['earn', 'Earnings and deductions'], ['review', 'Pay run review'], ['close', 'Month-close routine']] },
+      { id: 'pulse.loans', name: 'Loans & settlements', f: [['loans', 'Employee loans and advances'], ['settle', 'Settlement information']] },
+      { id: 'pulse.rep', name: 'Payroll reporting', f: [['reports', 'Payroll records and reports']] },
+      { id: 'pulse.ins', name: 'Insights', isNew: true, ins: true, f: [['head', 'Headcount and staff turnover'], ['cost', 'Payroll cost by department'], ['ot', 'Overtime trend'], ['abs', 'Absence patterns']] }
+    ] },
+    { id: 'compass', name: 'Compass', desc: 'Import & Export', color: 'var(--c-compass)', modules: [
+      { id: 'compass.cost', name: 'Costing', f: [['sheet', 'Shipment cost sheet, four stages'], ['unit', 'Landed cost per unit'], ['var', 'Actual against estimate']] },
+      { id: 'compass.track', name: 'Shipment tracking', f: [['book', 'Bookings and containers'], ['decl', 'Declaration status and release'], ['docs', 'Document and permit checklists'], ['free', 'Alerts before free time ends']] },
+      { id: 'compass.settle', name: 'Settlements', f: [['bills', 'Supplier and service-provider bills'], ['cust', 'Customer invoices and receipts'], ['tf', 'Trade-finance commitments'], ['exp', 'Export proceeds']] },
+      { id: 'compass.ins', name: 'Insights', isNew: true, ins: true, f: [['ship', 'Shipments and clearance time'], ['var', 'Landed cost against estimate'], ['dem', 'Demurrage cost'], ['mix', 'Landed cost composition']] }
+    ] },
+    { id: 'plat', name: 'Platform', desc: 'Shared by every product', color: '#8C99A8', platform: true, modules: [
+      { id: 'plat.signin', name: 'Sign-in', core: true, f: [['one', 'One sign-in for every product'], ['twofa', 'Second factor for finance and admin accounts'], ['sso', 'Sign in with a company account']] },
+      { id: 'plat.users', name: 'Users & access', core: true, f: [['console', 'Customer admin console'], ['roles', 'Roles per product'], ['insaccess', 'Insights access per person']] },
+      { id: 'plat.exec', name: 'Executive overview', isNew: true, ins: true, needs2: true, f: [['overview', 'Cross-product overview'], ['hl', 'Highlights']] },
+      { id: 'plat.notify', name: 'Notifications', core: true, f: [['wait', 'Waiting-for-you list']] }
+    ] }
+  ];
+  CAT.forEach(function (p) { p.modules.forEach(function (m) { m.product = p; m.f = m.f.map(function (x) { return { id: m.id + '.' + x[0], name: x[1], mod: m }; }); }); });
+  function findProduct(id) { for (var i = 0; i < CAT.length; i++) if (CAT[i].id === id) return CAT[i]; return null; }
+  function findModule(id) { var p = findProduct(id.split('.')[0]); if (!p) return null; for (var i = 0; i < p.modules.length; i++) if (p.modules[i].id === id) return p.modules[i]; return null; }
+  function nameOf(id) {
+    var parts = id.split('.'), p = findProduct(parts[0]);
+    if (parts.length === 1) return p.name;
+    var m = findModule(parts[0] + '.' + parts[1]);
+    if (parts.length === 2) return p.name + ' › ' + m.name;
+    for (var i = 0; i < m.f.length; i++) if (m.f[i].id === id) return p.name + ' › ' + m.name + ' › ' + m.f[i].name;
+    return id;
+  }
+
+  var CUSTOMERS = [
+    { id: 'acme', name: 'Acme Traders (Pvt) Ltd', city: 'Colombo', products: ['orbit', 'pulse', 'compass'], band: '21–50', status: 'Active', since: '2026-03', used: true, off: {} },
+    { id: 'bluewave', name: 'Bluewave Exports (Pvt) Ltd', city: 'Negombo', products: ['orbit', 'compass'], band: '6–20', status: 'Active', since: '2026-05', used: true, off: { 'compass.settle.tf': 'Customer request' } },
+    { id: 'greenleaf', name: 'Greenleaf Estates', city: 'Nuwara Eliya', products: ['pulse'], band: '21–50', status: 'Active', since: '2026-04', used: true, off: {} },
+    { id: 'coastline', name: 'Coastline Hardware', city: 'Galle', products: ['orbit'], band: '1–5', status: 'Trial', since: '2026-11', used: false, off: {} },
+    { id: 'silverline', name: 'Silverline Apparel (Pvt) Ltd', city: 'Biyagama', products: ['orbit', 'pulse'], band: 'Above 50', status: 'Active', since: '2026-02', used: true, off: { 'pulse.loans': 'Customer request' } },
+    { id: 'meridian', name: 'Meridian Pharma Distributors', city: 'Kandy', products: ['orbit', 'compass'], band: '6–20', status: 'Overdue', since: '2026-06', used: false, off: {} },
+    { id: 'harbour', name: 'Harbour Interiors', city: 'Colombo', products: ['orbit'], band: '1–5', status: 'Active', since: '2026-07', used: false, off: { 'orbit.ins': 'Customer request' } },
+    { id: 'redstone', name: 'Redstone Auto Parts', city: 'Kurunegala', products: ['orbit', 'pulse'], band: '6–20', status: 'Suspended', since: '2026-01', used: false, off: {} },
+    { id: 'lotus', name: 'Lotus Foods (Pvt) Ltd', city: 'Ja-Ela', products: ['orbit', 'pulse', 'compass'], band: '21–50', status: 'Active', since: '2026-08', used: true, off: {} },
+    { id: 'summit', name: 'Summit Electricals', city: 'Matara', products: ['orbit'], band: '6–20', status: 'Active', since: '2026-09', used: true, off: {} },
+    { id: 'palm', name: 'Palm Grove Hotels', city: 'Bentota', products: ['pulse'], band: '21–50', status: 'Trial', since: '2026-10', used: true, off: {} },
+    { id: 'northgate', name: 'Northgate Logistics', city: 'Jaffna', products: ['orbit', 'pulse', 'compass'], band: 'Above 50', status: 'Active', since: '2026-10', used: true, off: {} }
+  ];
+  function custById(id) { for (var i = 0; i < CUSTOMERS.length; i++) if (CUSTOMERS[i].id === id) return CUSTOMERS[i]; return null; }
+  var ACME = custById('acme');
+  function holds(c, p) { return c.products.indexOf(p) >= 0; }
+  function isOn(c, id) {
+    var parts = id.split('.'), p = findProduct(parts[0]);
+    if (c.status === 'Suspended') return false;
+    if (!p.platform && !holds(c, p.id)) return false;
+    var m = parts[0] + '.' + parts[1];
+    if (findModule(m).needs2 && c.products.length < 2) return false;
+    if (c.off[m]) return false;
+    if (parts.length > 2 && c.off[id]) return false;
+    return true;
+  }
+
+  var TEAM = [
+    { id: 'nuwan', name: 'Nuwan Perera', title: 'Managing Director', role: 'Owner', email: 'nuwan@acmetraders.lk', av: 'NP', roles: { orbit: 'Owner', pulse: 'Owner', compass: 'Owner' } },
+    { id: 'priya', name: 'Priya Jayasuriya', title: 'Finance Manager', role: 'Admin', roles: { orbit: 'Admin', pulse: 'Admin', compass: 'Admin' } },
+    { id: 'shehani', name: 'Shehani Fernando', title: 'HR Manager', role: 'Member', roles: { pulse: 'Payroll reviewer' } },
+    { id: 'dinithi', name: 'Dinithi Wickramasinghe', title: 'Accounts Executive', role: 'Member', email: 'dinithi@acmetraders.lk', av: 'DW', roles: { orbit: 'Approver', pulse: 'Read only', compass: 'Finance' } },
+    { id: 'ruwan', name: 'Ruwan Silva', title: 'Warehouse Supervisor', role: 'Member', roles: { orbit: 'Storekeeper' } },
+    { id: 'kasun', name: 'Kasun Herath', title: 'Shipping Coordinator', role: 'Member', roles: { compass: 'Operator' } }
+  ];
+  var GRANTS = { priya: { overview: true, orbit: true, pulse: true, compass: true }, shehani: { pulse: true }, dinithi: {}, ruwan: {}, kasun: {} };
+  function member(id) { for (var i = 0; i < TEAM.length; i++) if (TEAM[i].id === id) return TEAM[i]; return null; }
+  var AREAS = [
+    { id: 'overview', name: 'Overview', mod: 'plat.exec', color: '#8C99A8' },
+    { id: 'orbit', name: 'Orbit', mod: 'orbit.ins', color: 'var(--c-orbit)' },
+    { id: 'pulse', name: 'Pulse', mod: 'pulse.ins', color: 'var(--c-pulse)' },
+    { id: 'compass', name: 'Compass', mod: 'compass.ins', color: 'var(--c-compass)' }
+  ];
+  function areaById(a) { for (var i = 0; i < AREAS.length; i++) if (AREAS[i].id === a) return AREAS[i]; }
+  function companyHas(a) {
+    var m = findModule(areaById(a).mod);
+    if (!isOn(ACME, m.id)) return false;
+    return m.f.some(function (f) { return isOn(ACME, f.id); });
+  }
+  function hasRole(u, a) { return a === 'overview' || u.role !== 'Member' || !!u.roles[a]; }
+  function granted(u, a) {
+    if (u.role === 'Owner') return true;
+    return !!(GRANTS[u.id] && GRANTS[u.id][a]) && hasRole(u, a);
+  }
+  function userCan(a) { return companyHas(a) && granted(currentUser(), a); }
+  function feat(id) { return isOn(ACME, id); }
+
+  /* ---------- state ---------- */
+  var S = {
+    persona: null, cview: 'home', aview: 'overview', period: 3, itab: null,
+    saCustomer: null, expanded: { 'orbit.ins': true, 'pulse.ins': true, 'compass.ins': true, 'plat.exec': true },
+    catProduct: 'all', catGroup: 'product', catQuery: '',
+    cProduct: 'all', cStatus: 'all', cQuery: '', reason: 'Customer request'
+  };
+  var LOG = [
+    { when: '21 Nov 2026, 3:40 pm', cust: 'Harbour Interiors', change: 'Orbit › Insights turned off', reason: 'Customer request' },
+    { when: '18 Nov 2026, 11:05 am', cust: 'Coastline Hardware', change: 'Orbit trial started with the standard package', reason: 'Trial' },
+    { when: '12 Nov 2026, 9:20 am', cust: 'Silverline Apparel (Pvt) Ltd', change: 'Pulse › Loans & settlements turned off', reason: 'Customer request' },
+    { when: '6 Nov 2026, 4:55 pm', cust: 'Redstone Auto Parts', change: 'Account suspended', reason: 'Non-payment' },
+    { when: '30 Oct 2026, 2:10 pm', cust: 'Bluewave Exports (Pvt) Ltd', change: 'Compass › Settlements › Trade-finance commitments turned off', reason: 'Customer request' },
+    { when: '15 Oct 2026, 10:30 am', cust: 'Northgate Logistics', change: 'Orbit, Pulse and Compass added', reason: 'New subscription' }
+  ];
+  function currentUser() { return member(S.persona === 'staff' ? 'dinithi' : 'nuwan'); }
+  function addLog(c, change) { LOG.unshift({ when: nowStr(), cust: c.name, change: change, reason: S.reason }); }
+
+  /* ---------- icons ---------- */
+  var IC = {
+    up: '<svg width="11" height="11" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 19V5M5 12l7-7 7 7"/></svg>',
+    down: '<svg width="11" height="11" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12l7 7 7-7"/></svg>',
+    info: '<svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="var(--sky)" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>',
+    shield: '<svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="var(--pulse)" stroke-width="1.9"><path d="M12 3l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z"/><path d="M9 12.3l2.1 2.1L15.3 10"/></svg>',
+    chev: '<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg>',
+    trend: '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#A9B6C4" stroke-width="2"><path d="M4 17l6-6 4 4 6-7"/><path d="M15 8h5v5"/></svg>',
+    box: '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#A9B6C4" stroke-width="2"><path d="M4 8l8-4 8 4v8l-8 4-8-4z"/><path d="M4 8l8 4 8-4M12 12v8"/></svg>',
+    clock: '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#A9B6C4" stroke-width="2"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
+    ship: '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#A9B6C4" stroke-width="2"><path d="M3 15l2 5h14l2-5H3zM6 15V9h12v6M12 9V4"/></svg>'
+  };
+  function statusHTML(s) {
+    var m = {
+      Active: ['#3DBE5C', '<path d="M5 12.5l4.2 4.2L19 7"/>'],
+      Trial: ['#7EBAFF', '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'],
+      Overdue: ['#fab219', '<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17v.5"/>'],
+      Suspended: ['#E05252', '<circle cx="12" cy="12" r="8.5"/><path d="M10 9v6M14 9v6"/>']
+    }[s];
+    return '<span class="st"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="' + m[0] + '" stroke-width="2.4">' + m[1] + '</svg>' + esc(s) + '</span>';
+  }
+  function pills(c) {
+    return ['orbit', 'pulse', 'compass'].filter(function (p) { return holds(c, p); }).map(function (p) {
+      var pr = findProduct(p); return '<span class="ppill"><i style="background:' + pr.color + '"></i>' + pr.name + '</span>';
+    }).join('');
+  }
+
+  /* ---------- charts ---------- */
+  function niceTicks(max, isInt) {
+    if (!(max > 0)) return [0, 1];
+    var raw = max / 4, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / p;
+    var st = (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * p, t = [];
+    if (isInt) st = Math.max(1, Math.ceil(st));
+    for (var v = 0; v < max - 1e-9; v += st) t.push(+v.toFixed(6));
+    t.push(+(t[t.length - 1] + st).toFixed(6));
+    return t;
+  }
+  function colPath(x, y, w, h, r) {
+    r = Math.min(r, h, w / 2);
+    if (h <= 0) return '';
+    return 'M' + x + ',' + (y + h) + 'V' + (y + r) + 'A' + r + ',' + r + ' 0 0 1 ' + (x + r) + ',' + y + 'H' + (x + w - r) + 'A' + r + ',' + r + ' 0 0 1 ' + (x + w) + ',' + (y + r) + 'V' + (y + h) + 'Z';
+  }
+  function rowPath(x, y, w, h, r) {
+    r = Math.min(r, w, h / 2);
+    return 'M' + x + ',' + y + 'H' + (x + w - r) + 'A' + r + ',' + r + ' 0 0 1 ' + (x + w) + ',' + (y + r) + 'V' + (y + h - r) + 'A' + r + ',' + r + ' 0 0 1 ' + (x + w - r) + ',' + (y + h) + 'H' + x + 'Z';
+  }
+  function tableView(headers, rows) {
+    return '<details class="tv"><summary>Show as table</summary><div class="tbl-wrap"><table class="tbl"><thead><tr>' +
+      headers.map(function (h, i) { return '<th' + (i ? ' class="n"' : '') + ' scope="col">' + esc(h) + '</th>'; }).join('') +
+      '</tr></thead><tbody>' + rows.map(function (r) {
+        return '<tr>' + r.map(function (c, i) { return '<td' + (i ? ' class="n"' : '') + '>' + esc(c) + '</td>'; }).join('') + '</tr>';
+      }).join('') + '</tbody></table></div></details>';
+  }
+  function legendHTML(items, shape) {
+    return '<div class="legend">' + items.map(function (it) {
+      return '<span><i style="background:' + it.color + (shape === 'line' ? ';height:2px;width:14px;border-radius:1px' : '') + '"></i>' + esc(it.name) + '</span>';
+    }).join('') + '</div>';
+  }
+  function bindTip(host, H, getData) {
+    var tip = document.createElement('div'); tip.className = 'tip'; tip.hidden = true; host.appendChild(tip);
+    var svg = host.querySelector('svg');
+    function show(e) {
+      var el = e.currentTarget, d = getData(+el.getAttribute('data-i'));
+      tip.textContent = '';
+      var th = document.createElement('div'); th.className = 'th'; th.textContent = d.title; tip.appendChild(th);
+      d.rows.forEach(function (r) {
+        var row = document.createElement('div'); row.className = 'tr';
+        var key = document.createElement('i'); key.style.background = r.color; row.appendChild(key);
+        var b = document.createElement('b'); b.textContent = r.value; row.appendChild(b);
+        var sp = document.createElement('span'); sp.textContent = r.name; row.appendChild(sp);
+        tip.appendChild(row);
+      });
+      tip.hidden = false;
+      host.querySelectorAll('.hit.on').forEach(function (h) { h.classList.remove('on'); });
+      el.classList.add('on');
+      var hr = host.getBoundingClientRect(), sr = svg.getBoundingClientRect(), er = el.getBoundingClientRect();
+      var scale = sr.height / H, cx = er.left - hr.left + er.width / 2, tw = tip.offsetWidth, thh = tip.offsetHeight;
+      var left = Math.max(0, Math.min(cx - tw / 2, hr.width - tw));
+      var top = (sr.top - hr.top) + d.anchorY * scale - thh - 10;
+      if (top < 0) top = (sr.top - hr.top) + d.anchorY * scale + 14;
+      tip.style.left = left + 'px'; tip.style.top = top + 'px';
+    }
+    function hide() { tip.hidden = true; host.querySelectorAll('.hit.on').forEach(function (h) { h.classList.remove('on'); }); }
+    host.querySelectorAll('.hit').forEach(function (h) {
+      h.addEventListener('pointerenter', show); h.addEventListener('focus', show);
+      h.addEventListener('pointerleave', hide); h.addEventListener('blur', hide);
+    });
+  }
+  function colChart(host, o) {
+    if (!host) return;
+    var W = Math.max(280, Math.floor(host.clientWidth || 600)), H = o.height || 230;
+    var padL = 46, padR = 6, padT = 24, padB = 30;
+    var n = o.labels.length, ns = o.series.length, max = 0;
+    o.series.forEach(function (s) { s.values.forEach(function (v) { if (v > max) max = v; }); });
+    var ticks = niceTicks(max, o.int), top = ticks[ticks.length - 1];
+    var pw = W - padL - padR, ph = H - padT - padB, band = pw / n, gap = 2;
+    var bw = Math.max(4, Math.min(24, (band * 0.6 - gap * (ns - 1)) / ns)), gw = bw * ns + gap * (ns - 1);
+    function Y(v) { return padT + ph - (v / top) * ph; }
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" role="img" aria-label="' + esc(o.aria) + '">';
+    ticks.forEach(function (t) {
+      var y = Y(t).toFixed(1);
+      s += '<line x1="' + padL + '" x2="' + (W - padR) + '" y1="' + y + '" y2="' + y + '" stroke="' + (t === 0 ? 'var(--axis)' : 'var(--grid)') + '" stroke-width="1"/>';
+      s += '<text x="' + (padL - 8) + '" y="' + y + '" dy="4" text-anchor="end" font-size="11.5" fill="var(--tick)">' + esc(o.tick(t, top)) + '</text>';
+    });
+    var tallest = [];
+    for (var i = 0; i < n; i++) {
+      var gx = padL + i * band + (band - gw) / 2, hiY = padT + ph;
+      o.series.forEach(function (se, k) {
+        var v = se.values[i]; if (v == null) return;
+        var y = Y(v); if (y < hiY) hiY = y;
+        s += '<path d="' + colPath(gx + k * (bw + gap), y, bw, padT + ph - y, 4) + '" fill="' + se.color + '"/>';
+      });
+      tallest.push(hiY);
+      s += '<text x="' + (padL + i * band + band / 2).toFixed(1) + '" y="' + (H - 9) + '" text-anchor="middle" font-size="11.5" fill="var(--tick)">' + esc(o.labels[i]) + '</text>';
+    }
+    if (ns === 1) {
+      var li = n - 1, lv = o.series[0].values[li];
+      s += '<text x="' + (padL + li * band + band / 2).toFixed(1) + '" y="' + (Y(lv) - 8).toFixed(1) + '" text-anchor="middle" font-size="12" font-weight="650" fill="var(--ink)">' + esc(o.short(lv)) + '</text>';
+    }
+    for (i = 0; i < n; i++) {
+      var lab = o.labels[i] + ': ' + o.series.map(function (se) { return se.name + ' ' + o.fmt(se.values[i]); }).join(', ');
+      s += '<rect class="hit" data-i="' + i + '" tabindex="0" role="img" aria-label="' + esc(lab) + '" x="' + (padL + i * band).toFixed(1) + '" y="' + padT + '" width="' + band.toFixed(1) + '" height="' + ph + '"/>';
+    }
+    s += '</svg>';
+    var leg = ns > 1 ? legendHTML(o.series, 'rect') : '';
+    var tv = tableView([o.tableHead || 'Month'].concat(o.series.map(function (se) { return se.name; })),
+      o.labels.map(function (l, i) { return [o.fullLabels ? o.fullLabels[i] : l].concat(o.series.map(function (se) { return o.fmt(se.values[i]); })); }));
+    host.innerHTML = s + leg + tv;
+    bindTip(host, H, function (i) {
+      return { title: o.fullLabels ? o.fullLabels[i] : o.labels[i], anchorY: tallest[i],
+        rows: o.series.map(function (se) { return { color: se.color, value: o.fmt(se.values[i]), name: se.name }; }) };
+    });
+  }
+  function hbarChart(host, o) {
+    if (!host) return;
+    var W = Math.max(280, Math.floor(host.clientWidth || 600)), rowH = 46, barH = 14, n = o.items.length, H = n * rowH + 4;
+    var valW = 96, pw = W - valW, max = 0;
+    o.items.forEach(function (it) { if (it.value > max) max = it.value; });
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" role="img" aria-label="' + esc(o.aria) + '">';
+    s += '<line x1="0.5" x2="0.5" y1="18" y2="' + (H - 2) + '" stroke="var(--axis)" stroke-width="1"/>';
+    o.items.forEach(function (it, i) {
+      var y0 = i * rowH, w = Math.max(2, it.value / (max || 1) * pw), by = y0 + 22;
+      s += '<text x="0" y="' + (y0 + 14) + '" font-size="13" fill="#C8D2DC">' + esc(it.label) + '</text>';
+      s += '<path d="' + rowPath(1, by, w, barH, 4) + '" fill="' + (it.color || o.color) + '"/>';
+      s += '<text x="' + (w + 9).toFixed(1) + '" y="' + (by + 11) + '" font-size="12.5" font-weight="650" fill="var(--ink)">' + esc(o.fmt(it.value)) + '</text>';
+      s += '<rect class="hit" data-i="' + i + '" tabindex="0" role="img" aria-label="' + esc(it.label + ': ' + o.fmt(it.value) + (it.note ? ', ' + it.note : '')) + '" x="0" y="' + y0 + '" width="' + W + '" height="' + rowH + '"/>';
+    });
+    s += '</svg>';
+    host.innerHTML = s + tableView([o.head || 'Item', o.valueHead || 'Value'], o.items.map(function (it) { return [it.label, o.fmt(it.value)]; }));
+    bindTip(host, H, function (i) {
+      var it = o.items[i];
+      var rows = [{ color: it.color || o.color, value: o.fmt(it.value), name: o.valueHead || '' }];
+      if (it.note) rows.push({ color: 'transparent', value: it.note, name: '' });
+      return { title: it.label, anchorY: i * rowH + 22, rows: rows };
+    });
+  }
+  function segBar(host, o) {
+    if (!host) return;
+    var W = Math.max(280, Math.floor(host.clientWidth || 600)), H = 28, gap = 2, n = o.parts.length, x = 0;
+    var total = o.parts.reduce(function (t, p) { return t + p.value; }, 0), avail = W - gap * (n - 1);
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" role="img" aria-label="' + esc(o.aria) + '">';
+    var hits = '';
+    o.parts.forEach(function (p, i) {
+      var w = p.value / total * avail, share = Math.round(p.value / total * 100) + '%';
+      if (w > 0) {
+        s += '<rect x="' + x.toFixed(1) + '" y="0" width="' + w.toFixed(1) + '" height="' + H + '" rx="4" fill="' + p.color + '"/>';
+        if (w >= share.length * 7.4 + 16) s += '<text x="' + (x + 8).toFixed(1) + '" y="18.5" font-size="12.5" font-weight="650" fill="#ffffff">' + share + '</text>';
+        hits += '<rect class="hit" data-i="' + i + '" tabindex="0" role="img" aria-label="' + esc(p.label + ': ' + o.fmt(p.value) + ', ' + share) + '" x="' + x.toFixed(1) + '" y="0" width="' + w.toFixed(1) + '" height="' + H + '"/>';
+      }
+      x += w + gap;
+    });
+    s += hits + '</svg>';
+    host.innerHTML = s + legendHTML(o.parts.map(function (p) { return { name: p.label, color: p.color }; }), 'rect') +
+      tableView(['Cost', 'Amount', 'Share'], o.parts.map(function (p) { return [p.label, o.fmt(p.value), Math.round(p.value / total * 100) + '%']; }));
+    bindTip(host, H, function (i) {
+      var p = o.parts[i];
+      return { title: p.label, anchorY: 0, rows: [{ color: p.color, value: o.fmt(p.value), name: Math.round(p.value / total * 100) + '% of landed cost' }] };
+    });
+  }
+
+  /* ---------- stat tiles ---------- */
+  function delta(cur, prev, upGood, cmp, isPts) {
+    if (prev == null || (!isPts && prev === 0)) return '';
+    var ch = isPts ? cur - prev : (cur - prev) / prev * 100;
+    var dir = Math.abs(ch) < 0.05 ? 'flat' : ch > 0 ? 'up' : 'down';
+    var cls = dir === 'flat' || upGood === null ? 'flat' : ((dir === 'up') === upGood ? dir + '-good' : dir + '-bad');
+    var txt = dir === 'flat' ? 'No change' : (ch > 0 ? '+' : '−') + Math.abs(ch).toFixed(1) + (isPts ? ' pts' : '%');
+    return '<span class="d ' + cls + '"><span class="dn">' + (dir === 'up' ? IC.up : dir === 'down' ? IC.down : '') + txt + '</span><small>vs ' + esc(cmp) + '</small></span>';
+  }
+  function stat(label, value, d) { return '<div class="stat"><span class="l">' + esc(label) + '</span><span class="v">' + esc(value) + '</span>' + (d || '') + '</div>'; }
+  function card(id, title, sub, extra) {
+    return '<section class="card"><h3>' + esc(title) + '</h3>' + (sub ? '<p class="cs">' + esc(sub) + '</p>' : '') + (extra || '') + '<div class="plot" id="' + id + '"></div></section>';
+  }
+  function grid(cards) {
+    cards = cards.filter(Boolean);
+    if (!cards.length) return '';
+    if (cards.length === 1) return cards[0];
+    return '<div class="grid2">' + cards.join('') + '</div>';
+  }
+
+  /* ---------- views: show/hide ---------- */
+  var signin = $('signin'), app = $('app'), admin = $('admin'), dock = $('dock');
+  var Q = [];
+  function flush() { var q = Q; Q = []; q.forEach(function (f) { f(); }); }
+  function toast(msg) {
+    var t = $('toast'); t.textContent = msg; t.hidden = false;
+    clearTimeout(toast._t); toast._t = setTimeout(function () { t.hidden = true; }, 3600);
+  }
+  function greet() { var h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; }
+
+  function setPersona(p, focus) {
+    S.persona = p;
+    signin.hidden = true;
+    dock.hidden = false; document.body.classList.add('has-dock');
+    dock.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-persona') === p)); });
+    closeMenus();
+    if (p === 'admin') {
+      app.hidden = true; admin.hidden = false;
+      document.title = 'Evokes Business Software — Super Admin';
+      renderAdmin(); window.scrollTo(0, 0);
+      if (focus !== false) $('sa-title').focus();
+    } else {
+      admin.hidden = true; app.hidden = false;
+      var u = currentUser();
+      $('cust-av').textContent = u.av; $('cust-name').textContent = u.name.split(' ')[0]; $('cust-email').textContent = u.email;
+      $('nav-team').hidden = u.role === 'Member';
+      if (u.role === 'Member' && S.cview === 'team') S.cview = 'home';
+      document.title = 'Evokes Business Software — your products';
+      renderCustomer(); window.scrollTo(0, 0);
+      if (focus !== false) $('greeting').focus();
+    }
+  }
+  function signOut() {
+    closeMenus();
+    app.hidden = true; admin.hidden = true; dock.hidden = true; document.body.classList.remove('has-dock');
+    signin.hidden = false; S.persona = null;
+    document.title = 'Evokes Business Software — sign in';
+    window.scrollTo(0, 0); $('email').focus();
+  }
+
+  /* ---------- customer side ---------- */
+  var tileOrig = {};
+  function setTile(p) {
+    var held = holds(ACME, p);
+    if (p === 'compass') {
+      $('compass-held').hidden = !held; $('compass-locked').hidden = held;
+      var tg = $('toggle-entitlement');
+      tg.setAttribute('aria-pressed', String(!held));
+      tg.textContent = held ? 'Show Compass as not in plan' : 'Show Compass as included';
       return;
     }
+    var t = $('tile-' + p); if (!t) return;
+    if (!tileOrig[p]) tileOrig[p] = t.innerHTML;
+    t.innerHTML = tileOrig[p];
+    if (held) { t.classList.remove('locked'); return; }
+    t.classList.add('locked');
+    var b = t.querySelector('.badge'); b.className = 'badge quiet'; b.removeAttribute('style'); b.textContent = 'Not in your plan';
+    t.querySelector('p').textContent = p === 'orbit' ? 'Stock, sales and customer follow-up, on the same sign-in.' : 'Employee records, attendance, leave and monthly payroll, on the same sign-in.';
+    var g = t.querySelector('.go'); g.style.color = 'var(--muted)'; g.textContent = 'Ask about ' + (p === 'orbit' ? 'Orbit' : 'Pulse');
+  }
+
+  function renderCustomer() {
+    var v = S.cview, u = currentUser();
+    document.querySelectorAll('#cust-nav button').forEach(function (b) {
+      if (b.getAttribute('data-view') === v) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
+    });
+    $('view-home').hidden = v !== 'home'; $('view-insights').hidden = v !== 'insights'; $('view-team').hidden = v !== 'team';
+    ['orbit', 'pulse', 'compass'].forEach(setTile);
+    var held = ACME.products.length;
+    if (v === 'home') {
+      $('greeting').textContent = greet() + ', ' + u.name.split(' ')[0] + '.';
+      var rows = document.querySelectorAll('#waiting .row'), w = 0;
+      rows.forEach(function (r) { var ok = holds(ACME, r.getAttribute('data-product')); r.hidden = !ok; if (ok) w++; });
+      $('hero-sub').textContent = word(held) + (held === 1 ? ' product' : ' products') + ', one sign-in. ' + word(w) + (w === 1 ? ' thing is' : ' things are') + ' waiting for you today.';
+      $('hero-meta').textContent = 'Last signed in yesterday, 4:12 PM · Colombo';
+      renderAccess(u); renderHomeInsights();
+    } else if (v === 'insights') {
+      $('greeting').textContent = 'Insights';
+      $('hero-sub').textContent = 'How Acme Traders is doing, drawn from the products it holds. Figures run to the end of October 2026.';
+      $('hero-meta').textContent = 'Illustrative figures · updated each night';
+      renderInsights();
+    } else {
+      $('greeting').textContent = 'Team & access';
+      $('hero-sub').textContent = 'Evokes sets which products and features Acme Traders holds. You decide who in the company sees them.';
+      $('hero-meta').textContent = 'Changes apply the next time a person signs in';
+      renderTeam();
+    }
+    flush();
+  }
+
+  function renderAccess(u) {
+    var h = '';
+    ['orbit', 'pulse', 'compass'].forEach(function (p) {
+      if (!holds(ACME, p)) return;
+      h += '<div class="kv"><span style="color:var(--muted)">' + findProduct(p).name + '</span><span style="font-weight:550">' + esc(u.roles[p] || 'No access') + '</span></div>';
+    });
+    var areas = AREAS.filter(function (a) { return userCan(a.id); }).map(function (a) { return a.name; });
+    h += '<div class="kv" style="margin-bottom:20px"><span style="color:var(--muted)">Insights</span><span style="font-weight:550;text-align:right">' +
+      esc(areas.length === AREAS.filter(function (a) { return companyHas(a.id); }).length && areas.length ? 'All' : areas.length ? areas.join(', ') : 'Not given yet') + '</span></div>';
+    $('access-kv').innerHTML = h;
+    $('access-note').textContent = u.role === 'Member'
+      ? 'Nuwan Perera and Priya Jayasuriya administer this organisation. Ask them for a change of access.'
+      : 'You and Priya Jayasuriya administer this organisation. Manage people under Team & access.';
+  }
+
+  function renderHomeInsights() {
+    var host = $('home-insights');
+    if (!userCan('overview') || !feat('plat.exec.overview')) { host.innerHTML = ''; return; }
+    var cmp = rangeShort(6, 9), t = '';
+    if (holds(ACME, 'orbit')) t += stat('Gross profit, ' + rangeLabel(9, 12), lkr(sum(GP, 9, 12)), delta(sum(GP, 9, 12), sum(GP, 6, 9), true, cmp));
+    if (holds(ACME, 'pulse')) t += stat('Staff cost', lkr(sum(STAFF, 9, 12)), delta(sum(STAFF, 9, 12), sum(STAFF, 6, 9), false, cmp));
+    if (holds(ACME, 'orbit') && holds(ACME, 'pulse')) {
+      var r = sum(STAFF, 9, 12) / sum(GP, 9, 12) * 100, rp = sum(STAFF, 6, 9) / sum(GP, 6, 9) * 100;
+      t += stat('Staff cost as share of gross profit', r.toFixed(1) + '%', delta(r, rp, false, cmp, true));
+    }
+    host.innerHTML = '<div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px">' +
+      '<h2 class="sechead" style="margin:0">Last 3 months at a glance</h2><button type="button" class="linkbtn" data-goto="insights">Open Insights</button></div>' +
+      '<div class="stats" style="margin-bottom:46px">' + t + '</div>';
+  }
+
+  function renderInsights() {
+    var host = $('view-insights'), u = currentUser();
+    var avail = AREAS.filter(function (a) { return userCan(a.id); }).map(function (a) { return a.id; });
+    var notInPlan = AREAS.filter(function (a) { return !companyHas(a.id) && (a.id === 'overview' || holds(ACME, a.id)); });
+    if (!avail.length) {
+      host.innerHTML = '<div class="locked-card"><h3>' + (u.role === 'Member' ? 'You haven’t been given Insights yet' : 'Insights aren’t in your organisation’s plan') + '</h3><p>' +
+        (u.role === 'Member' ? 'Insights show company figures such as payroll cost and gross profit, so each person gets only the parts they need. Nuwan Perera or Priya Jayasuriya can switch them on for you under Team &amp; access.'
+          : 'Evokes has switched Insights off for Acme Traders. Contact Evokes to switch them back on.') + '</p></div>';
+      return;
+    }
+    if (avail.indexOf(S.itab) < 0) S.itab = avail[0];
+    var P = S.period, c0 = 12 - P, c1 = 12, p0 = 12 - 2 * P, p1 = 12 - P, cmp = rangeLabel(p0, p1);
+    var h = '<div class="filters" role="group" aria-label="Filters"><span class="lbl">Period</span><div class="seg">' +
+      [3, 6].map(function (n) { return '<button type="button" data-period="' + n + '" aria-pressed="' + (P === n) + '">Last ' + n + ' months</button>'; }).join('') +
+      '</div><span style="font-size:13.5px;color:var(--muted)">' + esc(rangeLabel(c0, c1)) + ', compared with ' + esc(cmp) + '</span></div>';
+    h += '<div class="tabs" role="tablist" aria-label="Insights">' + avail.map(function (a) {
+      var ar = areaById(a);
+      return '<button type="button" role="tab" id="itab-' + a + '" aria-controls="itab-panel" aria-selected="' + (S.itab === a) + '" tabindex="' + (S.itab === a ? 0 : -1) + '" data-itab="' + a + '"><span class="k" style="background:' + ar.color + '"></span>' + ar.name + '</button>';
+    }).join('') + '</div>';
+    h += '<div id="itab-panel" role="tabpanel" aria-labelledby="itab-' + S.itab + '">';
+    var ctx = { c0: c0, c1: c1, p0: p0, p1: p1, cmp: cmp, cs: rangeShort(p0, p1), P: P, avail: avail };
+    h += ({ overview: insOverview, orbit: insOrbit, pulse: insPulse, compass: insCompass })[S.itab](ctx);
+    var offF = (function () {
+      var m = findModule(areaById(S.itab).mod);
+      return m.f.filter(function (f) { return !isOn(ACME, f.id); }).map(function (f) { return f.name; });
+    })();
+    if (offF.length) h += '<p style="font-size:13px;color:var(--dim);margin-top:4px">Not in your plan: ' + esc(offF.join(', ')) + '. Contact Evokes to add ' + (offF.length > 1 ? 'them' : 'it') + '.</p>';
+    h += '</div>';
+    if (notInPlan.length && u.role !== 'Member') h += '<p style="font-size:13px;color:var(--dim);margin-top:10px">Switched off for Acme Traders by Evokes: ' + esc(notInPlan.map(function (a) { return a.name + ' Insights'; }).join(', ')) + '.</p>';
+    h += '<div class="note" style="margin-top:22px">' + IC.info + '<span>Insights show what changed, not why it changed. A dip in one department tells you where to look; check with the people involved before you act on it.</span></div>';
+    host.innerHTML = h;
+  }
+
+  function insOverview(x) {
+    var o = holds(ACME, 'orbit'), pu = holds(ACME, 'pulse'), co = holds(ACME, 'compass'), h = '';
+    if (feat('plat.exec.overview')) {
+      h += '<div class="stats">';
+      if (o) h += stat('Sales', lkr(sum(SALES, x.c0, x.c1)), delta(sum(SALES, x.c0, x.c1), sum(SALES, x.p0, x.p1), true, x.cs));
+      if (o) h += stat('Gross profit', lkr(sum(GP, x.c0, x.c1)), delta(sum(GP, x.c0, x.c1), sum(GP, x.p0, x.p1), true, x.cs));
+      if (pu) h += stat('Staff cost', lkr(sum(STAFF, x.c0, x.c1)), delta(sum(STAFF, x.c0, x.c1), sum(STAFF, x.p0, x.p1), false, x.cs));
+      if (o && pu) {
+        var r = sum(STAFF, x.c0, x.c1) / sum(GP, x.c0, x.c1) * 100, rp = sum(STAFF, x.p0, x.p1) / sum(GP, x.p0, x.p1) * 100;
+        h += stat('Staff cost as share of gross profit', r.toFixed(1) + '%', delta(r, rp, false, x.cs, true));
+      }
+      if (co) h += stat('Imports, landed cost', lkr(sum(SHIP.act, x.c0, x.c1)), delta(sum(SHIP.act, x.c0, x.c1), sum(SHIP.act, x.p0, x.p1), null, x.cs));
+      h += '</div>';
+      var series = [];
+      if (o) series.push({ name: 'Gross profit', color: 'var(--c-orbit)', values: GP.slice(x.c0, x.c1) });
+      if (pu) series.push({ name: 'Staff cost', color: 'var(--c-pulse)', values: STAFF.slice(x.c0, x.c1) });
+      if (series.length) {
+        h += card('ch-ov', series.length > 1 ? 'Gross profit and staff cost by month' : series[0].name + ' by month', 'From ' + (o ? 'Orbit' : '') + (o && pu ? ' and ' : '') + (pu ? 'Pulse' : '') + ' · LKR');
+        Q.push(function () { colChart($('ch-ov'), { labels: MS.slice(x.c0, x.c1), fullLabels: MONTHS.slice(x.c0, x.c1), series: series, fmt: lkr, short: lkr, tick: tickK, aria: 'Gross profit and staff cost by month' }); });
+      }
+    }
+    if (feat('plat.exec.hl')) {
+      var hl = [];
+      if (o && pu) {
+        var g = (sum(GP, x.c0, x.c1) - sum(GP, x.p0, x.p1)) / sum(GP, x.p0, x.p1) * 100, st = (sum(STAFF, x.c0, x.c1) - sum(STAFF, x.p0, x.p1)) / sum(STAFF, x.p0, x.p1) * 100;
+        hl.push({ ic: IC.trend, t: 'Gross profit rose ' + g.toFixed(1) + '% while staff cost rose ' + st.toFixed(1) + '%.', s: 'Orbit and Pulse · ' + rangeLabel(x.c0, x.c1) + ' against ' + x.cmp, go: 'orbit' });
+      }
+      if (pu) {
+        var wh = DEPTS[1], a = sum(wh.ot, x.c0, x.c1), b = sum(wh.ot, x.p0, x.p1);
+        hl.push({ ic: IC.clock, t: 'Warehouse overtime ' + (a < b ? 'fell ' : 'rose ') + Math.abs((a - b) / b * 100).toFixed(0) + '%, to ' + fmtInt(a) + ' hours.', s: 'Pulse · most of the drop came in September and October', go: 'pulse' });
+      }
+      if (o) {
+        var tot = STOCK_AGE.reduce(function (t2, r2) { return t2 + r2[1]; }, 0), old = STOCK_AGE[3][1];
+        hl.push({ ic: IC.box, t: lkr(old) + ' of stock is older than 90 days, ' + Math.round(old / tot * 100) + '% of stock value.', s: 'Orbit · as at 31 October 2026', go: 'orbit' });
+      }
+      if (co) {
+        var ea = sum(SHIP.est, x.c0, x.c1), aa = sum(SHIP.act, x.c0, x.c1), dm = sum(SHIP.dem, x.c0, x.c1);
+        hl.push({ ic: IC.ship, t: 'Landed cost ran ' + ((aa - ea) / ea * 100).toFixed(1) + '% above estimate' + (dm ? ', with ' + lkr(dm) + ' in demurrage.' : '.'), s: 'Compass · ' + sum(SHIP.count, x.c0, x.c1) + ' shipments in the period', go: 'compass' });
+      }
+      h += '<section class="card"><h3>Highlights</h3><p class="cs">The few things that moved most in this period</p><div style="margin-top:8px">' + hl.map(function (i) {
+        var can = x.avail.indexOf(i.go) >= 0;
+        return '<div class="hl"><span class="ic">' + i.ic + '</span><span style="flex:1;min-width:0"><span class="t">' + esc(i.t) + '</span><span class="s">' + esc(i.s) + '</span></span>' +
+          (can ? '<button type="button" class="linkbtn" data-itab="' + i.go + '">Open ' + areaById(i.go).name + '</button>' : '') + '</div>';
+      }).join('') + '</div></section>';
+    }
+    return h;
+  }
+
+  function insPulse(x) {
+    var h = '', cmp = x.cs;
+    var hc = HEAD[x.c1 - 1], hp = HEAD[x.p1 - 1];
+    var avgHead = function (i, j) { return sum(HEAD, i, j) / (j - i); };
+    var to = sum(LEAVERS, x.c0, x.c1) / avgHead(x.c0, x.c1) * 100, top = sum(LEAVERS, x.p0, x.p1) / avgHead(x.p0, x.p1) * 100;
+    var tiles = '';
+    if (feat('pulse.ins.head')) {
+      tiles += stat('Headcount at ' + MONTHS[x.c1 - 1].slice(0, 3) + ' end', String(hc), delta(hc, hp, null, cmp));
+      tiles += stat('Joined / left', sum(JOINERS, x.c0, x.c1) + ' / ' + sum(LEAVERS, x.c0, x.c1), '<span class="d flat"><small>' + sum(JOINERS, x.p0, x.p1) + ' / ' + sum(LEAVERS, x.p0, x.p1) + ' in ' + esc(cmp) + '</small></span>');
+      tiles += stat('Staff turnover', to.toFixed(1) + '%', delta(to, top, false, cmp, true));
+    }
+    if (feat('pulse.ins.cost')) tiles += stat('Payroll cost', lkr(sum(STAFF, x.c0, x.c1)), delta(sum(STAFF, x.c0, x.c1), sum(STAFF, x.p0, x.p1), false, cmp));
+    if (tiles) h += '<div class="stats">' + tiles + '</div>';
+    h += grid([
+      feat('pulse.ins.cost') ? card('ch-pcost', 'Payroll cost by month', 'All departments · LKR') : '',
+      feat('pulse.ins.ot') ? card('ch-pot', 'Overtime hours by month', 'All departments') : ''
+    ]);
+    if (feat('pulse.ins.cost')) {
+      var showOt = feat('pulse.ins.ot'), showAbs = feat('pulse.ins.abs');
+      var th = '<tr><th scope="col">Department</th><th class="n" scope="col">Headcount</th><th class="n" scope="col">Payroll cost</th><th class="n" scope="col">Change</th><th class="n" scope="col">Cost per head, monthly</th>' +
+        (showOt ? '<th class="n" scope="col">Overtime hours</th>' : '') + (showAbs ? '<th class="n" scope="col">Absence rate</th>' : '') + '</tr>';
+      var tb = DEPTS.map(function (d) {
+        var c = sum(d.cost, x.c0, x.c1), pv = sum(d.cost, x.p0, x.p1), ch = (c - pv) / pv * 100;
+        var mh = sum(d.head, x.c0, x.c1) / x.P, ar = sum(d.abs, x.c0, x.c1) / (sum(d.head, x.c0, x.c1) * WORKDAYS) * 100;
+        return '<tr><td class="first" data-h="Department">' + esc(d.name) + '</td><td class="n" data-h="Headcount">' + d.head[x.c1 - 1] + '</td><td class="n" data-h="Payroll cost">' + lkr(c) + '</td>' +
+          '<td class="n" data-h="Change">' + (ch >= 0 ? '+' : '−') + Math.abs(ch).toFixed(1) + '%</td><td class="n" data-h="Cost per head">' + lkr(c / x.P / mh) + '</td>' +
+          (showOt ? '<td class="n" data-h="Overtime hours">' + fmtInt(sum(d.ot, x.c0, x.c1)) + '</td>' : '') + (showAbs ? '<td class="n" data-h="Absence rate">' + ar.toFixed(1) + '%</td>' : '') + '</tr>';
+      }).join('');
+      h += '<section class="card"><h3>Departments</h3><p class="cs">' + esc(rangeLabel(x.c0, x.c1)) + ' · change is against ' + esc(x.cmp) + '</p><div class="tbl-wrap" style="margin-top:12px"><table class="tbl cards"><thead>' + th + '</thead><tbody>' + tb + '</tbody></table></div></section>';
+    }
+    if (feat('pulse.ins.abs')) h += card('ch-pabs', 'Absence rate by department', 'Days absent as a share of working days, ' + rangeLabel(x.c0, x.c1));
+    Q.push(function () {
+      colChart($('ch-pcost'), { labels: MS.slice(x.c0, x.c1), fullLabels: MONTHS.slice(x.c0, x.c1), series: [{ name: 'Payroll cost', color: 'var(--c-pulse)', values: STAFF.slice(x.c0, x.c1) }], fmt: lkr, short: lkr, tick: tickK, aria: 'Payroll cost by month' });
+      colChart($('ch-pot'), { labels: MS.slice(x.c0, x.c1), fullLabels: MONTHS.slice(x.c0, x.c1), series: [{ name: 'Overtime hours', color: 'var(--c-pulse)', values: OT.slice(x.c0, x.c1) }], fmt: function (v) { return fmtInt(v) + ' h'; }, short: function (v) { return fmtInt(v) + ' h'; }, tick: function (v) { return fmtInt(v); }, aria: 'Overtime hours by month' });
+      hbarChart($('ch-pabs'), { color: 'var(--c-pulse)', head: 'Department', valueHead: 'Absence rate', fmt: function (v) { return v.toFixed(1) + '%'; }, aria: 'Absence rate by department',
+        items: DEPTS.map(function (d) { return { label: d.name, value: sum(d.abs, x.c0, x.c1) / (sum(d.head, x.c0, x.c1) * WORKDAYS) * 100, note: fmtInt(sum(d.abs, x.c0, x.c1)) + ' days absent' }; }) });
+    });
+    return h;
+  }
+
+  function insOrbit(x) {
+    var h = '', cmp = x.cs, gp = sum(GP, x.c0, x.c1), gpp = sum(GP, x.p0, x.p1);
+    if (feat('orbit.ins.margin')) {
+      var mg = gp / sum(SALES, x.c0, x.c1) * 100, mgp = gpp / sum(SALES, x.p0, x.p1) * 100;
+      h += '<div class="stats">' + stat('Sales', lkr(sum(SALES, x.c0, x.c1)), delta(sum(SALES, x.c0, x.c1), sum(SALES, x.p0, x.p1), true, cmp)) +
+        stat('Gross profit', lkr(gp), delta(gp, gpp, true, cmp)) + stat('Gross margin', mg.toFixed(1) + '%', delta(mg, mgp, true, cmp, true)) + '</div>';
+    }
+    h += grid([
+      feat('orbit.ins.margin') ? card('ch-ogp', 'Gross profit by month', 'LKR') : '',
+      feat('orbit.ins.top') ? card('ch-otop', 'Top items by gross profit', rangeLabel(x.c0, x.c1)) : ''
+    ]);
+    h += grid([
+      feat('orbit.ins.ageing') ? card('ch-oage', 'Stock ageing', 'Stock value by days since received, as at 31 October 2026') : '',
+      feat('orbit.ins.recv') ? card('ch-orec', 'Receivables ageing', 'What customers owe, as at 31 October 2026') : ''
+    ]);
+    Q.push(function () {
+      colChart($('ch-ogp'), { labels: MS.slice(x.c0, x.c1), fullLabels: MONTHS.slice(x.c0, x.c1), series: [{ name: 'Gross profit', color: 'var(--c-orbit)', values: GP.slice(x.c0, x.c1) }], fmt: lkr, short: lkr, tick: tickK, aria: 'Gross profit by month' });
+      hbarChart($('ch-otop'), { color: 'var(--c-orbit)', head: 'Item', valueHead: 'Gross profit', fmt: lkr, aria: 'Top items by gross profit',
+        items: TOP_ITEMS.map(function (t) { return { label: t[0], value: Math.round(gp * t[1]), note: Math.round(t[1] * 100) + '% of gross profit' }; }) });
+      var stot = STOCK_AGE.reduce(function (t, r) { return t + r[1]; }, 0);
+      hbarChart($('ch-oage'), { color: 'var(--c-orbit)', head: 'Age', valueHead: 'Stock value', fmt: lkr, aria: 'Stock ageing',
+        items: STOCK_AGE.map(function (r) { return { label: r[0], value: r[1], note: Math.round(r[1] / stot * 100) + '% of stock value' }; }) });
+      var rtot = RECV_AGE.reduce(function (t, r) { return t + r[1]; }, 0);
+      hbarChart($('ch-orec'), { color: 'var(--c-orbit)', head: 'Age', valueHead: 'Amount owed', fmt: lkr, aria: 'Receivables ageing',
+        items: RECV_AGE.map(function (r) { return { label: r[0], value: r[1], note: Math.round(r[1] / rtot * 100) + '% of receivables' }; }) });
+    });
+    return h;
+  }
+
+  function insCompass(x) {
+    var h = '', cmp = x.cs, tiles = '';
+    function wavg(i, j) { var n = 0, t = 0; for (var k = i; k < j; k++) { n += SHIP.count[k]; t += SHIP.count[k] * SHIP.days[k]; } return t / n; }
+    if (feat('compass.ins.ship')) {
+      tiles += stat('Shipments', String(sum(SHIP.count, x.c0, x.c1)), delta(sum(SHIP.count, x.c0, x.c1), sum(SHIP.count, x.p0, x.p1), null, cmp));
+      tiles += stat('Average clearance', wavg(x.c0, x.c1).toFixed(1) + ' days', delta(wavg(x.c0, x.c1), wavg(x.p0, x.p1), false, cmp));
+    }
+    if (feat('compass.ins.var')) {
+      var v = (sum(SHIP.act, x.c0, x.c1) / sum(SHIP.est, x.c0, x.c1) - 1) * 100, vp = (sum(SHIP.act, x.p0, x.p1) / sum(SHIP.est, x.p0, x.p1) - 1) * 100;
+      tiles += stat('Landed cost against estimate', '+' + v.toFixed(1) + '%', delta(v, vp, false, cmp, true));
+    }
+    if (feat('compass.ins.dem')) tiles += stat('Demurrage paid', lkr(sum(SHIP.dem, x.c0, x.c1)), delta(sum(SHIP.dem, x.c0, x.c1), sum(SHIP.dem, x.p0, x.p1), false, cmp));
+    if (tiles) h += '<div class="stats">' + tiles + '</div>';
+    h += grid([
+      feat('compass.ins.ship') ? card('ch-cship', 'Shipments by month', 'Shipments received') : '',
+      feat('compass.ins.var') ? card('ch-cvar', 'Landed cost above estimate, by month', 'Final cost against the estimate made at order') : ''
+    ]);
+    if (feat('compass.ins.mix')) h += card('ch-cmix', 'Where the landed cost goes', 'All shipments, ' + rangeLabel(x.c0, x.c1) + ' · ' + lkr(sum(SHIP.act, x.c0, x.c1)) + ' in total');
+    Q.push(function () {
+      colChart($('ch-cship'), { labels: MS.slice(x.c0, x.c1), fullLabels: MONTHS.slice(x.c0, x.c1), series: [{ name: 'Shipments', color: 'var(--c-compass)', values: SHIP.count.slice(x.c0, x.c1) }], int: true, fmt: function (v) { return String(v); }, short: function (v) { return String(v); }, tick: function (v) { return String(v); }, aria: 'Shipments by month' });
+      colChart($('ch-cvar'), { labels: MS.slice(x.c0, x.c1), fullLabels: MONTHS.slice(x.c0, x.c1), series: [{ name: 'Above estimate', color: 'var(--c-compass)', values: SHIP.act.slice(x.c0, x.c1).map(function (a, i) { return Math.round((a / SHIP.est[x.c0 + i] - 1) * 1000) / 10; }) }], fmt: function (v) { return '+' + v.toFixed(1) + '%'; }, short: function (v) { return '+' + v.toFixed(1) + '%'; }, tick: function (v) { return v + '%'; }, aria: 'Landed cost above estimate by month' });
+      var tot = sum(SHIP.act, x.c0, x.c1);
+      segBar($('ch-cmix'), { fmt: lkr, aria: 'Landed cost composition', parts: MIX.map(function (m) { return { label: m[0], value: Math.round(tot * m[1]), color: m[2] }; }) });
+    });
+    return h;
+  }
+
+  function renderTeam() {
+    var host = $('view-team'), me = currentUser();
+    var h = '<div class="note" style="margin-bottom:22px">' + IC.shield + '<span>Insights are on for Owners and Admins. Everyone else starts with none, so switch on only what each person needs. Pulse Insights show payroll cost by department, and the Overview shows staff cost against gross profit.</span></div>';
+    h += '<div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Person</th><th scope="col">Role</th>' +
+      AREAS.map(function (a) { return '<th class="c" scope="col">' + a.name + ' Insights</th>'; }).join('') + '</tr></thead><tbody>';
+    TEAM.forEach(function (u) {
+      var prodRoles = ['orbit', 'pulse', 'compass'].filter(function (p) { return holds(ACME, p) && u.roles[p]; }).map(function (p) { return findProduct(p).name + ': ' + u.roles[p]; }).join(' · ');
+      h += '<tr><td class="first" data-h="Person"><span style="font-weight:600">' + esc(u.name) + (u.id === me.id ? ' <span class="tag">You</span>' : '') + '</span><span class="sub">' + esc(u.title) + (prodRoles ? ' · ' + esc(prodRoles) : '') + '</span></td><td data-h="Role">' + esc(u.role) + '</td>';
+      AREAS.forEach(function (a) {
+        var cell;
+        if (!companyHas(a.id)) cell = '<span style="font-size:12.5px;color:var(--dim)">Not in plan</span>';
+        else if (u.role === 'Owner') cell = '<span class="swrow"><button class="sw" role="switch" aria-checked="true" disabled aria-label="' + esc(a.name + ' Insights for ' + u.name + ', always on for the Owner') + '"></button></span>';
+        else if (!hasRole(u, a.id)) cell = '<span style="font-size:12.5px;color:var(--dim)">No ' + a.name + ' role</span>';
+        else cell = '<button class="sw" role="switch" aria-checked="' + granted(u, a.id) + '" data-grant="' + u.id + '" data-area="' + a.id + '" aria-label="' + esc(a.name + ' Insights for ' + u.name) + '"></button>';
+        h += '<td class="c" data-h="' + a.name + ' Insights">' + cell + '</td>';
+      });
+      h += '</tr>';
+    });
+    h += '</tbody></table></div>';
+    h += '<section class="panel" style="margin-top:22px"><h2 class="sechead">Set by Evokes for Acme Traders</h2><p style="font-size:14px;color:var(--muted);margin-bottom:12px">You can’t change these here. They follow your subscription.</p>';
+    ['orbit', 'pulse', 'compass'].forEach(function (p) {
+      var pr = findProduct(p), on = holds(ACME, p);
+      h += '<div class="kv"><span style="color:var(--muted)">' + pr.name + '</span><span style="font-weight:550">' + (on ? (companyHas(p) ? 'Subscribed, Insights on' : 'Subscribed, Insights off') : 'Not in your plan') + '</span></div>';
+    });
+    h += '<div class="kv"><span style="color:var(--muted)">Overview across products</span><span style="font-weight:550">' + (companyHas('overview') ? 'On' : ACME.products.length < 2 ? 'Needs two or more products' : 'Off') + '</span></div></section>';
+    host.innerHTML = h;
+  }
+
+  /* ---------- Super Admin side ---------- */
+  function renderAdmin() {
+    var v = S.aview;
+    document.querySelectorAll('#sa-nav button').forEach(function (b) {
+      var bv = b.getAttribute('data-view');
+      if (bv === v || (v === 'customer' && bv === 'customers')) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
+    });
+    var host = $('sa-view'), t = $('sa-title'), sub = $('sa-sub');
+    if (v === 'overview') {
+      var multi = CUSTOMERS.filter(function (c) { return c.products.length > 1; }).length;
+      t.textContent = greet() + ', Vihan.';
+      sub.textContent = CUSTOMERS.length + ' customer companies, ' + multi + ' of them on two or more products. You control what each company has, not what is inside it.';
+      host.innerHTML = saOverview();
+    } else if (v === 'customers') {
+      t.textContent = 'Customers'; sub.textContent = 'Open a company to see its products and switch modules or features on or off for the whole company.';
+      host.innerHTML = saCustomers();
+    } else if (v === 'customer') {
+      var c = custById(S.saCustomer); t.textContent = c.name; sub.textContent = c.city + ' · customer since ' + monthName(c.since);
+      host.innerHTML = saDetail(c);
+    } else if (v === 'catalogue') {
+      t.textContent = 'Feature catalogue'; sub.textContent = 'Every module and feature, grouped by product. Sales and marketing work from this list.';
+      host.innerHTML = saCatalogue();
+    } else {
+      t.textContent = 'Activity'; sub.textContent = 'Every change made in Super Admin, newest first, with the reason given.';
+      host.innerHTML = saActivity();
+    }
+    flush();
+  }
+  function monthName(ym) { var p = ym.split('-'); return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+p[1] - 1] + ' ' + p[0]; }
+  function offCount(c) { return Object.keys(c.off).length; }
+  function boundaryNote() {
+    return '<div class="note" style="margin-bottom:22px">' + IC.shield + '<span>Super Admin shows subscriptions, settings and usage counts. It cannot open a customer’s records, figures or Insights. Who sees what inside a company is set by that company’s own admin.</span></div>';
+  }
+
+  function saOverview() {
+    var n = CUSTOMERS.length, by = function (s) { return CUSTOMERS.filter(function (c) { return c.status === s; }).length; };
+    var multi = CUSTOMERS.filter(function (c) { return c.products.length > 1; }).length, used = CUSTOMERS.filter(function (c) { return c.used; }).length;
+    var h = boundaryNote() + '<div class="stats">' +
+      stat('Customer companies', String(n), '<span class="d flat"><small>' + by('Active') + ' active · ' + by('Trial') + ' trial · ' + by('Overdue') + ' overdue · ' + by('Suspended') + ' suspended</small></span>') +
+      stat('On two or more products', String(multi), '<span class="d flat"><small>' + Math.round(multi / n * 100) + '% of customers, 20% bundle discount</small></span>') +
+      stat('Opened Insights, last 30 days', used + ' of ' + n, '<span class="d flat"><small>companies with at least one user</small></span>') +
+      stat('Changes from standard', String(CUSTOMERS.filter(function (c) { return offCount(c) > 0; }).length), '<span class="d flat"><small>companies with a module or feature off</small></span>') + '</div>';
+    h += grid([card('sa-prod', 'Customers by product', 'A company on several products counts once in each'), card('sa-new', 'New customers by month', 'Dec 2025 to Nov 2026 (to date)')]);
+    var dev = CUSTOMERS.filter(function (c) { return offCount(c) > 0; });
+    h += '<section class="card"><h3>Companies off the standard package</h3><p class="cs">Each change is logged with its reason. Keep this list short.</p><div style="margin-top:8px">' +
+      (dev.length ? dev.map(function (c) {
+        return '<div class="hl"><span style="flex:1;min-width:0"><span class="t">' + esc(c.name) + '</span><span class="s">' + Object.keys(c.off).map(function (k) { return esc(nameOf(k)) + ' off (' + esc(c.off[k]) + ')'; }).join(' · ') + '</span></span><button type="button" class="linkbtn" data-open="' + c.id + '">Open</button></div>';
+      }).join('') : '<p style="font-size:14px;color:var(--muted);padding:12px 0">Every company is on the standard package.</p>') + '</div></section>';
+    Q.push(function () {
+      hbarChart($('sa-prod'), { head: 'Product', valueHead: 'Customers', fmt: function (v) { return String(v); }, aria: 'Customers by product',
+        items: ['orbit', 'pulse', 'compass'].map(function (p) { return { label: findProduct(p).name, color: findProduct(p).color, value: CUSTOMERS.filter(function (c) { return holds(c, p); }).length }; }) });
+      var mk = ['2025-12', '2026-01', '2026-02', '2026-03', '2026-04', '2026-05', '2026-06', '2026-07', '2026-08', '2026-09', '2026-10', '2026-11'];
+      colChart($('sa-new'), { labels: mk.map(function (m) { return monthName(m).slice(0, 3); }), fullLabels: mk.map(function (m) { return monthName(m) + (m === '2026-11' ? ' (to date)' : ''); }), tableHead: 'Month',
+        int: true, series: [{ name: 'New customers', color: 'var(--s1)', values: mk.map(function (m) { return CUSTOMERS.filter(function (c) { return c.since === m; }).length; }) }],
+        fmt: function (v) { return String(v); }, short: function (v) { return String(v); }, tick: function (v) { return String(v); }, aria: 'New customers by month' });
+    });
+    return h;
+  }
+
+  function saCustomers() {
+    var h = '<div class="filters" role="group" aria-label="Filters"><span class="lbl">Product</span>' +
+      [['all', 'All']].concat(['orbit', 'pulse', 'compass'].map(function (p) { return [p, findProduct(p).name]; })).map(function (o) {
+        return '<button type="button" class="chip" data-cprod="' + o[0] + '" aria-pressed="' + (S.cProduct === o[0]) + '">' + (o[0] !== 'all' ? '<span class="k" style="background:' + findProduct(o[0]).color + '"></span>' : '') + o[1] + '</button>';
+      }).join('') +
+      '<label class="sr" for="c-status">Status</label><select class="select" id="c-status">' + ['all', 'Active', 'Trial', 'Overdue', 'Suspended'].map(function (s) { return '<option value="' + s + '"' + (S.cStatus === s ? ' selected' : '') + '>' + (s === 'all' ? 'Any status' : s) + '</option>'; }).join('') + '</select>' +
+      '<label class="sr" for="c-q">Search companies</label><input class="search" id="c-q" type="search" placeholder="Search companies" value="' + esc(S.cQuery) + '"></div>';
+    h += '<div id="c-table">' + custTable() + '</div>';
+    return h;
+  }
+  function custTable() {
+    var q = S.cQuery.trim().toLowerCase();
+    var rows = CUSTOMERS.filter(function (c) {
+      return (S.cProduct === 'all' || holds(c, S.cProduct)) && (S.cStatus === 'all' || c.status === S.cStatus) && (!q || c.name.toLowerCase().indexOf(q) >= 0 || c.city.toLowerCase().indexOf(q) >= 0);
+    });
+    if (!rows.length) return '<p style="font-size:14px;color:var(--muted);padding:18px 0">No companies match these filters.</p>';
+    return '<p style="font-size:13px;color:var(--dim);margin-bottom:10px">' + rows.length + ' of ' + CUSTOMERS.length + ' companies</p><div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Company</th><th scope="col">Products</th><th scope="col">Seat band</th><th scope="col">Status</th><th class="n" scope="col">Changes from standard</th><th scope="col">Since</th></tr></thead><tbody>' +
+      rows.map(function (c) {
+        return '<tr class="clickable" data-row="' + c.id + '"><td class="first" data-h="Company"><button type="button" class="linkbtn" data-open="' + c.id + '" style="color:var(--ink);font-size:14.5px;text-align:left;padding:0">' + esc(c.name) + '</button><span class="sub">' + esc(c.city) + '</span></td>' +
+          '<td data-h="Products">' + pills(c) + '</td><td data-h="Seat band">' + esc(c.band) + '</td><td data-h="Status">' + statusHTML(c.status) + '</td><td class="n" data-h="Changes">' + (offCount(c) || '—') + '</td><td data-h="Since">' + monthName(c.since) + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
+  function sw(attrs, on, label, disabled) {
+    return '<button type="button" class="sw" role="switch" aria-checked="' + (!!on) + '" aria-label="' + esc(label) + '"' + (disabled ? ' disabled' : '') + ' ' + attrs + '></button>';
+  }
+  function saDetail(c) {
+    var h = '<button type="button" class="linkbtn" data-aview="customers" style="margin-bottom:16px">← All customers</button>';
+    h += '<div class="stats">' + stat('Status', c.status, '') + stat('Seat band', c.band + (c.band === 'Above 50' ? ' (quoted)' : ''), '') +
+      stat('Products', String(c.products.length), '<span class="d flat"><small>' + (c.products.length > 1 ? '20% multi-product discount applies' : 'Single product') + '</small></span>') +
+      stat('Changes from standard', String(offCount(c)), '') + '</div>';
+    h += '<div class="filters" style="justify-content:space-between"><span style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><label class="lbl" for="reason">Reason logged with each change</label><select class="select" id="reason">' +
+      ['Customer request', 'Trial', 'Non-payment', 'Beta rollout', 'Correction'].map(function (r) { return '<option' + (S.reason === r ? ' selected' : '') + '>' + r + '</option>'; }).join('') +
+      '</select></span><button type="button" class="btn ghost-btn" data-reset="' + c.id + '" style="min-height:40px;padding:8px 16px;font-size:14px"' + (offCount(c) ? '' : ' disabled') + '>Reset to standard package</button></div>';
+    h += '<div class="note" style="margin-bottom:20px">' + IC.info + '<span>Switches here apply to the whole of ' + esc(c.name) + '. Everything is on by default for a product the company holds, Insights included. Inside the company, Insights start visible to the Owner and Admins only.</span></div>';
+    CAT.forEach(function (p) {
+      var held = p.platform || holds(c, p.id);
+      h += '<section class="prod' + (held ? '' : ' off') + '"><div class="prod-h"><span class="mark" style="width:12px;height:12px;border-radius:4px;border:0;background:' + p.color + '"></span><span><span class="nm">' + p.name + '</span> <span class="ds2">' + esc(p.desc) + '</span></span><span class="sp">' +
+        (p.platform ? '<span style="font-size:13px;color:var(--dim)">Included with every subscription</span>' :
+          '<span class="swrow"><small>' + (held ? 'Subscribed' : 'Not subscribed') + '</small>' + sw('data-prod="' + p.id + '"', held, p.name + ' subscription for ' + c.name) + '</span>') + '</span></div>';
+      p.modules.forEach(function (m) {
+        var mOn = !c.off[m.id], blocked = m.needs2 && c.products.length < 2, ex = !!S.expanded[m.id];
+        var fOn = m.f.filter(function (f) { return held && mOn && !c.off[f.id] && !blocked; }).length;
+        h += '<div class="mod"><div class="mod-h"><button type="button" class="exp" aria-expanded="' + ex + '" data-exp="' + m.id + '">' + IC.chev + '<span>' + esc(m.name) + (m.isNew ? ' <span class="tag new">New</span>' : '') +
+          ' <span class="cnt">' + fOn + ' of ' + m.f.length + ' on</span>' + (c.off[m.id] ? ' <span class="dev-mark">· off: ' + esc(c.off[m.id]) + '</span>' : '') + '</span></button>' +
+          (m.core ? '<span style="font-size:12.5px;color:var(--dim)">Core, always on</span>' : blocked ? '<span style="font-size:12.5px;color:var(--dim)">Needs two or more products</span>' :
+            sw('data-mod="' + m.id + '"', mOn && held, m.name + ' for ' + c.name, !held)) + '</div>';
+        if (ex) {
+          m.f.forEach(function (f) {
+            var on = held && mOn && !c.off[f.id] && !blocked;
+            h += '<div class="feat"><span class="fn">' + esc(f.name) + (c.off[f.id] ? ' <span class="dev-mark">· off: ' + esc(c.off[f.id]) + '</span>' : '') + '</span>' +
+              (m.core ? '' : sw('data-feat="' + f.id + '"', on, f.name + ' for ' + c.name, !held || !mOn || blocked)) + '</div>';
+          });
+        }
+        h += '</div>';
+      });
+      h += '</section>';
+    });
+    return h;
+  }
+
+  function saCatalogue() {
+    var h = '<div class="filters" role="group" aria-label="Filters"><span class="lbl">Product</span>' +
+      [['all', 'All']].concat(CAT.map(function (p) { return [p.id, p.name]; })).map(function (o) {
+        var pr = findProduct(o[0]);
+        return '<button type="button" class="chip" data-catp="' + o[0] + '" aria-pressed="' + (S.catProduct === o[0]) + '">' + (pr ? '<span class="k" style="background:' + pr.color + '"></span>' : '') + o[1] + '</button>';
+      }).join('') +
+      '<span class="lbl" style="margin-left:6px">Group by</span><div class="seg">' + [['product', 'Product'], ['status', 'Status']].map(function (g) {
+        return '<button type="button" data-catg="' + g[0] + '" aria-pressed="' + (S.catGroup === g[0]) + '">' + g[1] + '</button>';
+      }).join('') + '</div><label class="sr" for="cat-q">Search features</label><input class="search" id="cat-q" type="search" placeholder="Search features" value="' + esc(S.catQuery) + '"></div>';
+    h += '<div id="cat-body">' + catBody() + '</div>';
+    return h;
+  }
+  function catRows() {
+    var q = S.catQuery.trim().toLowerCase(), out = [];
+    CAT.forEach(function (p) {
+      if (S.catProduct !== 'all' && S.catProduct !== p.id) return;
+      p.modules.forEach(function (m) {
+        m.f.forEach(function (f) {
+          if (q && (f.name + ' ' + m.name + ' ' + p.name).toLowerCase().indexOf(q) < 0) return;
+          var offN = CUSTOMERS.filter(function (c) { return (p.platform || holds(c, p.id)) && (c.off[m.id] || c.off[f.id]); }).length;
+          out.push({ p: p, m: m, f: f, offN: offN });
+        });
+      });
+    });
+    return out;
+  }
+  function visibleTo(r) {
+    if (r.m.ins) return 'Owner and Admins, then whoever they choose';
+    if (r.m.id === 'plat.users') return 'Owner and Admins';
+    if (r.p.platform) return 'Everyone in the company';
+    return 'People with ' + (/^[AEIOU]/.test(r.p.name) ? 'an ' : 'a ') + r.p.name + ' role';
+  }
+  function catTable(rows, showProduct) {
+    var lastMod = null;
+    return '<div class="tbl-wrap"><table class="tbl cards"><thead><tr>' + (showProduct ? '<th scope="col">Product</th>' : '') + '<th scope="col">Module</th><th scope="col">Feature</th><th scope="col">Status</th><th scope="col">Default for a new customer</th><th scope="col">Visible inside the company to</th><th class="n" scope="col">Customers with it off</th></tr></thead><tbody>' +
+      rows.map(function (r) {
+        var modCell = r.m.id !== lastMod ? esc(r.m.name) : '<span style="color:var(--dim)">' + esc(r.m.name) + '</span>';
+        lastMod = r.m.id;
+        return '<tr>' + (showProduct ? '<td data-h="Product"><span class="ppill"><i style="background:' + r.p.color + '"></i>' + r.p.name + '</span></td>' : '') +
+          '<td data-h="Module">' + modCell + '</td><td class="first" data-h="Feature" style="font-weight:550">' + esc(r.f.name) + '</td>' +
+          '<td data-h="Status">' + (r.m.isNew ? '<span class="tag new">New</span>' : '<span class="tag">Included</span>') + '</td>' +
+          '<td data-h="Default">' + (r.m.core ? 'Always on' : r.m.needs2 ? 'On, with two or more products' : 'On') + '</td>' +
+          '<td data-h="Visible to">' + esc(visibleTo(r)) + '</td><td class="n" data-h="Customers with it off">' + (r.offN || '—') + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+  function catBody() {
+    var rows = catRows();
+    if (!rows.length) return '<p style="font-size:14px;color:var(--muted);padding:18px 0">No features match.</p>';
+    var h = '<p style="font-size:13px;color:var(--dim);margin-bottom:14px">' + rows.length + ' features</p>';
+    if (S.catGroup === 'product') {
+      CAT.forEach(function (p) {
+        var pr = rows.filter(function (r) { return r.p === p; });
+        if (!pr.length) return;
+        h += '<div class="cat-group"><div class="cat-gh"><span class="k" style="background:' + p.color + '"></span><h3>' + p.name + '</h3><span class="c">' + esc(p.desc) + ' · ' + pr.length + ' features</span></div>' + catTable(pr, false) + '</div>';
+      });
+    } else {
+      [['New', function (r) { return r.m.isNew; }, 'Being added: analytics and the cross-product overview'], ['Included', function (r) { return !r.m.isNew; }, 'In every subscription to the product today']].forEach(function (g) {
+        var gr = rows.filter(g[1]); if (!gr.length) return;
+        h += '<div class="cat-group"><div class="cat-gh"><h3>' + g[0] + '</h3><span class="c">' + g[2] + ' · ' + gr.length + ' features</span></div>' + catTable(gr, true) + '</div>';
+      });
+    }
+    return h;
+  }
+
+  function saActivity() {
+    return boundaryNote() + '<div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">When</th><th scope="col">Company</th><th scope="col">Change</th><th scope="col">Reason</th><th scope="col">By</th></tr></thead><tbody>' +
+      LOG.map(function (l) {
+        return '<tr><td data-h="When" style="white-space:nowrap">' + esc(l.when) + '</td><td class="first" data-h="Company" style="font-weight:550">' + esc(l.cust) + '</td><td data-h="Change">' + esc(l.change) + '</td><td data-h="Reason">' + esc(l.reason) + '</td><td data-h="By">Vihan Nanayakkara</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
+  /* ---------- events ---------- */
+  var form = $('signin-form'), msg = $('signin-msg');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = $('email').value.trim().toLowerCase();
+    if (!email || email.indexOf('@') < 1) { msg.textContent = 'Enter a work email address to continue.'; $('email').focus(); return; }
     msg.textContent = '';
-    show('app');
+    S.cview = 'home'; S.aview = 'overview';
+    setPersona(/@evokestech\.com$/.test(email) ? 'admin' : /dinithi/.test(email) ? 'staff' : 'owner');
+  });
+  $('sso').addEventListener('click', function () { S.cview = 'home'; setPersona('owner'); });
+  document.querySelectorAll('[data-persona]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var p = b.getAttribute('data-persona');
+      if (signin.hidden === false) { S.cview = 'home'; S.aview = 'overview'; }
+      setPersona(p);
+    });
   });
 
-  document.getElementById('sso').addEventListener('click', function () { show('app'); });
-
-  var acct = document.getElementById('acct');
-  var menu = document.getElementById('acct-menu');
-  acct.addEventListener('click', function (e) {
-    e.stopPropagation();
-    var open = menu.hidden;
-    menu.hidden = !open;
-    acct.setAttribute('aria-expanded', String(open));
+  function closeMenus() {
+    [['acct', 'acct-menu'], ['sa-acct', 'sa-menu']].forEach(function (m) { $(m[1]).hidden = true; $(m[0]).setAttribute('aria-expanded', 'false'); });
+  }
+  [['acct', 'acct-menu'], ['sa-acct', 'sa-menu']].forEach(function (m) {
+    $(m[0]).addEventListener('click', function (e) {
+      e.stopPropagation(); var menu = $(m[1]), open = menu.hidden; closeMenus(); menu.hidden = !open; $(m[0]).setAttribute('aria-expanded', String(open));
+    });
   });
   document.addEventListener('click', function (e) {
-    if (!menu.hidden && !menu.contains(e.target)) {
-      menu.hidden = true;
-      acct.setAttribute('aria-expanded', 'false');
-    }
+    ['acct-menu', 'sa-menu'].forEach(function (id) { var mn = $(id); if (!mn.hidden && !mn.contains(e.target)) closeMenus(); });
   });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !menu.hidden) {
-      menu.hidden = true;
-      acct.setAttribute('aria-expanded', 'false');
-      acct.focus();
-    }
+    if (e.key === 'Escape') { var was = !$('acct-menu').hidden ? 'acct' : !$('sa-menu').hidden ? 'sa-acct' : null; closeMenus(); if (was) $(was).focus(); }
   });
-  document.getElementById('signout').addEventListener('click', function () {
-    menu.hidden = true;
-    acct.setAttribute('aria-expanded', 'false');
-    show('signin');
+  $('signout').addEventListener('click', signOut);
+  $('sa-signout').addEventListener('click', signOut);
+
+  $('cust-nav').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-view]'); if (!b) return;
+    S.cview = b.getAttribute('data-view'); renderCustomer(); $('greeting').focus();
+  });
+  $('sa-nav').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-view]'); if (!b) return;
+    S.aview = b.getAttribute('data-view'); renderAdmin(); $('sa-title').focus();
   });
 
-  var held = document.getElementById('compass-held');
-  var locked = document.getElementById('compass-locked');
-  var toggle = document.getElementById('toggle-entitlement');
-  toggle.addEventListener('click', function () {
-    var nowLocked = held.hidden === false;
-    held.hidden = nowLocked;
-    locked.hidden = !nowLocked;
-    toggle.setAttribute('aria-pressed', String(nowLocked));
-    toggle.textContent = nowLocked ? 'Show Compass as included' : 'Show Compass as not in plan';
+  $('toggle-entitlement').addEventListener('click', function () {
+    var i = ACME.products.indexOf('compass');
+    if (i >= 0) { ACME.products.splice(i, 1); addLog(ACME, 'Compass removed'); } else { ACME.products.push('compass'); addLog(ACME, 'Compass added'); }
+    renderCustomer();
   });
+
+  app.addEventListener('click', function (e) {
+    var g = e.target.closest('[data-goto]');
+    if (g) { S.cview = g.getAttribute('data-goto'); renderCustomer(); $('greeting').focus(); return; }
+    var pb = e.target.closest('[data-period]');
+    if (pb) { S.period = +pb.getAttribute('data-period'); renderCustomer(); var nb = document.querySelector('[data-period="' + S.period + '"]'); if (nb) nb.focus(); return; }
+    var tb = e.target.closest('[data-itab]');
+    if (tb) { S.itab = tb.getAttribute('data-itab'); renderCustomer(); var nt = $('itab-' + S.itab); if (nt) nt.focus(); return; }
+    var gr = e.target.closest('[data-grant]');
+    if (gr) {
+      var uid = gr.getAttribute('data-grant'), a = gr.getAttribute('data-area'), u = member(uid);
+      GRANTS[uid] = GRANTS[uid] || {}; GRANTS[uid][a] = !GRANTS[uid][a];
+      renderCustomer();
+      var again = document.querySelector('[data-grant="' + uid + '"][data-area="' + a + '"]'); if (again) again.focus();
+      toast(u.name + (GRANTS[uid][a] ? ' can now see ' : ' no longer sees ') + areaById(a).name + ' Insights.');
+    }
+  });
+  app.addEventListener('keydown', function (e) {
+    var t = e.target; if (!t.matches || !t.matches('[role="tab"]')) return;
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('#view-insights [role="tab"]')), i = tabs.indexOf(t);
+    var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+    S.itab = n.getAttribute('data-itab'); renderCustomer(); $('itab-' + S.itab).focus(); e.preventDefault();
+  });
+
+  admin.addEventListener('click', function (e) {
+    var t = e.target, c, id, b;
+    if ((b = t.closest('[data-open]'))) { S.saCustomer = b.getAttribute('data-open'); S.aview = 'customer'; renderAdmin(); $('sa-title').focus(); return; }
+    if ((b = t.closest('tr[data-row]'))) { S.saCustomer = b.getAttribute('data-row'); S.aview = 'customer'; renderAdmin(); $('sa-title').focus(); return; }
+    if ((b = t.closest('[data-aview]'))) { S.aview = b.getAttribute('data-aview'); renderAdmin(); $('sa-title').focus(); return; }
+    if ((b = t.closest('[data-cprod]'))) { S.cProduct = b.getAttribute('data-cprod'); renderAdmin(); return; }
+    if ((b = t.closest('[data-catp]'))) { S.catProduct = b.getAttribute('data-catp'); renderAdmin(); return; }
+    if ((b = t.closest('[data-catg]'))) { S.catGroup = b.getAttribute('data-catg'); renderAdmin(); return; }
+    if ((b = t.closest('[data-exp]'))) { id = b.getAttribute('data-exp'); S.expanded[id] = !S.expanded[id]; renderAdmin(); var eb = document.querySelector('[data-exp="' + id + '"]'); if (eb) eb.focus(); return; }
+    c = custById(S.saCustomer);
+    if ((b = t.closest('[data-reset]'))) {
+      c.off = {}; addLog(c, 'Reset to the standard package'); renderAdmin(); toast('Reset ' + c.name + ' to the standard package. Logged as: ' + S.reason + '.'); return;
+    }
+    var key = null, attr = null;
+    ['data-prod', 'data-mod', 'data-feat'].some(function (a) { b = t.closest('[' + a + ']'); if (b) { attr = a; key = b.getAttribute(a); } return !!b; });
+    if (!key || b.disabled) return;
+    var label = nameOf(key), change;
+    if (attr === 'data-prod') {
+      var ix = c.products.indexOf(key);
+      if (ix >= 0) { c.products.splice(ix, 1); change = label + ' removed'; } else { c.products.push(key); change = label + ' added'; }
+    } else {
+      if (c.off[key]) { delete c.off[key]; change = label + ' turned on'; } else { c.off[key] = S.reason; change = label + ' turned off'; }
+    }
+    addLog(c, change); renderAdmin();
+    var again = document.querySelector('[' + attr + '="' + key + '"]'); if (again) again.focus();
+    toast(change + ' for ' + c.name + '. Logged as: ' + S.reason + '.');
+  });
+  admin.addEventListener('change', function (e) {
+    if (e.target.id === 'reason') S.reason = e.target.value;
+    if (e.target.id === 'c-status') { S.cStatus = e.target.value; $('c-table').innerHTML = custTable(); }
+  });
+  admin.addEventListener('input', function (e) {
+    if (e.target.id === 'c-q') { S.cQuery = e.target.value; $('c-table').innerHTML = custTable(); }
+    if (e.target.id === 'cat-q') { S.catQuery = e.target.value; $('cat-body').innerHTML = catBody(); }
+  });
+
+  var rT;
+  window.addEventListener('resize', function () {
+    clearTimeout(rT);
+    rT = setTimeout(function () {
+      if (!S.persona) return;
+      var ae = document.activeElement, aid = ae && ae.id;
+      if (S.persona === 'admin') { if (S.aview === 'overview') renderAdmin(); }
+      else if (S.cview === 'insights' || S.cview === 'home') renderCustomer();
+      if (aid && $(aid)) $(aid).focus({ preventScroll: true });
+    }, 180);
+  });
+
+  /* clone brand marks into the Super Admin header */
+  var lock = document.querySelector('#app .topbar .lock');
+  if (lock) $('sa-lock').innerHTML = lock.innerHTML;
+  var ghost = document.querySelector('#app .hero .ghost');
+  if (ghost) document.querySelector('#admin .hero .layer').appendChild(ghost.cloneNode(true));
 })();
 </script>
 </body>
