@@ -9,6 +9,7 @@ Updated 20 November 2026. Current design files: Pulse and Orbit meeting-fix revi
 - Compass: https://compass.evokestech.com/ (Root Directory `compass`)
 - Digital Company Suite: https://evokessuite.vercel.app/ (Vercel project `evokessuite`, Root Directory `suite`)
 - CeyDesk: https://ceydesk.evokestech.com/ (prototype; fictional data and simulated payments, so it is not linked from the product pages)
+- Ledger: https://ledger.evokestech.com/ (Root Directory `ledger`; the Vercel project and the subdomain have not been created yet)
 
 Both pages now use these owner-supplied addresses for their canonical URL, social URL metadata and links to the other product. This revision applies the scoped meeting fixes below. No production deployment was performed.
 
@@ -55,6 +56,21 @@ Follow-ups: the Orbit and Pulse pages still present CeyDesk as available ("Discu
 - Print: A4, with every costing stage and every FAQ answer shown, navigation and forms hidden, and the on-screen state restored afterwards.
 
 Follow-ups: the Orbit and Pulse pages still present CeyDesk with "Discuss support", while the Compass page shows it as "coming soon"; align the three before the suite is shared widely. Compass sample figures should be reviewed by someone who handles shipments daily before the page is shown to a client. A trademark and domain check on the Compass name has not been carried out.
+
+## Evokes Ledger page
+
+`ledger/index.html` is the complete Evokes Ledger page: accounting and finance (the EBS Finance module), sold as a standalone product within Evokes Business Software. Deploy it as its own Vercel project with Root Directory set to `ledger` and Framework Preset set to Other (no build command). Do not combine it with the other projects.
+
+- Self-contained single file (about 210 KB): CSS, JavaScript, SVG artwork and two embedded fonts (Source Serif 4 for headings and IBM Plex Mono for figures, both SIL Open Font License). Body text uses the system sans-serif, as on Orbit, Pulse and Compass. No external requests.
+- Identity: deep plum (`#3e2252`) with a violet accent (`#5a2a78` for text, `#7a3d99` for marks), on a warm ruled "ledger paper" background. The mark is an "L" formed by a ledger margin and a total's double rule, with a column of figures inside it. The wordmark is set in the heading typeface; drawn letterforms have not been produced.
+- Structure: hero with a sample journal (the "Send it again" button shows that a document posted twice posts once), how posting works, a five-stage payroll payment batch walkthrough (instruction, approval, bank file, executed and posted, reported back), the nine capabilities, the post-dated cheque register, controls with the document posting table, per-company capabilities with their status, getting started, four ways to start, the suite section, FAQs and a review-before-send enquiry.
+- Source: the eVokes ERP Module 200 "Accounting and Finance" document. Code names and the technology stack were left out. Capabilities that document marks "In build" or "Next in this release" are labelled that way on the page.
+- Sample figures: the batch is 24 payments totalling LKR 2,148,600.00; the bank pays 23 (LKR 2,084,350.00) and rejects one (LKR 64,250.00), which is retried and paid. Journals balance and the footer totals follow each stage. Account codes, document numbers, the approval rule and the file fingerprint are illustrative.
+- Content decisions: no prices. Ledger is described as sold on its own, with a "New company" route recommending Ledger, Orbit and Pulse together. Existing Orbit or Pulse customers are told adding Ledger is their choice. Compass and CeyDesk are not described as posting into Ledger. CeyDesk is shown as "coming soon" and is not linked.
+- The enquiry form prepares an email to info@evokestech.com for the visitor to review and send; nothing is submitted or stored by the page.
+- Print: A4, with every batch stage and FAQ answer shown and the on-screen state restored afterwards.
+
+Follow-ups: confirm with the developer which Finance capabilities are in the current release; confirm how a Ledger-only customer records supplier and customer invoices (the source document lists no invoice documents in Finance); create the `ledger` Vercel project and the ledger.evokestech.com subdomain; add a Ledger card to the Orbit, Pulse and Compass suite sections. A trademark and domain check on the Ledger name has not been carried out.
 
 ## Meeting fix list — 15 November 2026
 
