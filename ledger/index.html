@@ -91,7 +91,7 @@ header{position:sticky;top:0;z-index:30;background:rgba(250,247,241,.93);backdro
   border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;gap:30px;min-height:92px}
 .brand{display:flex;align-items:center;gap:14px;flex-shrink:0}
-.brand-mark{width:48px;height:48px;display:block;flex:none}
+.brand-mark{width:31px;height:24px;display:block;flex:none}
 .lock{display:block;line-height:1}
 .lock .ev{display:block;font-size:11px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
 .lock .wm{display:block;font-family:var(--serif);font-size:31px;font-weight:650;letter-spacing:-.03em;color:var(--ink)}
@@ -374,7 +374,7 @@ a.suitecard:hover{transform:translateY(-3px);box-shadow:0 1px 2px rgba(31,26,36,
   .frow{grid-template-columns:1fr;gap:8px}
   table.docs th,table.docs td{padding:13px 18px}
   .lock .wm{font-size:27px}
-  .brand-mark{width:42px;height:42px}
+  .brand-mark{width:28px;height:22px}
 }
 @media(max-width:640px){
   .cards4,.suite,.ledgerlist{grid-template-columns:1fr}
@@ -447,10 +447,10 @@ a.suitecard:hover{transform:translateY(-3px);box-shadow:0 1px 2px rgba(31,26,36,
   .v-msg{display:none}
 }
 .print-only{display:none}
-.brand-mark,.ledger-disc{border-radius:50%;background:#fff;box-shadow:0 0 0 1px var(--line)}
-.brand-mark{padding:5px}
-.ledger-disc svg{width:32px;height:32px}
-.lock .ev{letter-spacing:.08em;font-size:10px}
+.tile.ledger-disc{width:26px;height:24px;background:transparent;border:0;box-shadow:none}
+
+.ledger-disc svg{width:24px;height:19px}
+.lock .ev{letter-spacing:.28em;font-size:10px}
 .suitecard.ledger-card{border-top:3px solid #544061}
 
 /* The product pages share a type family. Plum identifies Ledger inside EBS. */
@@ -478,7 +478,7 @@ header{background:rgba(251,249,252,.96)}
 @media(max-width:600px){.family-head{display:block}.family-login{margin-top:12px}.family-grid{grid-template-columns:1fr}.family-product:nth-child(n+2){border-left:0;border-top:1px solid #36404d}.family-disc{float:left;width:40px;height:40px;margin:0 12px 0 0}.family-icon{width:28px;height:28px}.family-product .family-role{margin-bottom:12px}.family-product h3{font-size:20px}}
 @media print{.family-section,.family-grid{background:white;color:#15191c}.family-section{padding:16pt 0}.family-brand img{display:none}.family-head h2,.family-head p,.family-product h3,.family-product p,.family-product .family-role,.family-note,.family-brand span{color:#222}.family-login{display:none}.family-grid{grid-template-columns:repeat(2,1fr)}.family-product{break-inside:avoid}}
 </style>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20width%3D%2248%22%20height%3D%2248%22%20rx%3D%226%22%20fill%3D%22white%22%2F%3E%3Cpath%20fill%3D%22%2350345F%22%20d%3D%22M6.1%204.5H8C9.8%204.5%2010.9%205.9%2010.9%207.5C10.9%208.9%2010.1%209.8%209.4%2010.3Q9%2010.6%209%2011.5V16.4H17.4A2.6%202.6%200%200%201%2017.4%2021.6H9V34.9Q9%2036.8%2011%2036.8H30.2A3.35%203.35%200%200%201%2030.2%2043.5H6.1Q2%2043.5%202%2039.4V8.6Q2%204.5%206.1%204.5Z%22%2F%3E%3Cpath%20fill%3D%22%23855C99%22%20transform%3D%22rotate%28180%2024%2024%29%22%20d%3D%22M6.1%204.5H8C9.8%204.5%2010.9%205.9%2010.9%207.5C10.9%208.9%2010.1%209.8%209.4%2010.3Q9%2010.6%209%2011.5V16.4H17.4A2.6%202.6%200%200%201%2017.4%2021.6H9V34.9Q9%2036.8%2011%2036.8H30.2A3.35%203.35%200%200%201%2030.2%2043.5H6.1Q2%2043.5%202%2039.4V8.6Q2%204.5%206.1%204.5Z%22%2F%3E%3C%2Fsvg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-2%20-2%20104%20104%22%20role%3D%22img%22%20aria-label%3D%22Evokes%20Ledger%22%3E%3Cpath%20fill%3D%22%2350164E%22%20d%3D%22M3.5%2062.2C-3.2%2055.4-3%2042.7%203.6%2032.5%2013.1%2017.7%2033.2%2010.9%2050.8%2012.5%2065.9%2013.4%2076%2018.2%2082.2%2024.7%2082.9%2025.5%2082.2%2026.1%2081.4%2025.6%2069.7%2019.4%2057.9%2019%2046.1%2022.1%2027.4%2027.2%209.9%2040.7%205.9%2054.1%205%2057.2%205.3%2060.4%205.1%2062.3%205%2063.1%204.2%2063%203.5%2062.2Z%22%2F%3E%3Cpath%20fill%3D%22%23854078%22%20d%3D%22M96.5%2037.8C103.2%2044.6%20103%2057.3%2096.4%2067.5%2086.9%2082.3%2066.8%2089.1%2049.2%2087.5%2034.1%2086.6%2024%2081.8%2017.8%2075.3%2017.1%2074.5%2017.8%2073.9%2018.6%2074.4%2030.3%2080.6%2042.1%2081%2053.9%2077.9%2072.6%2072.8%2090.1%2059.3%2094.1%2045.9%2095%2042.8%2094.7%2039.6%2094.9%2037.7%2095%2036.9%2095.8%2037%2096.5%2037.8Z%22%2F%3E%3Cpath%20fill%3D%22%23434247%22%20d%3D%22M32%2041h36v6H32zm0%2012h36v6H32z%22%2F%3E%3C%2Fsvg%3E">
 </head>
 <body>
 
@@ -488,9 +488,9 @@ header{background:rgba(251,249,252,.96)}
   <div class="wrap">
     <div class="nav">
       <a class="brand" href="#top" aria-label="Evokes Ledger home">
-        <svg class="brand-mark" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#50345F" d="M6.1 4.5H8C9.8 4.5 10.9 5.9 10.9 7.5C10.9 8.9 10.1 9.8 9.4 10.3Q9 10.6 9 11.5V16.4H17.4A2.6 2.6 0 0 1 17.4 21.6H9V34.9Q9 36.8 11 36.8H30.2A3.35 3.35 0 0 1 30.2 43.5H6.1Q2 43.5 2 39.4V8.6Q2 4.5 6.1 4.5Z"/><path fill="#855C99" transform="rotate(180 24 24)" d="M6.1 4.5H8C9.8 4.5 10.9 5.9 10.9 7.5C10.9 8.9 10.1 9.8 9.4 10.3Q9 10.6 9 11.5V16.4H17.4A2.6 2.6 0 0 1 17.4 21.6H9V34.9Q9 36.8 11 36.8H30.2A3.35 3.35 0 0 1 30.2 43.5H6.1Q2 43.5 2 39.4V8.6Q2 4.5 6.1 4.5Z"/></svg>
+        <svg class="brand-mark" width="48" height="48" viewBox="-2 10 104 80" aria-hidden="true" focusable="false"><path fill="#50164E" d="M3.5 62.2C-3.2 55.4-3 42.7 3.6 32.5 13.1 17.7 33.2 10.9 50.8 12.5 65.9 13.4 76 18.2 82.2 24.7 82.9 25.5 82.2 26.1 81.4 25.6 69.7 19.4 57.9 19 46.1 22.1 27.4 27.2 9.9 40.7 5.9 54.1 5 57.2 5.3 60.4 5.1 62.3 5 63.1 4.2 63 3.5 62.2Z"/><path fill="#854078" d="M96.5 37.8C103.2 44.6 103 57.3 96.4 67.5 86.9 82.3 66.8 89.1 49.2 87.5 34.1 86.6 24 81.8 17.8 75.3 17.1 74.5 17.8 73.9 18.6 74.4 30.3 80.6 42.1 81 53.9 77.9 72.6 72.8 90.1 59.3 94.1 45.9 95 42.8 94.7 39.6 94.9 37.7 95 36.9 95.8 37 96.5 37.8Z"/><path fill="#434247" d="M32 41h36v6H32zm0 12h36v6H32z"/></svg>
         <span class="lock">
-          <span class="ev">Evokes Business Software</span>
+          <span class="ev">Evokes</span>
           <span class="wm">Ledger</span>
           <span class="ds">Accounting &amp; Finance</span>
         </span>
@@ -532,7 +532,7 @@ header{background:rgba(251,249,252,.96)}
 
       <div class="voucher" role="group" aria-labelledby="v-title">
         <div class="v-head">
-          <span class="tile ledger-disc"><svg class="voucher-mark" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#50345F" d="M6.1 4.5H8C9.8 4.5 10.9 5.9 10.9 7.5C10.9 8.9 10.1 9.8 9.4 10.3Q9 10.6 9 11.5V16.4H17.4A2.6 2.6 0 0 1 17.4 21.6H9V34.9Q9 36.8 11 36.8H30.2A3.35 3.35 0 0 1 30.2 43.5H6.1Q2 43.5 2 39.4V8.6Q2 4.5 6.1 4.5Z"/><path fill="#855C99" transform="rotate(180 24 24)" d="M6.1 4.5H8C9.8 4.5 10.9 5.9 10.9 7.5C10.9 8.9 10.1 9.8 9.4 10.3Q9 10.6 9 11.5V16.4H17.4A2.6 2.6 0 0 1 17.4 21.6H9V34.9Q9 36.8 11 36.8H30.2A3.35 3.35 0 0 1 30.2 43.5H6.1Q2 43.5 2 39.4V8.6Q2 4.5 6.1 4.5Z"/></svg></span>
+          <span class="tile ledger-disc"><svg class="voucher-mark" width="48" height="48" viewBox="-2 10 104 80" aria-hidden="true" focusable="false"><path fill="#50164E" d="M3.5 62.2C-3.2 55.4-3 42.7 3.6 32.5 13.1 17.7 33.2 10.9 50.8 12.5 65.9 13.4 76 18.2 82.2 24.7 82.9 25.5 82.2 26.1 81.4 25.6 69.7 19.4 57.9 19 46.1 22.1 27.4 27.2 9.9 40.7 5.9 54.1 5 57.2 5.3 60.4 5.1 62.3 5 63.1 4.2 63 3.5 62.2Z"/><path fill="#854078" d="M96.5 37.8C103.2 44.6 103 57.3 96.4 67.5 86.9 82.3 66.8 89.1 49.2 87.5 34.1 86.6 24 81.8 17.8 75.3 17.1 74.5 17.8 73.9 18.6 74.4 30.3 80.6 42.1 81 53.9 77.9 72.6 72.8 90.1 59.3 94.1 45.9 95 42.8 94.7 39.6 94.9 37.7 95 36.9 95.8 37 96.5 37.8Z"/><path fill="#434247" d="M32 41h36v6H32zm0 12h36v6H32z"/></svg></span>
           <div>
             <p class="ttl" id="v-title">Sample journal · <span class="nw">SPAY-0108</span></p>
             <p class="sub">Supplier payment settling SINV-0041 · October 2026</p>
@@ -582,7 +582,7 @@ header{background:rgba(251,249,252,.96)}
             <circle cx="100" cy="100" r="13" fill="none" stroke="#2b3540" stroke-width="7"></circle>
           </g>
         </svg></span><h3>Compass</h3><p class="family-role">Import &amp; Export</p><p>Freight comes in above the estimate. The imports team uses the shipment record to see how the extra cost changes the landed cost per unit.</p></article>
-<article class="family-product"><span class="family-disc"><svg class="family-icon" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#50345F" d="M6.1 4.5H8C9.8 4.5 10.9 5.9 10.9 7.5C10.9 8.9 10.1 9.8 9.4 10.3Q9 10.6 9 11.5V16.4H17.4A2.6 2.6 0 0 1 17.4 21.6H9V34.9Q9 36.8 11 36.8H30.2A3.35 3.35 0 0 1 30.2 43.5H6.1Q2 43.5 2 39.4V8.6Q2 4.5 6.1 4.5Z"/><path fill="#855C99" transform="rotate(180 24 24)" d="M6.1 4.5H8C9.8 4.5 10.9 5.9 10.9 7.5C10.9 8.9 10.1 9.8 9.4 10.3Q9 10.6 9 11.5V16.4H17.4A2.6 2.6 0 0 1 17.4 21.6H9V34.9Q9 36.8 11 36.8H30.2A3.35 3.35 0 0 1 30.2 43.5H6.1Q2 43.5 2 39.4V8.6Q2 4.5 6.1 4.5Z"/></svg></span><h3>Ledger</h3><p class="family-role">Accounting &amp; Finance</p><p>The supplier asks about a payment. Your accountant opens the entry, checks who approved it and sees which invoice it settled.</p></article></div>
+<article class="family-product"><span class="family-disc"><svg class="family-icon" width="48" height="48" viewBox="-2 10 104 80" aria-hidden="true" focusable="false"><path fill="#50164E" d="M3.5 62.2C-3.2 55.4-3 42.7 3.6 32.5 13.1 17.7 33.2 10.9 50.8 12.5 65.9 13.4 76 18.2 82.2 24.7 82.9 25.5 82.2 26.1 81.4 25.6 69.7 19.4 57.9 19 46.1 22.1 27.4 27.2 9.9 40.7 5.9 54.1 5 57.2 5.3 60.4 5.1 62.3 5 63.1 4.2 63 3.5 62.2Z"/><path fill="#854078" d="M96.5 37.8C103.2 44.6 103 57.3 96.4 67.5 86.9 82.3 66.8 89.1 49.2 87.5 34.1 86.6 24 81.8 17.8 75.3 17.1 74.5 17.8 73.9 18.6 74.4 30.3 80.6 42.1 81 53.9 77.9 72.6 72.8 90.1 59.3 94.1 45.9 95 42.8 94.7 39.6 94.9 37.7 95 36.9 95.8 37 96.5 37.8Z"/><path fill="#434247" d="M32 41h36v6H32zm0 12h36v6H32z"/></svg></span><h3>Ledger</h3><p class="family-role">Accounting &amp; Finance</p><p>The supplier asks about a payment. Your accountant opens the entry, checks who approved it and sees which invoice it settled.</p></article></div>
       <p class="family-note">The Compass connection to Ledger is planned. CeyDesk, the professional services platform, has its own sign-in.</p>
     </div>
   </section>
@@ -925,8 +925,8 @@ header{background:rgba(251,249,252,.96)}
   <div class="wrap">
     <div class="footer-top">
       <a class="brand" href="#top" aria-label="Evokes Ledger home">
-        <svg class="brand-mark" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#50345F" d="M6.1 4.5H8C9.8 4.5 10.9 5.9 10.9 7.5C10.9 8.9 10.1 9.8 9.4 10.3Q9 10.6 9 11.5V16.4H17.4A2.6 2.6 0 0 1 17.4 21.6H9V34.9Q9 36.8 11 36.8H30.2A3.35 3.35 0 0 1 30.2 43.5H6.1Q2 43.5 2 39.4V8.6Q2 4.5 6.1 4.5Z"/><path fill="#855C99" transform="rotate(180 24 24)" d="M6.1 4.5H8C9.8 4.5 10.9 5.9 10.9 7.5C10.9 8.9 10.1 9.8 9.4 10.3Q9 10.6 9 11.5V16.4H17.4A2.6 2.6 0 0 1 17.4 21.6H9V34.9Q9 36.8 11 36.8H30.2A3.35 3.35 0 0 1 30.2 43.5H6.1Q2 43.5 2 39.4V8.6Q2 4.5 6.1 4.5Z"/></svg>
-        <span class="lock"><span class="ev">Evokes Business Software</span><span class="wm">Ledger</span><span class="ds">Accounting &amp; Finance</span></span>
+        <svg class="brand-mark" width="48" height="48" viewBox="-2 10 104 80" aria-hidden="true" focusable="false"><path fill="#50164E" d="M3.5 62.2C-3.2 55.4-3 42.7 3.6 32.5 13.1 17.7 33.2 10.9 50.8 12.5 65.9 13.4 76 18.2 82.2 24.7 82.9 25.5 82.2 26.1 81.4 25.6 69.7 19.4 57.9 19 46.1 22.1 27.4 27.2 9.9 40.7 5.9 54.1 5 57.2 5.3 60.4 5.1 62.3 5 63.1 4.2 63 3.5 62.2Z"/><path fill="#854078" d="M96.5 37.8C103.2 44.6 103 57.3 96.4 67.5 86.9 82.3 66.8 89.1 49.2 87.5 34.1 86.6 24 81.8 17.8 75.3 17.1 74.5 17.8 73.9 18.6 74.4 30.3 80.6 42.1 81 53.9 77.9 72.6 72.8 90.1 59.3 94.1 45.9 95 42.8 94.7 39.6 94.9 37.7 95 36.9 95.8 37 96.5 37.8Z"/><path fill="#434247" d="M32 41h36v6H32zm0 12h36v6H32z"/></svg>
+        <span class="lock"><span class="ev">Evokes</span><span class="wm">Ledger</span><span class="ds">Accounting &amp; Finance</span></span>
       </a>
       <div class="footer-links">
         <a href="#batch">See it work</a><a href="#carries">Accounting features</a><a href="#controls">Controls</a><a href="#plans">Ways to start</a>
