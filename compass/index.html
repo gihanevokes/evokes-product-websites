@@ -80,12 +80,9 @@ h3{font-size:24px;margin-bottom:12px;font-weight:650}
 header{position:sticky;top:0;z-index:30;background:rgba(246,247,249,.92);backdrop-filter:saturate(140%) blur(8px);
   border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;gap:30px;min-height:100px}
-.brand{display:flex;align-items:center;gap:14px;flex-shrink:0}
-.brand-mark{width:52px;height:52px;display:block;flex:none}
-.lock{display:block;line-height:1}
-.lock .ev{display:block;font-size:11px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
-.lock .wm{display:block;font-size:31px;font-weight:700;letter-spacing:-.045em;color:var(--ink)}
-.lock .ds{display:block;font-size:11.5px;font-weight:650;letter-spacing:.02em;color:var(--accent);margin-top:3px}
+.brand{position:relative;display:block;width:198px;flex-shrink:0}
+.brand-lockup{width:100%;height:auto;display:block}
+.brand-description{position:absolute;left:36%;top:79%;font-size:10.5px;line-height:1.15;font-weight:650;letter-spacing:.02em;color:var(--accent);white-space:nowrap}
 .nav-links{display:flex;align-items:center;gap:30px;margin-left:auto;font-size:16px;font-weight:600}
 .nav-links a{padding:12px 0}
 .nav-links a:hover{color:var(--accent)}
@@ -239,8 +236,8 @@ a.suitecard:hover{transform:translateY(-3px);box-shadow:0 1px 2px rgba(18,26,34,
   .hero-top h1{text-align:center;max-width:100%}
   .two{grid-template-columns:1fr}
   .pc-head,.pc-body,.pc-foot{padding-left:22px;padding-right:22px}
-  .lock .wm{font-size:26px}
-  .brand-mark{width:44px;height:44px}
+  .brand{width:174px}
+  .brand-description{font-size:9.5px}
 }
 @media(max-width:620px){
   .tabs{grid-template-columns:1fr}
@@ -265,6 +262,7 @@ a.suitecard:hover{transform:translateY(-3px);box-shadow:0 1px 2px rgba(18,26,34,
 }
 .print-only{display:none}
 </style>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22352%2080%20548%20548%22%20role%3D%22img%22%20aria-label%3D%22Evokes%20Compass%22%3E%0A%20%20%3Cpath%20fill%3D%22%232b3540%22%20d%3D%22M628%2094h3c7%2061%2013%20113%2029%20159%2021%2060%2057%2082%20121%2094h-92c-31-17-51-45-59-94-18%2069-44%2093-111%20113%2070%2017%2094%2043%20110%20112%2011-42%2025-67%2050-86-16-11-32-19-50-24v-4h231v4c-57%2013-102%2019-138%2037-63%2031-72%2099-91%20213h-3c-17-105-28-175-86-208-36-21-94-29-151-42v-4c56-14%20110-20%20143-38%2063-35%2076-119%2094-232Z%22%2F%3E%0A%20%20%3Cpath%20fill%3D%22%23a9712a%22%20d%3D%22M746%20227c8%2012%2017%2023%2028%2034-11%2010-21%2021-28%2032-9-12-18-22-30-32%2012-11%2022-23%2030-34Z%22%2F%3E%0A%3C%2Fsvg%3E">
 </head>
 <body>
 
@@ -274,21 +272,14 @@ a.suitecard:hover{transform:translateY(-3px);box-shadow:0 1px 2px rgba(18,26,34,
   <div class="wrap">
     <div class="nav">
       <a class="brand" href="#top" aria-label="Evokes Compass home">
-        <svg class="brand-mark" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
-          <g class="anim-rose">
-            <path class="r-n" d="M100 10 L114 86 L100 100 L86 86 Z" fill="#a9712a"/>
-            <path d="M100 190 L86 114 L100 100 L114 114 Z" fill="#c8d0d8"/>
-            <path d="M190 100 L114 114 L100 100 L114 86 Z" fill="#2b3540"/>
-            <path d="M10 100 L86 86 L100 100 L86 114 Z" fill="#2b3540"/>
-            <circle cx="100" cy="100" r="13" fill="#f6f7f9"/>
-            <circle cx="100" cy="100" r="13" fill="none" stroke="#2b3540" stroke-width="7"/>
-          </g>
-        </svg>
-        <span class="lock">
-          <span class="ev">Evokes</span>
-          <span class="wm">compass</span>
-          <span class="ds">Import &amp; Export</span>
-        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="380 82 1438 548" class="brand-lockup" aria-hidden="true" focusable="false">
+  <path fill="#2b3540" d="M628 94h3c7 61 13 113 29 159 21 60 57 82 121 94h-92c-31-17-51-45-59-94-18 69-44 93-111 113 70 17 94 43 110 112 11-42 25-67 50-86-16-11-32-19-50-24v-4h231v4c-57 13-102 19-138 37-63 31-72 99-91 213h-3c-17-105-28-175-86-208-36-21-94-29-151-42v-4c56-14 110-20 143-38 63-35 76-119 94-232Z"/>
+  <path fill="#a9712a" d="M746 227c8 12 17 23 28 34-11 10-21 21-28 32-9-12-18-22-30-32 12-11 22-23 30-34Z"/>
+  <path fill="#2b3540" fill-rule="evenodd" d="M912 226h48v11h-35v16h31v11h-31v17h36v12h-49Z M1003 226h15l20 49 20-49h15l-29 67h-12Z M1160 225c21 0 36 15 36 35s-15 34-36 34-36-15-36-34 15-35 36-35Z M1160 237c-13 0-22 10-22 23s9 22 22 22 22-9 22-22-9-23-22-23Z M1247 226h13v31l28-31h17l-27 30 30 37h-17l-22-28-9 10v18h-13Z M1336 226h48v11h-35v16h31v11h-31v17h36v12h-49Z M1480 242c-6-4-12-6-18-6-7 0-11 3-11 7s3 6 16 9c14 4 21 9 21 21 0 13-11 21-26 21-12 0-23-4-31-12l8-9c7 6 15 9 23 9s12-3 12-8-4-7-17-10c-14-3-21-9-21-20 0-12 10-19 25-19 10 0 18 2 25 8Z"/>
+  <path fill="#2b3540" fill-rule="evenodd" d="M1036 358l-24 16c-9-14-22-22-39-22-28 0-46 21-46 49s18 49 46 49c17 0 30-8 40-22l24 15c-13 21-36 34-65 34-44 0-75-33-75-76s32-75 75-75c28 0 50 12 64 32Z M1102 364c35 0 59 24 59 56s-25 57-59 57-59-24-59-57 25-56 59-56Z M1102 388c-18 0-31 14-31 32s13 32 31 32 31-14 31-32-13-32-31-32Z M1177 366h26v15c8-11 19-17 33-17 16 0 28 6 36 19 10-13 22-19 38-19 24 0 37 16 37 43v67h-28v-63c0-15-6-23-19-23-14 0-23 10-23 26v60h-28v-63c0-15-6-23-19-23-15 0-24 10-24 26v60h-29Z M1369 366h27v14c8-10 19-16 34-16 30 0 52 24 52 56s-21 57-52 57c-15 0-26-5-34-15v51h-27Z M1425 388c-17 0-29 14-29 32s12 32 29 32c18 0 29-13 29-32s-11-32-29-32Z M1501 380c13-10 28-16 47-16 27 0 45 15 45 43v67h-27v-13c-7 10-18 16-33 16-23 0-40-13-40-34 0-22 17-36 46-36 10 0 19 2 26 5v-5c0-14-8-21-23-21-11 0-21 4-31 11Z M1565 429c-7-3-15-4-22-4-14 0-23 6-23 16 0 9 7 14 18 14 16 0 27-9 27-21Z M1681 397c-10-7-21-11-31-11-9 0-14 3-14 9s6 8 22 12c24 6 37 14 37 34 0 22-17 35-43 35-19 0-36-5-49-16l13-18c12 8 24 13 36 13 11 0 16-4 16-10s-5-9-22-13c-23-6-37-14-37-34 0-21 17-34 41-34 17 0 31 4 43 13Z"/>
+  <path fill="#2b3540" transform="translate(111 0)" d="M1681 397c-10-7-21-11-31-11-9 0-14 3-14 9s6 8 22 12c24 6 37 14 37 34 0 22-17 35-43 35-19 0-36-5-49-16l13-18c12 8 24 13 36 13 11 0 16-4 16-10s-5-9-22-13c-23-6-37-14-37-34 0-21 17-34 41-34 17 0 31 4 43 13Z"/>
+</svg>
+        <span class="brand-description">Import &amp; Export</span>
       </a>
       <nav id="nav-links" class="nav-links" aria-label="Primary">
         <a href="#costing">See it work</a>
@@ -312,15 +303,8 @@ a.suitecard:hover{transform:translateY(-3px);box-shadow:0 1px 2px rgba(18,26,34,
     <div class="wrap">
       <span class="pill">Import &amp; Export for Sri Lankan traders</span>
       <div class="hero-top">
-        <svg class="hero-mark" viewBox="0 0 200 200" role="img" aria-label="Evokes Compass mark">
-          <g class="anim-rose">
-            <path class="r-n" d="M100 10 L114 86 L100 100 L86 86 Z" fill="#a9712a"/>
-            <path d="M100 190 L86 114 L100 100 L114 114 Z" fill="#c8d0d8"/>
-            <path d="M190 100 L114 114 L100 100 L114 86 Z" fill="#2b3540"/>
-            <path d="M10 100 L86 86 L100 100 L86 114 Z" fill="#2b3540"/>
-            <circle cx="100" cy="100" r="13" fill="#f6f7f9"/>
-            <circle cx="100" cy="100" r="13" fill="none" stroke="#2b3540" stroke-width="7"/>
-          </g>
+        <svg class="hero-mark" viewBox="352 80 548 548" role="img" aria-label="Evokes Compass mark">
+          <g class="anim-rose"><path fill="#2b3540" d="M628 94h3c7 61 13 113 29 159 21 60 57 82 121 94h-92c-31-17-51-45-59-94-18 69-44 93-111 113 70 17 94 43 110 112 11-42 25-67 50-86-16-11-32-19-50-24v-4h231v4c-57 13-102 19-138 37-63 31-72 99-91 213h-3c-17-105-28-175-86-208-36-21-94-29-151-42v-4c56-14 110-20 143-38 63-35 76-119 94-232Z"/><path class="r-n" fill="#a9712a" d="M746 227c8 12 17 23 28 34-11 10-21 21-28 32-9-12-18-22-30-32 12-11 22-23 30-34Z"/></g>
         </svg>
         <h1>No more guessing.<span class="l2">The real landed cost.</span></h1>
       </div>
@@ -590,15 +574,14 @@ a.suitecard:hover{transform:translateY(-3px);box-shadow:0 1px 2px rgba(18,26,34,
   <div class="wrap">
     <div class="footer-top">
       <a class="brand" href="#top" aria-label="Evokes Compass home">
-        <svg class="brand-mark" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
-          <path d="M100 10 L114 86 L100 100 L86 86 Z" fill="#a9712a"/>
-          <path d="M100 190 L86 114 L100 100 L114 114 Z" fill="#c8d0d8"/>
-          <path d="M190 100 L114 114 L100 100 L114 86 Z" fill="#2b3540"/>
-          <path d="M10 100 L86 86 L100 100 L86 114 Z" fill="#2b3540"/>
-          <circle cx="100" cy="100" r="13" fill="#ffffff"/>
-          <circle cx="100" cy="100" r="13" fill="none" stroke="#2b3540" stroke-width="7"/>
-        </svg>
-        <span class="lock"><span class="ev">Evokes</span><span class="wm">compass</span><span class="ds">Import &amp; Export</span></span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="380 82 1438 548" class="brand-lockup" aria-hidden="true" focusable="false">
+  <path fill="#2b3540" d="M628 94h3c7 61 13 113 29 159 21 60 57 82 121 94h-92c-31-17-51-45-59-94-18 69-44 93-111 113 70 17 94 43 110 112 11-42 25-67 50-86-16-11-32-19-50-24v-4h231v4c-57 13-102 19-138 37-63 31-72 99-91 213h-3c-17-105-28-175-86-208-36-21-94-29-151-42v-4c56-14 110-20 143-38 63-35 76-119 94-232Z"/>
+  <path fill="#a9712a" d="M746 227c8 12 17 23 28 34-11 10-21 21-28 32-9-12-18-22-30-32 12-11 22-23 30-34Z"/>
+  <path fill="#2b3540" fill-rule="evenodd" d="M912 226h48v11h-35v16h31v11h-31v17h36v12h-49Z M1003 226h15l20 49 20-49h15l-29 67h-12Z M1160 225c21 0 36 15 36 35s-15 34-36 34-36-15-36-34 15-35 36-35Z M1160 237c-13 0-22 10-22 23s9 22 22 22 22-9 22-22-9-23-22-23Z M1247 226h13v31l28-31h17l-27 30 30 37h-17l-22-28-9 10v18h-13Z M1336 226h48v11h-35v16h31v11h-31v17h36v12h-49Z M1480 242c-6-4-12-6-18-6-7 0-11 3-11 7s3 6 16 9c14 4 21 9 21 21 0 13-11 21-26 21-12 0-23-4-31-12l8-9c7 6 15 9 23 9s12-3 12-8-4-7-17-10c-14-3-21-9-21-20 0-12 10-19 25-19 10 0 18 2 25 8Z"/>
+  <path fill="#2b3540" fill-rule="evenodd" d="M1036 358l-24 16c-9-14-22-22-39-22-28 0-46 21-46 49s18 49 46 49c17 0 30-8 40-22l24 15c-13 21-36 34-65 34-44 0-75-33-75-76s32-75 75-75c28 0 50 12 64 32Z M1102 364c35 0 59 24 59 56s-25 57-59 57-59-24-59-57 25-56 59-56Z M1102 388c-18 0-31 14-31 32s13 32 31 32 31-14 31-32-13-32-31-32Z M1177 366h26v15c8-11 19-17 33-17 16 0 28 6 36 19 10-13 22-19 38-19 24 0 37 16 37 43v67h-28v-63c0-15-6-23-19-23-14 0-23 10-23 26v60h-28v-63c0-15-6-23-19-23-15 0-24 10-24 26v60h-29Z M1369 366h27v14c8-10 19-16 34-16 30 0 52 24 52 56s-21 57-52 57c-15 0-26-5-34-15v51h-27Z M1425 388c-17 0-29 14-29 32s12 32 29 32c18 0 29-13 29-32s-11-32-29-32Z M1501 380c13-10 28-16 47-16 27 0 45 15 45 43v67h-27v-13c-7 10-18 16-33 16-23 0-40-13-40-34 0-22 17-36 46-36 10 0 19 2 26 5v-5c0-14-8-21-23-21-11 0-21 4-31 11Z M1565 429c-7-3-15-4-22-4-14 0-23 6-23 16 0 9 7 14 18 14 16 0 27-9 27-21Z M1681 397c-10-7-21-11-31-11-9 0-14 3-14 9s6 8 22 12c24 6 37 14 37 34 0 22-17 35-43 35-19 0-36-5-49-16l13-18c12 8 24 13 36 13 11 0 16-4 16-10s-5-9-22-13c-23-6-37-14-37-34 0-21 17-34 41-34 17 0 31 4 43 13Z"/>
+  <path fill="#2b3540" transform="translate(111 0)" d="M1681 397c-10-7-21-11-31-11-9 0-14 3-14 9s6 8 22 12c24 6 37 14 37 34 0 22-17 35-43 35-19 0-36-5-49-16l13-18c12 8 24 13 36 13 11 0 16-4 16-10s-5-9-22-13c-23-6-37-14-37-34 0-21 17-34 41-34 17 0 31 4 43 13Z"/>
+</svg>
+        <span class="brand-description">Import &amp; Export</span>
       </a>
       <div class="footer-links">
         <a href="#costing">See it work</a><a href="#capability">Capability</a><a href="#plans">Plans</a>
