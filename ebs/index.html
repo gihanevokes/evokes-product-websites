@@ -614,6 +614,27 @@ tr.sel td{background:rgba(126,186,255,.06)}
 html.light tr.sel td{background:rgba(31,99,198,.06)}
 .join-note{font-size:13px;line-height:1.55;color:var(--dim);margin:4px 0 18px}
 #sa-nav button{padding:8px 12px}
+
+/* step 6: get started, partner terms */
+.gs-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
+.gs-intro{font-size:14.5px;color:var(--muted);margin-bottom:6px}
+.gs-steps{list-style:none;margin:0;padding:0}
+.gs-step{display:flex;align-items:center;gap:16px;padding:16px 0;border-top:1px solid rgba(255,255,255,.07)}
+html.light .gs-step{border-top-color:rgba(23,34,46,.09)}
+.gs-num{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;border:1px solid var(--line-2);color:var(--ink-2)}
+.gs-step.done .gs-num{background:rgba(61,190,92,.14);border-color:rgba(61,190,92,.45);color:var(--good)}
+.gs-txt{flex:1;min-width:0}
+.gs-txt .t{display:block;font-weight:650;color:var(--ink)}
+.gs-txt .s{display:block;font-size:13.5px;line-height:1.5;color:var(--muted);margin-top:3px}
+.gs-state{font-size:13.5px;font-weight:600;color:var(--good);white-space:nowrap}
+@media(max-width:560px){.gs-step{flex-wrap:wrap;align-items:flex-start}.gs-txt{flex:1 1 calc(100% - 48px)}.gs-step .btn,.gs-state{margin-left:48px}}
+.tm-list{margin:0}
+.tm-list div{padding:14px 0;border-top:1px solid rgba(255,255,255,.07)}
+html.light .tm-list div{border-top-color:rgba(23,34,46,.09)}
+.tm-list dt{font-weight:650;color:var(--ink);margin-bottom:4px}
+.tm-list dd{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink-2)}
+.tm-check{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.5;color:var(--ink);font-weight:550}
+.tm-check input{width:18px;height:18px;margin-top:2px;accent-color:var(--sky);flex:none}
 </style>
 </head>
 <body>
@@ -758,6 +779,7 @@ html.light tr.sel td{background:rgba(31,99,198,.06)}
 
   <main class="body" id="cust-main">
   <div id="view-home">
+    <div id="getstarted"></div>
     <h2 class="sechead">Your products</h2>
 
     <div class="tiles">
@@ -897,6 +919,7 @@ html.light tr.sel td{background:rgba(31,99,198,.06)}
     <div class="foot">
       <p>Demonstration only. Names, figures and activity on this page are illustrative. Nothing here connects to a live system, and the page makes no network requests.</p>
       <button class="demobtn" type="button" id="toggle-entitlement" aria-pressed="false">Show Compass as not in plan</button>
+      <button class="demobtn" type="button" id="toggle-firstrun" aria-pressed="false">Show a new account’s first sign-in</button>
     </div>
   </main>
 </div>
@@ -1193,6 +1216,10 @@ html.light tr.sel td{background:rgba(31,99,198,.06)}
   var SHARE_NAMES = { overview: 'Overview Insights', orbit: 'Orbit Insights', pulse: 'Pulse Insights', compass: 'Compass Insights', ledger: 'Ledger, to work in the books' };
   function rs(v) { return 'LKR ' + fmtInt(v); }
   AGENTS.forEach(function (a) { a.status = 'Active'; a.off = {}; });
+  var TERMS = { v: 2, published: '28 Nov 2026', change: 'Version 2 explains what happens to commission when a privilege is paused or ended.' };
+  agentById('malith').terms = { v: 1, at: '14 Feb 2026, 10:20 am' };
+  agentById('nadeesha').terms = { v: 2, at: '28 Nov 2026, 11:05 am' };
+  agentById('roshan').terms = { v: 1, at: '2 Oct 2026, 11:40 am' };
   var PARTNER_FEATS = [
     ['invite', 'Invite customers with a personal link'],
     ['usage', 'See whether each customer’s team is using EBS'],
@@ -1516,6 +1543,7 @@ html.light tr.sel td{background:rgba(31,99,198,.06)}
   function greet() { var h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; }
 
   function setPersona(p, focus) {
+    if (p === 'staff' && S.firstRun) setFirstRun(false);
     S.persona = p; S.askP = null; joinEl.hidden = true;
     signin.hidden = true;
     dock.hidden = false; document.body.classList.add('has-dock');
@@ -1619,14 +1647,17 @@ html.light tr.sel td{background:rgba(31,99,198,.06)}
     });
     $('view-home').hidden = v !== 'home'; $('view-insights').hidden = v !== 'insights'; $('view-team').hidden = v !== 'team';
     SOLD.forEach(setTile); renderAsk(u);
+    $('toggle-firstrun').hidden = u.role !== 'Owner';
+    $('toggle-firstrun').setAttribute('aria-pressed', String(!!S.firstRun));
+    $('toggle-firstrun').textContent = S.firstRun ? 'Show the full demo account' : 'Show a new account\u2019s first sign-in';
     var held = ACME.products.length;
     if (v === 'home') {
       $('greeting').textContent = greet() + ', ' + u.name.split(' ')[0] + '.';
       var rows = document.querySelectorAll('#waiting .row'), w = 0;
       rows.forEach(function (r) { var rp = r.getAttribute('data-product'), ok = holds(ACME, rp) && (u.role !== 'Member' || !!u.roles[rp]); r.hidden = !ok; if (ok) w++; });
       $('hero-sub').textContent = word(held) + (held === 1 ? ' product' : ' products') + ', one sign-in. ' + word(w) + (w === 1 ? ' thing is' : ' things are') + ' waiting for you today.';
-      $('hero-meta').textContent = 'Last signed in yesterday, 4:12 PM · Colombo';
-      renderAccess(u); renderHomeInsights();
+      $('hero-meta').textContent = S.firstRun ? 'First sign-in · Colombo' : 'Last signed in yesterday, 4:12 PM · Colombo';
+      renderAccess(u); renderHomeInsights(); renderGetStarted(u);
     } else if (v === 'insights') {
       $('greeting').textContent = 'Insights';
       $('hero-sub').textContent = 'How Acme Traders is doing, drawn from the products it holds. Figures run to the end of October 2026.';
@@ -1641,6 +1672,38 @@ html.light tr.sel td{background:rgba(31,99,198,.06)}
     flush();
   }
 
+  var TEAM_FULL = null, GRANTS_FULL = null;
+  function setFirstRun(on) {
+    if (on === !!S.firstRun) return;
+    S.firstRun = on;
+    if (on) {
+      TEAM_FULL = TEAM.slice(); GRANTS_FULL = JSON.parse(JSON.stringify(GRANTS));
+      TEAM.length = 0; TEAM.push(TEAM_FULL[0]);
+      Object.keys(GRANTS).forEach(function (k) { delete GRANTS[k]; });
+      S.gsDismissed = false; S.gsInsights = false; S.adding = false;
+    } else {
+      TEAM.length = 0; TEAM_FULL.forEach(function (m) { TEAM.push(m); });
+      Object.keys(GRANTS).forEach(function (k) { delete GRANTS[k]; });
+      Object.keys(GRANTS_FULL).forEach(function (k) { GRANTS[k] = GRANTS_FULL[k]; });
+      S.adding = false;
+    }
+  }
+  function renderGetStarted(u) {
+    var host = $('getstarted'), s1 = TEAM.length > 1, s2 = !!S.gsInsights;
+    if (!S.firstRun || u.role !== 'Owner' || S.gsDismissed || (s1 && s2)) { host.innerHTML = ''; return; }
+    var tick = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12.5l4.2 4.2L19 7"/></svg>';
+    var step = function (n, done, title, todo, doneTxt, btn) {
+      return '<li class="gs-step' + (done ? ' done' : '') + '"><span class="gs-num" aria-hidden="true">' + (done ? tick : n) + '</span><span class="gs-txt"><span class="t">' + title + '</span><span class="s">' + (done ? doneTxt : todo) + '</span></span>' +
+        (done ? '<span class="gs-state">Done</span>' : btn) + '</li>';
+    };
+    var added = TEAM.length - 1;
+    host.innerHTML = '<section class="panel" aria-labelledby="gs-h" style="margin-bottom:34px"><div class="gs-head"><h2 class="sechead" id="gs-h" style="margin:0">Get started</h2><button type="button" class="linkbtn" data-gsdismiss>Dismiss</button></div>' +
+      '<p class="gs-intro">Two steps to set up ' + esc(ACME.name.replace(' (Pvt) Ltd', '')) + ' for your team. ' + ((s1 ? 1 : 0) + (s2 ? 1 : 0)) + ' of 2 done.</p><ol class="gs-steps">' +
+      step(1, s1, 'Add your team', 'Each person uses one seat. Your band has ' + bandMax(ACME.band) + ' seats, and you use one.', added + (added === 1 ? ' person' : ' people') + ' added. You can add more under Team & access.', '<button type="button" class="btn ghost-btn sm" data-gsadd>Add people</button>') +
+      step(2, s2, 'Choose who sees Insights', 'Insights start visible to you and your Admins only. Give each person the areas their work needs.', 'Access chosen. You can change it any time under Team & access.', '<button type="button" class="btn ghost-btn sm" data-goto="team">Choose access</button>') +
+      '</ol></section>';
+  }
+
   function renderAccess(u) {
     var h = '';
     SOLD.forEach(function (p) {
@@ -1651,9 +1714,10 @@ html.light tr.sel td{background:rgba(31,99,198,.06)}
     h += '<div class="kv" style="margin-bottom:20px"><span style="color:var(--muted)">Insights</span><span style="font-weight:550;text-align:right">' +
       esc(areas.length === AREAS.filter(function (a) { return companyHas(a.id); }).length && areas.length ? 'All' : areas.length ? areas.join(', ') : 'Not given yet') + '</span></div>';
     $('access-kv').innerHTML = h;
+    var others = TEAM.filter(function (m) { return m.role === 'Admin'; }).map(function (m) { return m.name; });
     $('access-note').textContent = u.role === 'Member'
-      ? 'Nuwan Perera and Priya Jayasuriya administer this organisation. Ask them for a change of access.'
-      : 'You hold the account and administer it with Priya Jayasuriya. Add people and manage access under Team & access.';
+      ? andList(TEAM.filter(function (m) { return m.role !== 'Member'; }).map(function (m) { return m.name; })) + ' administer this organisation. Ask them for a change of access.'
+      : 'You hold the account' + (others.length ? ' and administer it with ' + andList(others) : '') + '. Add people and manage access under Team & access.';
   }
 
   function renderHomeInsights() {
@@ -1903,6 +1967,13 @@ html.light tr.sel td{background:rgba(31,99,198,.06)}
       document.querySelectorAll('#ag-nav button').forEach(function (b) { b.hidden = true; });
       return;
     }
+    if (!a.terms || a.terms.v < TERMS.v) {
+      document.querySelectorAll('#ag-nav button').forEach(function (b) { b.hidden = true; });
+      t.textContent = a.terms ? 'Updated partner terms' : 'Partner terms';
+      sub.textContent = a.terms ? 'Evokes has published version ' + TERMS.v + ' of the partner terms. Your portal opens once you accept it.' : 'Read and accept the partner terms. Your portal opens once you do.';
+      host.innerHTML = agTerms(a);
+      return;
+    }
     document.querySelectorAll('#ag-nav button').forEach(function (b) { b.hidden = false; });
     document.querySelectorAll('#ag-nav button').forEach(function (b) {
       var bv = b.getAttribute('data-view');
@@ -1924,6 +1995,27 @@ html.light tr.sel td{background:rgba(31,99,198,.06)}
       host.innerHTML = agCommission(a, cs);
     }
     flush();
+  }
+  function agTerms(a) {
+    var pts = [
+      ['Your privilege', 'Evokes grants the partner privilege to you as an individual. Evokes can pause or end it, and records the reason each time.'],
+      ['What you see', 'The customers you brought: their products, seats, status and whether their teams use EBS. Never their records or figures.'],
+      ['Commission', 'A rate Evokes sets for you, on what each of your customers pays Evokes each month, after discounts and before VAT. It starts with their first paid month and runs while the account is active. Evokes pays it monthly.'],
+      ['Paused or ended', 'While your privilege is paused you keep earning, but you cannot invite anyone new. If it ends, commission stops and your customers stay with Evokes.'],
+      ['Inviting', 'Invite businesses that expect to hear from you, and describe EBS accurately. Evokes sets up every account.']
+    ];
+    return '<section class="panel" aria-labelledby="tm-h" style="max-width:780px"><h2 class="sechead" id="tm-h" tabindex="-1">Partner terms, version ' + TERMS.v + ' · published ' + TERMS.published + '</h2>' +
+      (a.terms ? '<div class="note" style="margin-bottom:12px">' + IC.info + '<span>' + esc(TERMS.change) + ' You accepted version ' + a.terms.v + ' on ' + esc(a.terms.at.split(',')[0]) + '.</span></div>' : '') +
+      '<dl class="tm-list">' + pts.map(function (x) { return '<div><dt>' + x[0] + '</dt><dd>' + x[1] + '</dd></div>'; }).join('') + '</dl>' +
+      '<p style="font-size:12.5px;color:var(--dim);margin:10px 0 20px">A summary for this prototype. The full partner terms will come from Evokes.</p>' +
+      '<label class="tm-check"><input type="checkbox" id="tm-ok">I have read and accept the partner terms, version ' + TERMS.v + '.</label>' +
+      '<p id="tm-msg" role="status" style="font-size:13.5px;color:var(--bad);min-height:20px;margin-top:8px"></p>' +
+      '<div class="btnrow" style="margin-top:0"><button type="button" class="btn sm" data-tmaccept>Accept and continue</button><button type="button" class="btn ghost-btn sm" data-tmsignout>Sign out</button></div></section>';
+  }
+  function termsLine(a) {
+    var ok = a.terms && a.terms.v >= TERMS.v;
+    return '<p style="font-size:13.5px;line-height:1.6;color:var(--muted);margin-top:14px">Partner terms: ' + (a.terms ? 'version ' + a.terms.v + ' accepted ' + esc(a.terms.at) + '.' : 'not accepted yet.') +
+      (ok ? '' : ' Version ' + TERMS.v + ' is waiting for them; their portal opens once they accept it.') + '</p>';
   }
   function agNote() {
     var a = me_agent();
@@ -2086,6 +2178,8 @@ html.light tr.sel td{background:rgba(31,99,198,.06)}
       stat('Customers brought by partners', brought + ' of ' + CUSTOMERS.length, '<span class="d flat"><small>the rest came to Evokes directly</small></span>') +
       stat('Invites waiting', String(inv), '<span class="d flat"><small>sent by partners, not yet customers</small></span>') +
       stat('Commission this month', rs(due), '<span class="d flat"><small>sample figure · terms not final</small></span>') + '</div>';
+    var tAcc = AGENTS.filter(function (x) { return x.status !== 'Ended' && x.terms && x.terms.v >= TERMS.v; }).length, tAll = AGENTS.filter(function (x) { return x.status !== 'Ended'; }).length;
+    h += '<p style="font-size:13.5px;color:var(--muted);margin:-6px 0 18px">Partner terms: version ' + TERMS.v + ', published ' + TERMS.published + '. ' + tAcc + ' of ' + tAll + ' partners have accepted it. Each partner accepts the current version before their portal opens.</p>';
     h += '<div class="filters" style="justify-content:space-between;margin-bottom:14px"><span style="font-size:14px;color:var(--muted)">Each partner is managed as an individual member. Open one to set their rate, pause or end their privilege, or switch parts of their portal off.</span><button type="button" class="btn ghost-btn sm" data-addpartner' + (S.addingPartner ? ' disabled' : '') + '>Grant partner privilege</button></div>';
     if (S.addingPartner) {
       h += '<section class="panel" style="margin-bottom:18px"><h2 class="sechead">Grant partner privilege to a person</h2><div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end">' +
@@ -2126,7 +2220,7 @@ html.light tr.sel td{background:rgba(31,99,198,.06)}
       PARTNER_FEATS.map(function (f) {
         return '<div class="mod" style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0"><span class="feat" style="font-size:14px">' + esc(f[1]) + (a.off[f[0]] ? ' <span class="dev-mark">· off: ' + esc(a.off[f[0]]) + '</span>' : '') + '</span>' +
           sw('data-pfeat="' + f[0] + '"', !a.off[f[0]], f[1] + ' for ' + a.name, a.status !== 'Active' && f[0] !== 'commission') + '</div>';
-      }).join('') + '</section>';
+      }).join('') + '</section>' + termsLine(a);
     h += a.status === 'Ended' ? '<p style="font-size:13.5px;color:var(--muted);margin-top:12px">This privilege has ended. The customers below stay with Evokes, and commission has stopped.</p>'
       : '<div class="btnrow"><button type="button" class="btn ghost-btn sm" data-pend="' + a.id + '">End partner privilege</button></div><p style="font-size:12.5px;color:var(--dim);margin-top:8px">Ending it stops sign-in and commission. Customers this person brought stay with Evokes.</p>';
     h += '<h2 class="sechead" style="margin:26px 0 12px">Customers this partner brought</h2><div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Customer</th><th scope="col">Products</th><th scope="col">Status</th><th class="n" scope="col">Commission this month</th></tr></thead><tbody>' +
@@ -2453,6 +2547,17 @@ html.light tr.sel td{background:rgba(31,99,198,.06)}
     }
   });
 
+  app.addEventListener('click', function (e) {
+    var t = e.target;
+    if (t.closest('[data-grant]')) { S.gsInsights = true; return; }
+    if (t.closest('[data-gsadd]')) { S.cview = 'team'; S.adding = true; renderCustomer(); $('np-name').focus(); return; }
+    if (t.closest('[data-gsdismiss]')) { S.gsDismissed = true; renderCustomer(); $('greeting').focus(); toast('Get started is hidden. Both steps stay available under Team & access.'); return; }
+  });
+  $('toggle-firstrun').addEventListener('click', function () {
+    setFirstRun(!S.firstRun); S.cview = 'home'; renderCustomer(); window.scrollTo(0, 0); $('greeting').focus();
+    toast(S.firstRun ? 'Showing the first sign-in of a new account: only the Owner, no Insights access given yet.' : 'Showing the full demo account again.');
+  });
+
   agentEl.addEventListener('click', function (e) {
     var t = e.target, b;
     if ((b = t.closest('[data-agopen]')) || (b = t.closest('tr[data-agrow]'))) {
@@ -2487,6 +2592,15 @@ html.light tr.sel td{background:rgba(31,99,198,.06)}
       a.invites.unshift({ name: biz, who: who || 'Contact', sent: today(), state: 'Invite sent' });
       renderAgent(); $('ai-biz').focus();
       toast('Invite emailed to ' + em + '. It carries your link, so their enquiry stays tied to you.');
+    }
+  });
+  agentEl.addEventListener('click', function (e) {
+    var t = e.target, a = me_agent();
+    if (t.closest('[data-tmsignout]')) { signOut(); return; }
+    if (t.closest('[data-tmaccept]')) {
+      if (!$('tm-ok').checked) { $('tm-msg').textContent = 'Tick the box to accept the partner terms.'; $('tm-ok').focus(); return; }
+      a.terms = { v: TERMS.v, at: nowStr() }; S.agview = 'overview'; renderAgent(); window.scrollTo(0, 0); $('ag-title').focus({ preventScroll: true });
+      toast('Thank you. You have accepted version ' + TERMS.v + ' of the partner terms, and your portal is open.');
     }
   });
   $('ag-nav').addEventListener('click', function (e) {
