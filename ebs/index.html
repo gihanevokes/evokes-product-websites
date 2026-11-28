@@ -575,6 +575,45 @@ html.light .reflink code{background:#F7F9FB}
 html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradient(158deg,rgba(0,137,111,.06),#fff 60%)}
 .btnrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
 .btn.sm{min-height:40px;padding:8px 16px;font-size:14px}
+
+/* step 5: tiles by role, enquiries, add customer, join page */
+.tile.norole .mark{opacity:.6}
+.tile.norole .tile-name{color:var(--ink-2)}
+.tile .tile-note{font-size:14px;line-height:1.55;color:var(--muted);margin:0}
+html.light .tile .tile-note{color:var(--muted)}
+.field input[type=text],.field input[type=tel],.field textarea,.field select{width:100%;min-height:52px;padding:14px 16px;font-size:16px;font-family:inherit;
+  color:var(--ink);background:rgba(255,255,255,.045);border:1px solid var(--line-2);border-radius:11px}
+.field textarea{min-height:96px;line-height:1.5;resize:vertical}
+.field select option{background:#121821}
+html.light .field input[type=text],html.light .field input[type=tel],html.light .field textarea,html.light .field select{background:#fff;border-color:rgba(23,34,46,.24)}
+html.light .field select option{background:#fff}
+fieldset.field{border:0;padding:0;margin:0 0 18px;min-width:0}
+.field legend{font-size:13.5px;font-weight:600;margin-bottom:10px;color:#C8D2DC;padding:0}
+html.light .field legend{color:var(--ink-2)}
+.checks{display:flex;flex-wrap:wrap;gap:10px 20px}
+.checks label{display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:500;color:var(--ink-2);margin:0}
+.checks input{width:17px;height:17px;accent-color:var(--sky);margin:0}
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px}
+@media(max-width:560px){.fgrid{grid-template-columns:1fr}}
+.sa-form{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px 16px}
+.sa-form label{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)}
+.sa-form .search,.sa-form .select{min-width:0;width:100%}
+.sa-form fieldset{grid-column:1/-1;border:0;padding:0;margin:0;min-width:0}
+.sa-form legend{font-size:13px;color:var(--muted);margin-bottom:10px;padding:0}
+.sa-form .checks label{flex-direction:row;align-items:center;font-size:14px;color:var(--ink-2)}
+.nav .count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;margin-left:7px;border-radius:100px;
+  font-size:11.5px;font-weight:700;color:#0A0D12;background:var(--sky)}
+html.light .nav .count{color:#fff}
+.estat{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:var(--ink-2);white-space:nowrap}
+.estat i{width:8px;height:8px;border-radius:50%;background:var(--dim)}
+.estat.new i{background:var(--sky)}.estat.contacted i{background:var(--warn)}.estat.converted i{background:var(--good)}
+.enq{margin-bottom:18px}
+.enq .kvgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:0 28px;margin:14px 0 4px}
+.enq .msgq{font-size:14.5px;line-height:1.6;color:var(--ink-2);padding:10px 14px;border-left:3px solid var(--line-2);margin:14px 0 0}
+tr.sel td{background:rgba(126,186,255,.06)}
+html.light tr.sel td{background:rgba(31,99,198,.06)}
+.join-note{font-size:13px;line-height:1.55;color:var(--dim);margin:4px 0 18px}
+#sa-nav button{padding:8px 12px}
 </style>
 </head>
 <body>
@@ -644,7 +683,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
         <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="var(--pulse)" stroke-width="1.9" style="flex:none;margin-top:2px">
           <path d="M12 3l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z"></path><path d="M9 12.3l2.1 2.1L15.3 10"></path>
         </svg>
-        <p style="font-size:13.5px;line-height:1.55;color:var(--muted)">Finance and administrator accounts are asked for a second factor after this step.</p>
+        <p style="font-size:13.5px;line-height:1.55;color:var(--muted)">Accounts with admin, approval or partner access are asked for a second code after this step.</p>
       </div>
 
       <div class="demo-accts">
@@ -659,6 +698,9 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     </div>
   </div>
 </main>
+
+<!-- ============ PARTNER JOIN PAGE ============ -->
+<main id="join" class="signin" hidden></main>
 
 <!-- ============ DASHBOARD ============ -->
 <div id="app" hidden>
@@ -734,6 +776,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
           <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13M12 6l6 6-6 6"></path></svg>
         </span>
       </a>
+      <div class="tile locked" id="tile-orbit-alt" hidden></div>
 
       <a class="tile p rise rise-2" id="tile-pulse" href="#top">
         <span class="tile-head">
@@ -749,6 +792,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
           <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13M12 6l6 6-6 6"></path></svg>
         </span>
       </a>
+      <div class="tile locked" id="tile-pulse-alt" hidden></div>
 
       <a class="tile c rise rise-3" id="compass-held" href="#top">
         <span class="tile-head">
@@ -792,6 +836,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
           <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h13M12 6l6 6-6 6"></path></svg>
         </span>
       </a>
+      <div class="tile locked" id="tile-ledger-alt" hidden></div>
 
       <div class="tile half rise rise-4">
         <span class="tile-head">
@@ -807,6 +852,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       </div>
     </div>
 
+    <div id="ask-panel"></div>
     <p style="font-size:13px;color:var(--dim);margin-bottom:46px">Evokes sets which products and features your organisation holds. Your administrator decides who uses them. Each product checks both on every request.</p>
 
     <div id="home-insights"></div>
@@ -864,8 +910,9 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       <nav class="nav" aria-label="Super Admin" id="sa-nav">
         <button type="button" data-view="overview" aria-current="page">Overview</button>
         <button type="button" data-view="customers">Customers</button>
+        <button type="button" data-view="enquiries" id="sa-enq-nav">Enquiries<span class="count" id="sa-enq-count" aria-hidden="true"></span></button>
         <button type="button" data-view="agents">Partners</button>
-        <button type="button" data-view="catalogue">Feature catalogue</button>
+        <button type="button" data-view="catalogue">Catalogue</button>
         <button type="button" data-view="activity">Activity</button>
       </nav>
       <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
@@ -1105,12 +1152,35 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   ];
   /* ---------- partner agents ---------- */
   var AGENTS = [
-    { id: 'malith', name: 'Malith Gunasekara', profession: 'Chartered accountant', email: 'malith.g@gmail.com', industry: 'Accounting', city: 'Colombo', since: '2026-02', rate: 5, code: 'GUNASEKARA',
-      invites: [{ name: 'Kelani Bakers', who: 'Chamari Perera, owner', sent: '20 Nov 2026', state: 'Invite sent' }, { name: 'Sunrise Pharmacy', who: 'Dilan Rodrigo, owner', sent: '24 Nov 2026', state: 'Opened the invite' }] },
-    { id: 'nadeesha', name: 'Nadeesha Perera', profession: 'Import and export consultant', email: 'nadeesha.perera@yahoo.com', industry: 'Import and export', city: 'Negombo', since: '2026-05', rate: 5, code: 'PERERATRADE', invites: [{ name: 'Ocean Spice Exports', who: 'Owner', sent: '22 Nov 2026', state: 'Invite sent' }] },
-    { id: 'roshan', name: 'Roshan de Silva', profession: 'Hotel consultant', email: 'roshan.ds@outlook.com', industry: 'Hotels and hospitality', city: 'Bentota', since: '2026-10', rate: 5, code: 'HOSPLANKA', invites: [] }
+    { id: 'malith', name: 'Malith Gunasekara', profession: 'Chartered accountant', email: 'malith.g@gmail.com', industry: 'Accounting', city: 'Colombo', since: '2026-02', rate: 5, code: 'k7m2q9xd',
+      invites: [{ name: 'Kelani Bakers', who: 'Chamari Perera, owner', sent: '20 Nov 2026', state: 'Invite sent' }, { name: 'Sunrise Pharmacy', who: 'Dilan Rodrigo, owner', sent: '24 Nov 2026', state: 'Enquired' }] },
+    { id: 'nadeesha', name: 'Nadeesha Perera', profession: 'Import and export consultant', email: 'nadeesha.perera@yahoo.com', industry: 'Import and export', city: 'Negombo', since: '2026-05', rate: 5, code: 'r4tn8wpe', invites: [{ name: 'Ocean Spice Exports', who: 'Owner', sent: '22 Nov 2026', state: 'Invite sent' }] },
+    { id: 'roshan', name: 'Roshan de Silva', profession: 'Hotel consultant', email: 'roshan.ds@outlook.com', industry: 'Hotels and hospitality', city: 'Bentota', since: '2026-10', rate: 5, code: 'h3vb6czy', invites: [] }
   ];
   var AGENT_OF = { acme: 'malith', coastline: 'malith', harbour: 'malith', summit: 'malith', vertex: 'malith', meridian: 'malith', bluewave: 'nadeesha', northgate: 'nadeesha', palm: 'roshan' };
+
+  /* ---------- enquiries: from partner links, "Ask about" and the website ---------- */
+  var ENQ = [
+    { id: 'e4', when: '27 Nov 2026, 6:42 pm', src: 'Partner link', partner: 'malith', biz: 'Sunrise Pharmacy', form: 'Sole proprietorship', city: 'Kadawatha', contact: 'Dilan Rodrigo, owner', email: 'dilan@sunrisepharmacy.lk', phone: '', products: ['orbit', 'ledger'], size: '6–20', msg: 'We run two pharmacies and want stock and the accounts in one place.', status: 'New' },
+    { id: 'e3', when: '26 Nov 2026, 10:05 am', src: 'Ask about', partner: null, cust: 'silverline', biz: 'Silverline Apparel (Pvt) Ltd', contact: 'Ishara Gamage, Managing Director', email: 'ishara@silverlineapparel.lk', products: ['compass'], msg: 'We have started importing fabric. How does Compass work out landed cost?', status: 'Contacted' },
+    { id: 'e2', when: '24 Nov 2026, 2:30 pm', src: 'Evokes website', partner: null, biz: 'Hill Country Tea Traders', form: 'Partnership', city: 'Kandy', contact: 'Anura Bandara, partner', email: 'anura@hillcountrytea.lk', phone: '', products: ['orbit', 'pulse'], size: '21–50', msg: '', status: 'New' },
+    { id: 'e1', when: '3 Nov 2026, 9:15 am', src: 'Partner link', partner: 'malith', cust: 'vertex', biz: 'Vertex Engineering (Pvt) Ltd', form: 'Private limited company', city: 'Kelaniya', contact: 'Sanjeewa Kumara, Director', email: 'sanjeewa@vertexeng.lk', products: ['pulse', 'ledger'], size: '6–20', msg: '', status: 'Converted' }
+  ];
+  var ASKED = {};
+  var FORMS = ['Sole proprietorship', 'Partnership', 'Private limited company', 'Other'];
+  var BANDS = ['1–5', '6–20', '21–50', 'Above 50'];
+  function newCode() {
+    var ch = 'abcdefghjkmnpqrstuvwxyz23456789', out = '', r = new Uint8Array(8);
+    try { crypto.getRandomValues(r); } catch (err) { for (var k = 0; k < 8; k++) r[k] = Math.floor(Math.random() * 256); }
+    for (var i = 0; i < 8; i++) out += ch[r[i] % ch.length];
+    return out;
+  }
+  function enqById(id) { for (var i = 0; i < ENQ.length; i++) if (ENQ[i].id === id) return ENQ[i]; return null; }
+  function enqOpen(e) { return e.status === 'New' || e.status === 'Contacted'; }
+  function andList(a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; }
+  function prodNames(ps) { return ps.map(function (x) { return findProduct(x).name; }); }
+  function invWaiting(a) { return a.invites.filter(function (i) { return i.state !== 'Became a customer'; }).length; }
+  function today() { return nowStr().split(',')[0]; }
   /* sample monthly amounts, used only to show how commission adds up */
   var FEE = { acme: 96000, coastline: 4000, harbour: 5000, summit: 12000, vertex: 22400, meridian: 15800, bluewave: 18400, northgate: 142000, palm: 28000 };
   /* what each customer has chosen to share with its partner; only the customer's account holder changes this */
@@ -1189,7 +1259,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     { id: 'nuwan', name: 'Nuwan Perera', title: 'Managing Director', role: 'Owner', email: 'nuwan@acmetraders.lk', av: 'NP', roles: { orbit: 'Owner', pulse: 'Owner', compass: 'Owner' } },
     { id: 'priya', name: 'Priya Jayasuriya', title: 'Finance Manager', role: 'Admin', roles: { orbit: 'Admin', pulse: 'Admin', compass: 'Admin' } },
     { id: 'shehani', name: 'Shehani Fernando', title: 'HR Manager', role: 'Member', roles: { pulse: 'Payroll reviewer' } },
-    { id: 'dinithi', name: 'Dinithi Wickramasinghe', title: 'Accounts Executive', role: 'Member', email: 'dinithi@acmetraders.lk', av: 'DW', roles: { orbit: 'Approver', pulse: 'Read only', compass: 'Finance' } },
+    { id: 'dinithi', name: 'Dinithi Wickramasinghe', title: 'Accounts Executive', role: 'Member', email: 'dinithi@acmetraders.lk', av: 'DW', roles: { orbit: 'Approver', pulse: 'Read only' } },
     { id: 'ruwan', name: 'Ruwan Silva', title: 'Warehouse Supervisor', role: 'Member', roles: { orbit: 'Storekeeper' } },
     { id: 'kasun', name: 'Kasun Herath', title: 'Shipping Coordinator', role: 'Member', roles: { compass: 'Operator' } }
   ];
@@ -1436,7 +1506,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   }
 
   /* ---------- views: show/hide ---------- */
-  var signin = $('signin'), app = $('app'), admin = $('admin'), dock = $('dock'), agentEl = $('agent');
+  var signin = $('signin'), app = $('app'), admin = $('admin'), dock = $('dock'), agentEl = $('agent'), joinEl = $('join');
   var Q = [];
   function flush() { var q = Q; Q = []; q.forEach(function (f) { f(); }); }
   function toast(msg) {
@@ -1446,7 +1516,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   function greet() { var h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; }
 
   function setPersona(p, focus) {
-    S.persona = p;
+    S.persona = p; S.askP = null; joinEl.hidden = true;
     signin.hidden = true;
     dock.hidden = false; document.body.classList.add('has-dock');
     dock.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-persona') === p)); });
@@ -1477,7 +1547,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   function signOut() {
     closeMenus();
     app.hidden = true; admin.hidden = true; agentEl.hidden = true; dock.hidden = true; document.body.classList.remove('has-dock');
-    signin.hidden = false; S.persona = null;
+    joinEl.hidden = true; signin.hidden = false; S.persona = null;
     document.title = 'Evokes Business Software — sign in';
     window.scrollTo(0, 0); $('email').focus();
   }
@@ -1501,24 +1571,45 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   syncTheme();
 
   /* ---------- customer side ---------- */
-  var tileOrig = {};
+  var TILE_DESC = {
+    orbit: 'Stock, sales and customer follow-up, on the same sign-in.',
+    pulse: 'Employee records, attendance, leave and monthly payroll, on the same sign-in.',
+    compass: 'Landed cost, customs records and shipment tracking, on the same sign-in.',
+    ledger: 'Journals, supplier and customer accounts, cheques and statements, on the same sign-in.'
+  };
+  function tileEls(p) { return p === 'compass' ? [$('compass-held'), $('compass-locked')] : [$('tile-' + p), $('tile-' + p + '-alt')]; }
+  function adminsText() { return andList(TEAM.filter(function (m) { return m.role !== 'Member'; }).map(function (m) { return m.name; })).replace(/ and ([^,]+)$/, ' or $1'); }
+  function tileState(p, u) { return !holds(ACME, p) ? 'plan' : (u.role === 'Member' && !u.roles[p]) ? 'role' : 'open'; }
   function setTile(p) {
-    var held = holds(ACME, p);
+    var u = currentUser(), held = holds(ACME, p), el = tileEls(p), open = el[0], alt = el[1], st = tileState(p, u);
     if (p === 'compass') {
-      $('compass-held').hidden = !held; $('compass-locked').hidden = held;
       var tg = $('toggle-entitlement');
       tg.setAttribute('aria-pressed', String(!held));
       tg.textContent = held ? 'Show Compass as not in plan' : 'Show Compass as included';
-      return;
     }
-    var t = $('tile-' + p); if (!t) return;
-    if (!tileOrig[p]) tileOrig[p] = t.innerHTML;
-    t.innerHTML = tileOrig[p];
-    if (held) { t.classList.remove('locked'); return; }
-    t.classList.add('locked');
-    var b = t.querySelector('.badge'); b.className = 'badge quiet'; b.removeAttribute('style'); b.textContent = 'Not in your plan';
-    t.querySelector('p').textContent = { orbit: 'Stock, sales and customer follow-up, on the same sign-in.', pulse: 'Employee records, attendance, leave and monthly payroll, on the same sign-in.', ledger: 'Journals, supplier and customer accounts, cheques and statements, on the same sign-in.' }[p];
-    var g = t.querySelector('.go'); g.style.color = 'var(--muted)'; g.textContent = 'Ask about ' + findProduct(p).name;
+    open.hidden = st !== 'open'; alt.hidden = st === 'open';
+    if (st === 'open') return;
+    var pr = findProduct(p), act;
+    if (st === 'role') act = '<p class="tile-note">Ask ' + esc(adminsText()) + ' to add ' + pr.name + ' to your role.</p>';
+    else if (u.role === 'Member') act = '<p class="tile-note">Your account holder decides what the account includes.</p>';
+    else if (ASKED[p]) act = '<p class="tile-note">You asked Evokes about ' + pr.name + ' on ' + esc(ASKED[p]) + '. Evokes will be in touch.</p>';
+    else act = '<button class="btn ghost-btn sm" type="button" data-ask="' + p + '">Ask about ' + pr.name + '</button>';
+    alt.className = 'tile ' + (st === 'plan' ? 'locked' : 'norole') + (p === 'ledger' ? ' half' : '');
+    alt.innerHTML = '<span class="tile-head"><span class="mark">' + open.querySelector('.mark').innerHTML + '</span><span style="flex:1;min-width:0"><span class="tile-name">' + pr.name + '</span>' +
+      '<span class="tile-desc">' + esc(open.querySelector('.tile-desc').textContent) + '</span></span><span class="badge quiet">' + (st === 'plan' ? 'Not in your plan' : 'Not in your role') + '</span></span>' +
+      '<p>' + esc(st === 'plan' ? TILE_DESC[p] : 'Your organisation holds ' + pr.name + ', but your role does not include it yet.') + '</p>' + act;
+  }
+  function renderAsk(u) {
+    var host = $('ask-panel'), p = S.askP;
+    if (!p || u.role === 'Member' || holds(ACME, p)) { S.askP = null; host.innerHTML = ''; return; }
+    var pr = findProduct(p);
+    host.innerHTML = '<section class="panel" aria-labelledby="ask-h" style="margin-bottom:24px;max-width:720px">' +
+      '<h2 class="sechead" id="ask-h" tabindex="-1" style="margin-bottom:8px">Ask Evokes about ' + pr.name + '</h2>' +
+      '<p style="font-size:14.5px;line-height:1.6;color:var(--muted);margin-bottom:20px">Evokes sales will contact you. Nothing in your account changes until you agree it with them.</p>' +
+      '<div class="field"><label for="ask-q">What would you like to know?</label><textarea id="ask-q" rows="3" placeholder="For example, how ' + pr.name + ' would work with the products you already have"></textarea></div>' +
+      '<div class="field"><label for="ask-contact">Best way to reach you</label><input id="ask-contact" type="text" autocomplete="email" value="' + esc(u.email || '') + '"></div>' +
+      '<p id="ask-msg" role="status" style="font-size:13.5px;color:var(--bad);min-height:20px"></p>' +
+      '<div class="btnrow" style="margin-top:0"><button type="button" class="btn sm" data-asksend>Send to Evokes</button><button type="button" class="btn ghost-btn sm" data-askcancel>Cancel</button></div></section>';
   }
 
   function renderCustomer() {
@@ -1527,12 +1618,12 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       if (b.getAttribute('data-view') === v) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
     });
     $('view-home').hidden = v !== 'home'; $('view-insights').hidden = v !== 'insights'; $('view-team').hidden = v !== 'team';
-    SOLD.forEach(setTile);
+    SOLD.forEach(setTile); renderAsk(u);
     var held = ACME.products.length;
     if (v === 'home') {
       $('greeting').textContent = greet() + ', ' + u.name.split(' ')[0] + '.';
       var rows = document.querySelectorAll('#waiting .row'), w = 0;
-      rows.forEach(function (r) { var ok = holds(ACME, r.getAttribute('data-product')); r.hidden = !ok; if (ok) w++; });
+      rows.forEach(function (r) { var rp = r.getAttribute('data-product'), ok = holds(ACME, rp) && (u.role !== 'Member' || !!u.roles[rp]); r.hidden = !ok; if (ok) w++; });
       $('hero-sub').textContent = word(held) + (held === 1 ? ' product' : ' products') + ', one sign-in. ' + word(w) + (w === 1 ? ' thing is' : ' things are') + ' waiting for you today.';
       $('hero-meta').textContent = 'Last signed in yesterday, 4:12 PM · Colombo';
       renderAccess(u); renderHomeInsights();
@@ -1554,7 +1645,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     var h = '';
     SOLD.forEach(function (p) {
       if (!holds(ACME, p)) return;
-      h += '<div class="kv"><span style="color:var(--muted)">' + findProduct(p).name + '</span><span style="font-weight:550">' + esc(u.roles[p] || 'No access') + '</span></div>';
+      h += '<div class="kv"><span style="color:var(--muted)">' + findProduct(p).name + '</span><span style="font-weight:550">' + esc(u.roles[p] || 'No role') + '</span></div>';
     });
     var areas = AREAS.filter(function (a) { return userCan(a.id); }).map(function (a) { return a.name; });
     h += '<div class="kv" style="margin-bottom:20px"><span style="color:var(--muted)">Insights</span><span style="font-weight:550;text-align:right">' +
@@ -1820,7 +1911,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     var cs = agentCustomers(a), by = function (st) { return cs.filter(function (c) { return c.status === st; }).length; };
     if (v === 'overview') {
       t.textContent = greet() + ', ' + a.name.split(' ')[0] + '.';
-      sub.textContent = cs.length + ' customers came to EBS through you: ' + by('Active') + ' active, ' + by('Trial') + ' on trial, ' + by('Overdue') + ' overdue. ' + a.invites.length + ' more have your invite.';
+      sub.textContent = cs.length + ' customers came to EBS through you: ' + by('Active') + ' active, ' + by('Trial') + ' on trial, ' + by('Overdue') + ' overdue.' + (invWaiting(a) ? ' ' + invWaiting(a) + (invWaiting(a) === 1 ? ' more business has your invite.' : ' more businesses have your invite.') : '');
       host.innerHTML = agOverview(a, cs);
     } else if (v === 'customers') {
       t.textContent = 'My customers'; sub.textContent = 'Every business that subscribed through your invite. Open one to see its subscription.';
@@ -1855,7 +1946,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       stat('Customers you brought', String(cs.length), '<span class="d flat"><small>' + cs.filter(function (c) { return c.status === 'Active'; }).length + ' paying · ' + cs.filter(function (c) { return c.status !== 'Active'; }).length + ' not paying yet or overdue</small></span>') +
       stat('Earned since June', a.off.commission ? 'Hidden' : rs(agMonthly(a, cs).values.reduce(function (x, y) { return x + y; }, 0)), '<span class="d flat"><small>commission on your customers \u00B7 sample</small></span>') +
       stat('Commission this month', a.off.commission ? 'Hidden' : rs(month), '<span class="d flat"><small>' + a.rate + '% of what they pay \u00B7 sample</small></span>') +
-      stat('Invites waiting', String(a.invites.length), '<span class="d flat"><small>not subscribed yet</small></span>') + '</div>';
+      stat('Invites waiting', String(invWaiting(a)), '<span class="d flat"><small>not customers yet</small></span>') + '</div>';
     var att = [];
     cs.forEach(function (c) {
       if (c.status === 'Overdue') att.push({ ic: IC.clock, t: c.name + ' has an overdue payment.', s: 'No commission until they pay. If the account is suspended, their team loses access.', id: c.id });
@@ -1867,9 +1958,11 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     h += '<section class="card"><h3>Needs your attention</h3><p class="cs">From your customers’ subscriptions only. Nothing here comes from their records.</p><div style="margin-top:8px">' +
       att.map(function (x) { return '<div class="hl"><span class="ic">' + x.ic + '</span><span style="flex:1;min-width:0"><span class="t">' + esc(x.t) + '</span><span class="s">' + esc(x.s) + '</span></span><button type="button" class="linkbtn" ' + (x.id ? 'data-agopen="' + x.id + '"' : 'data-agview="' + x.go + '"') + '>Open</button></div>'; }).join('') + '</div></section>';
     h += grid([card('ag-comm', 'Commission by month', 'Jun to Nov 2026 · sample figures'),
-      '<section class="card"><h3>Invite a customer</h3><p class="cs">Anyone who subscribes through your link is added to your customers.</p>' + (pOn(a, 'invite') ? '' : '<p style="font-size:13.5px;color:var(--dim);margin-top:12px">Inviting is turned off by Evokes for now.</p>') +
-      '<div class="reflink"' + (pOn(a, 'invite') ? '' : ' hidden') + '><code id="ag-link">ebs.evokestech.com/join/' + esc(a.code) + '</code><button type="button" class="btn ghost-btn sm" data-agcopy>Copy link</button></div>' +
-      '<div style="margin-top:16px">' + a.invites.map(function (i) { return '<div class="kv"><span><span style="font-weight:600;color:var(--ink)">' + esc(i.name) + '</span><br><span style="font-size:12.5px;color:var(--dim)">' + esc(i.who) + ' · sent ' + esc(i.sent) + '</span></span><span style="font-size:13px;color:var(--muted)">' + esc(i.state) + '</span></div>'; }).join('') + '</div></section>']);
+      '<section class="card"><h3>Invite a business</h3><p class="cs">Share your link, or let EBS email it for you. Enquiries through your link stay tied to you, and Evokes sets up each account.</p>' + (pOn(a, 'invite') ? '' : '<p style="font-size:13.5px;color:var(--dim);margin-top:12px">Inviting is turned off by Evokes for now.</p>') +
+      '<div class="reflink"' + (pOn(a, 'invite') ? '' : ' hidden') + '><code id="ag-link">ebs.evokestech.com/join/' + esc(a.code) + '</code><button type="button" class="btn ghost-btn sm" data-agcopy>Copy link</button><button type="button" class="btn ghost-btn sm" data-agpreview>Preview your join page</button></div>' +
+      (pOn(a, 'invite') ? '<div class="sa-form" style="margin-top:18px"><label>Business name<input class="search" id="ai-biz" autocomplete="off"></label><label>Contact name<input class="search" id="ai-who" autocomplete="off"></label><label>Email<input class="search" id="ai-email" type="email" autocomplete="off"></label></div>' +
+        '<p id="ai-msg" role="status" style="font-size:13.5px;color:var(--bad);min-height:20px;margin-top:8px"></p><div class="btnrow" style="margin-top:0"><button type="button" class="btn sm" data-aginvite>Email the invite</button></div>' : '') +
+      '<div style="margin-top:16px">' + a.invites.map(function (i) { return '<div class="kv"><span><span style="font-weight:600;color:var(--ink)">' + esc(i.name) + '</span><br><span style="font-size:12.5px;color:var(--dim)">' + esc(i.who) + (i.via ? ' · came through your link, ' : ' · sent ') + esc(i.sent) + '</span></span><span style="font-size:13px;color:var(--muted)">' + esc(i.state) + '</span></div>'; }).join('') + '</div></section>']);
     Q.push(function () {
       var m = agMonthly(a, cs);
       colChart($('ag-comm'), { labels: m.mk.map(function (x) { return monthName(x).slice(0, 3); }), fullLabels: m.mk.map(function (x) { return monthName(x); }), tableHead: 'Month',
@@ -1922,7 +2015,8 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       var bv = b.getAttribute('data-view');
       if (bv === v || (v === 'customer' && bv === 'customers') || (v === 'agent' && bv === 'agents')) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
     });
-    var host = $('sa-view'), t = $('sa-title'), sub = $('sa-sub');
+    var host = $('sa-view'), t = $('sa-title'), sub = $('sa-sub'), ew = ENQ.filter(enqOpen).length;
+    $('sa-enq-count').textContent = ew; $('sa-enq-count').hidden = !ew; $('sa-enq-nav').setAttribute('aria-label', 'Enquiries' + (ew ? ', ' + ew + ' waiting' : ''));
     if (v === 'overview') {
       var multi = CUSTOMERS.filter(function (c) { return c.products.length > 1; }).length;
       t.textContent = greet() + ', Vihan.';
@@ -1940,6 +2034,9 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     } else if (v === 'agents') {
       t.textContent = 'Partners'; sub.textContent = 'Individuals who bring business to EBS. A partner account is a privilege Evokes grants, and can pause or end.';
       host.innerHTML = saAgents();
+    } else if (v === 'enquiries') {
+      t.textContent = 'Enquiries'; sub.textContent = 'Requests from businesses and from customers: through partners’ links, the “Ask about” buttons and the Evokes website.';
+      host.innerHTML = saEnquiries();
     } else if (v === 'catalogue') {
       t.textContent = 'Feature catalogue'; sub.textContent = 'Every module and feature, grouped by product. Sales and marketing work from this list.';
       host.innerHTML = saCatalogue();
@@ -1962,7 +2059,8 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       stat('Customers', String(n), '<span class="d flat"><small>' + by('Active') + ' active · ' + by('Trial') + ' trial · ' + by('Overdue') + ' overdue · ' + by('Suspended') + ' suspended</small></span>') +
       stat('On two or more products', String(multi), '<span class="d flat"><small>' + Math.round(multi / n * 100) + '% of customers, 20% bundle discount</small></span>') +
       stat('Opened Insights, last 30 days', used + ' of ' + n, '<span class="d flat"><small>companies with at least one user</small></span>') +
-      stat('Changes from standard', String(CUSTOMERS.filter(function (c) { return offCount(c) > 0; }).length), '<span class="d flat"><small>companies with a module or feature off</small></span>') + '</div>';
+      stat('Changes from standard', String(CUSTOMERS.filter(function (c) { return offCount(c) > 0; }).length), '<span class="d flat"><small>companies with a module or feature off</small></span>') +
+      stat('Enquiries waiting', String(ENQ.filter(enqOpen).length), '<span class="d flat"><small>new or contacted, not yet customers</small></span>') + '</div>';
     h += grid([card('sa-prod', 'Customers by product', 'A company on several products counts once in each'), card('sa-new', 'New customers by month', 'Dec 2025 to Nov 2026 (to date)')]);
     var dev = CUSTOMERS.filter(function (c) { return offCount(c) > 0; });
     h += '<section class="card"><h3>Companies off the standard package</h3><p class="cs">Each change is logged with its reason. Keep this list short.</p><div style="margin-top:8px">' +
@@ -1982,11 +2080,11 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
 
   function saAgents() {
     var brought = CUSTOMERS.filter(function (c) { return AGENT_OF[c.id]; }).length, due = 0, inv = 0;
-    AGENTS.forEach(function (a) { agentCustomers(a).forEach(function (c) { due += commissionOf(c, a); }); inv += a.invites.length; });
+    AGENTS.forEach(function (a) { agentCustomers(a).forEach(function (c) { due += commissionOf(c, a); }); inv += invWaiting(a); });
     var h = '<div class="note" style="margin-bottom:22px">' + IC.shield + '<span>A partner sees each of their customers’ products, seats, status and whether people are using EBS, and earns commission on what those customers pay. A partner never sees a customer\u2019s records or figures.</span></div>';
     h += '<div class="stats">' + stat('Partners', String(AGENTS.filter(function (a) { return a.status !== 'Ended'; }).length), '<span class="d flat"><small>' + AGENTS.map(function (a) { return a.industry; }).join(' · ') + '</small></span>') +
       stat('Customers brought by partners', brought + ' of ' + CUSTOMERS.length, '<span class="d flat"><small>the rest came to Evokes directly</small></span>') +
-      stat('Invites waiting', String(inv), '<span class="d flat"><small>sent by partners, not yet subscribed</small></span>') +
+      stat('Invites waiting', String(inv), '<span class="d flat"><small>sent by partners, not yet customers</small></span>') +
       stat('Commission this month', rs(due), '<span class="d flat"><small>sample figure · terms not final</small></span>') + '</div>';
     h += '<div class="filters" style="justify-content:space-between;margin-bottom:14px"><span style="font-size:14px;color:var(--muted)">Each partner is managed as an individual member. Open one to set their rate, pause or end their privilege, or switch parts of their portal off.</span><button type="button" class="btn ghost-btn sm" data-addpartner' + (S.addingPartner ? ' disabled' : '') + '>Grant partner privilege</button></div>';
     if (S.addingPartner) {
@@ -2044,8 +2142,8 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
         return '<button type="button" class="chip" data-cprod="' + o[0] + '" aria-pressed="' + (S.cProduct === o[0]) + '">' + (o[0] !== 'all' ? '<span class="k" style="background:' + findProduct(o[0]).color + '"></span>' : '') + o[1] + '</button>';
       }).join('') +
       '<label class="sr" for="c-status">Status</label><select class="select" id="c-status">' + ['all', 'Active', 'Trial', 'Overdue', 'Suspended'].map(function (s) { return '<option value="' + s + '"' + (S.cStatus === s ? ' selected' : '') + '>' + (s === 'all' ? 'Any status' : s) + '</option>'; }).join('') + '</select>' +
-      '<label class="sr" for="c-q">Search companies</label><input class="search" id="c-q" type="search" placeholder="Search companies" value="' + esc(S.cQuery) + '"></div>';
-    h += '<div id="c-table">' + custTable() + '</div>';
+      '<label class="sr" for="c-q">Search companies</label><input class="search" id="c-q" type="search" placeholder="Search companies" value="' + esc(S.cQuery) + '"><button type="button" class="btn ghost-btn sm" data-addcust style="margin-left:auto"' + (S.addingCust ? ' disabled' : '') + '>Add customer</button></div>';
+    h += addCustPanel() + '<div id="c-table">' + custTable() + '</div>';
     return h;
   }
   function custTable() {
@@ -2071,6 +2169,8 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       stat('Changes from standard', String(offCount(c)), '') + '</div>';
     h += '<div class="filters" style="justify-content:space-between"><span style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><label class="lbl" for="reason">Reason logged with each change</label><select class="select" id="reason">' +
       ['Customer request', 'Trial', 'Non-payment', 'Beta rollout', 'Correction'].map(function (r) { return '<option' + (S.reason === r ? ' selected' : '') + '>' + r + '</option>'; }).join('') +
+      '</select></span><span style="display:flex;align-items:center;gap:10px"><label class="lbl" for="c-by">Brought by</label><select class="select" id="c-by"><option value="">Direct</option>' +
+      AGENTS.filter(function (x) { return x.status !== 'Ended' || AGENT_OF[c.id] === x.id; }).map(function (x) { return '<option value="' + x.id + '"' + (AGENT_OF[c.id] === x.id ? ' selected' : '') + '>' + esc(x.name) + '</option>'; }).join('') +
       '</select></span><button type="button" class="btn ghost-btn" data-reset="' + c.id + '" style="min-height:40px;padding:8px 16px;font-size:14px"' + (offCount(c) ? '' : ' disabled') + '>Reset to standard package</button></div>';
     h += '<div class="note" style="margin-bottom:20px">' + IC.info + '<span>Switches here apply to the whole of ' + esc(c.name) + '. Everything is on by default for a product the company holds, Insights included, so a one-product customer still gets that product\u2019s graphs. The Cross-product overview adds figures across products once a second product is held. Inside the company, Insights start visible to the Owner and Admins only.</span></div>';
     CAT.forEach(function (p) {
@@ -2097,6 +2197,71 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       h += '</section>';
     });
     return h;
+  }
+
+  function estat(st) { return '<span class="estat ' + st.toLowerCase() + '"><i aria-hidden="true"></i>' + st + '</span>'; }
+  function saEnquiries() {
+    var f = S.eStatus || 'open';
+    var rows = ENQ.filter(function (e) { return f === 'all' || (f === 'open' ? enqOpen(e) : e.status === f); });
+    var h = '<div class="note" style="margin-bottom:22px">' + IC.info + '<span>An enquiry changes nothing in any account. Add the customer from it, or close it with a reason. An enquiry that came through a partner’s link stays tied to that partner.</span></div>';
+    h += '<div class="filters" role="group" aria-label="Filter enquiries"><span class="lbl">Show</span>' +
+      [['open', 'Waiting'], ['Converted', 'Became customers'], ['Closed', 'Closed'], ['all', 'All']].map(function (o) {
+        return '<button type="button" class="chip" data-efilter="' + o[0] + '" aria-pressed="' + (f === o[0]) + '">' + o[1] + '</button>';
+      }).join('') + '</div>';
+    var sel = S.saEnq && enqById(S.saEnq);
+    if (sel) h += enqDetail(sel);
+    if (!rows.length) return h + '<p style="font-size:14px;color:var(--muted);padding:18px 0">No enquiries here.</p>';
+    h += '<div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Business</th><th scope="col">Received</th><th scope="col">Source</th><th scope="col">Interested in</th><th scope="col">Partner</th><th scope="col">Status</th></tr></thead><tbody>' +
+      rows.map(function (e) {
+        return '<tr class="clickable' + (sel === e ? ' sel' : '') + '" data-enqrow="' + e.id + '"><td class="first" data-h="Business"><button type="button" class="linkbtn" data-openenq="' + e.id + '" style="color:var(--ink);font-size:14.5px;text-align:left;padding:0">' + esc(e.biz) + '</button><span class="sub">' + esc(e.contact) + '</span></td>' +
+          '<td data-h="Received">' + esc(e.when.split(',')[0]) + '</td><td data-h="Source">' + esc(e.src) + '</td><td data-h="Interested in">' + (e.products.length ? pills({ products: e.products }) : '<span style="color:var(--dim)">Not sure yet</span>') + '</td>' +
+          '<td data-h="Partner">' + (e.partner ? esc(agentById(e.partner).name) : '<span style="color:var(--dim)">None</span>') + '</td><td data-h="Status">' + estat(e.status) + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+    return h;
+  }
+  function enqDetail(e) {
+    var a = e.partner ? agentById(e.partner) : null, c = e.cust ? custById(e.cust) : null;
+    var kv = function (k, v) { return '<div class="kv"><span style="color:var(--muted)">' + k + '</span><span style="font-weight:550;text-align:right">' + v + '</span></div>'; };
+    var h = '<section class="panel enq" aria-labelledby="enq-h"><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">' +
+      '<h2 class="sechead" id="enq-h" tabindex="-1" style="margin:0">Enquiry from ' + esc(e.biz) + '</h2>' + estat(e.status) + '</div><div class="kvgrid">' +
+      kv('Received', esc(e.when)) + kv('Source', esc(e.src)) + kv('Contact', esc(e.contact)) + kv('Email', esc(e.email || 'Not given')) + (e.phone ? kv('Phone', esc(e.phone)) : '') +
+      (e.src === 'Ask about' && c ? kv('Customer', esc(c.name)) : kv('Legal form', esc(e.form || 'Not given')) + kv('City', esc(e.city || 'Not given')) + kv('People', esc(e.size || 'Not given'))) +
+      kv('Interested in', e.products.length ? esc(andList(prodNames(e.products))) : 'Not sure yet') + kv('Partner', a ? esc(a.name) : 'None') +
+      (e.status === 'Converted' && c ? kv('Became customer', esc(c.name)) : '') + (e.status === 'Closed' ? kv('Closed because', esc(e.closed)) : '') + '</div>' +
+      (e.msg ? '<p class="msgq">' + esc(e.msg) + '</p>' : '');
+    if (enqOpen(e)) {
+      if (S.enqClosing) {
+        h += '<div class="btnrow" style="align-items:center"><label class="lbl" for="enq-reason">Reason</label><select class="select" id="enq-reason">' +
+          ['Not a fit', 'No reply', 'Duplicate', 'Chose not to go ahead'].map(function (r) { return '<option>' + r + '</option>'; }).join('') +
+          '</select><button type="button" class="btn sm" data-enqcloseok>Close enquiry</button><button type="button" class="btn ghost-btn sm" data-enqcloseno>Cancel</button></div>';
+      } else {
+        h += '<div class="btnrow">' + (c ? '<button type="button" class="btn sm" data-open="' + c.id + '">Open customer</button>' : '<button type="button" class="btn sm" data-enqadd="' + e.id + '">Add customer from this enquiry</button>') +
+          (e.status === 'New' ? '<button type="button" class="btn ghost-btn sm" data-enqcontacted="' + e.id + '">Mark as contacted</button>' : '') +
+          '<button type="button" class="btn ghost-btn sm" data-enqclose>Close enquiry</button></div>';
+      }
+    } else if (c) h += '<div class="btnrow"><button type="button" class="btn ghost-btn sm" data-open="' + c.id + '">Open customer</button></div>';
+    return h + '</section>';
+  }
+  function addCustPanel() {
+    if (!S.addingCust) return '';
+    var e = S.addFrom ? enqById(S.addFrom) : null, v = function (x) { return e && e[x] ? esc(e[x]) : ''; };
+    var band = e ? ({ 'More than 50': 'Above 50' }[e.size] || e.size || '6–20') : '6–20';
+    var opts = function (arr, sel) { return arr.map(function (o) { return '<option' + (o === sel ? ' selected' : '') + '>' + esc(o) + '</option>'; }).join(''); };
+    var lab = function (txt, ctl) { return '<label>' + txt + ctl + '</label>'; };
+    var by = e && e.partner && agentById(e.partner).status !== 'Ended' ? e.partner : '';
+    return '<section class="panel" style="margin-bottom:18px" aria-labelledby="nc-h"><h2 class="sechead" id="nc-h">' + (e ? 'Add customer from the enquiry by ' + esc(e.biz) : 'Add a customer') + '</h2><div class="sa-form">' +
+      lab('Business name', '<input class="search" id="nc-name" autocomplete="off" value="' + v('biz') + '">') +
+      lab('Legal form', '<select class="select" id="nc-form">' + opts(FORMS, (e && e.form) || 'Private limited company') + '</select>') +
+      lab('City', '<input class="search" id="nc-city" autocomplete="off" value="' + v('city') + '">') +
+      lab('Seat band', '<select class="select" id="nc-band">' + opts(BANDS, band) + '</select>') +
+      lab('Status', '<select class="select" id="nc-status">' + opts(['Trial', 'Active'], 'Trial') + '</select>') +
+      lab('Brought by', '<select class="select" id="nc-by"><option value="">Direct</option>' + AGENTS.filter(function (x) { return x.status !== 'Ended'; }).map(function (x) { return '<option value="' + x.id + '"' + (x.id === by ? ' selected' : '') + '>' + esc(x.name) + '</option>'; }).join('') + '</select>') +
+      lab('Owner’s full name', '<input class="search" id="nc-owner" autocomplete="off" value="' + esc(e ? e.contact.split(',')[0] : '') + '">') +
+      lab('Owner’s email', '<input class="search" id="nc-email" type="email" autocomplete="off" value="' + v('email') + '">') +
+      '<fieldset><legend>Products</legend><div class="checks">' + SOLD.map(function (x) { return '<label><input type="checkbox" data-ncp="' + x + '"' + (e && e.products.indexOf(x) >= 0 ? ' checked' : '') + '>' + findProduct(x).name + '</label>'; }).join('') + '</div></fieldset></div>' +
+      '<p id="nc-msg" role="status" style="font-size:13.5px;color:var(--bad);min-height:20px;margin-top:10px"></p>' +
+      '<div class="btnrow" style="margin-top:4px"><button type="button" class="btn sm" data-savecust>Add customer</button><button type="button" class="btn ghost-btn sm" data-cancelcust>Cancel</button></div>' +
+      '<p style="font-size:12.5px;color:var(--dim);margin-top:12px">Evokes emails the owner a link to set a password. The customer starts on the standard package, with every module and feature of its products on. The owner then adds their own people.</p></section>';
   }
 
   function saCatalogue() {
@@ -2272,6 +2437,22 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     }
   });
 
+  app.addEventListener('click', function (e) {
+    var t = e.target, b;
+    if ((b = t.closest('[data-ask]'))) {
+      S.askP = b.getAttribute('data-ask'); renderCustomer(); $('ask-h').focus(); return;
+    }
+    if (t.closest('[data-askcancel]')) { var was = S.askP; S.askP = null; renderCustomer(); var bb = document.querySelector('[data-ask="' + was + '"]'); if (bb) bb.focus(); return; }
+    if (t.closest('[data-asksend]')) {
+      var u = currentUser(), p = S.askP, q = $('ask-q').value.trim(), ct = $('ask-contact').value.trim();
+      if (!ct) { $('ask-msg').textContent = 'Tell Evokes how to reach you.'; $('ask-contact').focus(); return; }
+      ENQ.unshift({ id: 'e' + Date.now().toString(36), when: nowStr(), src: 'Ask about', partner: null, cust: ACME.id, biz: ACME.name, contact: u.name + ', ' + u.title, email: ct, products: [p], msg: q, status: 'New' });
+      ASKED[p] = today(); S.askP = null; renderCustomer();
+      var al = tileEls(p)[1]; al.setAttribute('tabindex', '-1'); al.focus();
+      toast('Sent to Evokes. They will contact you about ' + findProduct(p).name + '.');
+    }
+  });
+
   agentEl.addEventListener('click', function (e) {
     var t = e.target, b;
     if ((b = t.closest('[data-agopen]')) || (b = t.closest('tr[data-agrow]'))) {
@@ -2294,6 +2475,18 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     }
     if ((b = t.closest('[data-agvisit]'))) {
       toast('In the live platform this opens ' + custById(b.getAttribute('data-agvisit')).name + '’s shared areas, read-only. The prototype stops here.'); return;
+    }
+  });
+  agentEl.addEventListener('click', function (e) {
+    var t = e.target, a = me_agent();
+    if (t.closest('[data-agpreview]')) { showJoin(a.code, 'agent'); return; }
+    if (t.closest('[data-aginvite]')) {
+      var biz = $('ai-biz').value.trim(), who = $('ai-who').value.trim(), em = $('ai-email').value.trim(), m = $('ai-msg');
+      if (!biz) { m.textContent = 'Enter the business name.'; $('ai-biz').focus(); return; }
+      if (em.indexOf('@') < 1) { m.textContent = 'Enter an email address for the invite.'; $('ai-email').focus(); return; }
+      a.invites.unshift({ name: biz, who: who || 'Contact', sent: today(), state: 'Invite sent' });
+      renderAgent(); $('ai-biz').focus();
+      toast('Invite emailed to ' + em + '. It carries your link, so their enquiry stays tied to you.');
     }
   });
   $('ag-nav').addEventListener('click', function (e) {
@@ -2346,7 +2539,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     if (t.closest('[data-savepartner]')) {
       var nm = $('pp-name').value.trim(), fm = $('pp-firm').value.trim(), ind = $('pp-ind').value.trim();
       if (!nm) { $('pp-msg').textContent = 'Enter the partner’s full name.'; $('pp-name').focus(); return; }
-      var np = { id: 'p' + Date.now().toString(36), name: nm, email: fm, profession: ind || 'Partner', industry: ind || 'Not set', city: 'Sri Lanka', since: '2026-11', rate: +$('pp-rate').value, code: nm.split(' ')[0].toUpperCase(), invites: [], status: 'Active', off: {} };
+      var np = { id: 'p' + Date.now().toString(36), name: nm, email: fm, profession: ind || 'Partner', industry: ind || 'Not set', city: 'Sri Lanka', since: '2026-11', rate: +$('pp-rate').value, code: newCode(), invites: [], status: 'Active', off: {} };
       AGENTS.push(np); LOG.unshift({ when: nowStr(), cust: 'Partner: ' + nm, change: 'Partner privilege granted at ' + np.rate + '% commission', reason: 'Partner request' });
       S.addingPartner = false; renderAdmin(); toast('Partner privilege granted to ' + nm + '. They get an email to set their password.'); return;
     }
@@ -2383,18 +2576,143 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     if (e.target.id === 'cat-q') { S.catQuery = e.target.value; $('cat-body').innerHTML = catBody(); }
   });
 
-  var rT;
+  admin.addEventListener('click', function (e) {
+    var t = e.target, b, en;
+    if ((b = t.closest('[data-efilter]'))) { S.eStatus = b.getAttribute('data-efilter'); S.saEnq = null; S.enqClosing = false; renderAdmin(); var fb = document.querySelector('[data-efilter="' + S.eStatus + '"]'); if (fb) fb.focus(); return; }
+    if ((b = t.closest('[data-openenq]')) || (b = t.closest('tr[data-enqrow]'))) {
+      S.saEnq = b.getAttribute('data-openenq') || b.getAttribute('data-enqrow'); S.enqClosing = false; renderAdmin(); $('enq-h').focus({ preventScroll: true }); $('enq-h').scrollIntoView({ block: 'center' }); return;
+    }
+    if ((b = t.closest('[data-enqcontacted]'))) { en = enqById(b.getAttribute('data-enqcontacted')); en.status = 'Contacted'; renderAdmin(); $('enq-h').focus(); toast(en.biz + ' marked as contacted.'); return; }
+    if (t.closest('[data-enqclose]')) { S.enqClosing = true; renderAdmin(); $('enq-reason').focus(); return; }
+    if (t.closest('[data-enqcloseno]')) { S.enqClosing = false; renderAdmin(); $('enq-h').focus(); return; }
+    if (t.closest('[data-enqcloseok]')) {
+      en = enqById(S.saEnq); en.status = 'Closed'; en.closed = $('enq-reason').value; S.enqClosing = false;
+      LOG.unshift({ when: nowStr(), cust: 'Enquiry: ' + en.biz, change: 'Enquiry closed', reason: en.closed });
+      renderAdmin(); toast('Enquiry from ' + en.biz + ' closed. Logged as: ' + en.closed + '.'); return;
+    }
+    if ((b = t.closest('[data-enqadd]'))) {
+      S.addFrom = b.getAttribute('data-enqadd'); S.addingCust = true; S.aview = 'customers'; renderAdmin(); $('nc-name').focus(); window.scrollTo(0, 0); return;
+    }
+    if (t.closest('[data-addcust]')) { S.addingCust = true; S.addFrom = null; renderAdmin(); $('nc-name').focus(); return; }
+    if (t.closest('[data-cancelcust]')) { S.addingCust = false; S.addFrom = null; renderAdmin(); return; }
+    if (t.closest('[data-savecust]')) {
+      var msg = $('nc-msg'), nm = $('nc-name').value.trim(), ow = $('nc-owner').value.trim(), em = $('nc-email').value.trim(), ps = [];
+      document.querySelectorAll('[data-ncp]').forEach(function (cb) { if (cb.checked) ps.push(cb.getAttribute('data-ncp')); });
+      if (!nm) { msg.textContent = 'Enter the business name.'; $('nc-name').focus(); return; }
+      if (CUSTOMERS.some(function (c) { return c.name.toLowerCase() === nm.toLowerCase(); })) { msg.textContent = 'A customer with this name already exists.'; $('nc-name').focus(); return; }
+      if (!ps.length) { msg.textContent = 'Choose at least one product.'; document.querySelector('[data-ncp]').focus(); return; }
+      if (!ow) { msg.textContent = 'Enter the owner’s full name.'; $('nc-owner').focus(); return; }
+      if (em.indexOf('@') < 1) { msg.textContent = 'Enter the owner’s email address.'; $('nc-email').focus(); return; }
+      var st = $('nc-status').value, by = $('nc-by').value, id = 'c' + Date.now().toString(36);
+      var nc = { id: id, name: nm, form: $('nc-form').value, city: $('nc-city').value.trim() || 'Not given', products: ps, band: $('nc-band').value, seats: 1, status: st, since: '2026-11', used: false, off: {} };
+      CUSTOMERS.push(nc); if (by) AGENT_OF[id] = by;
+      LOG.unshift({ when: nowStr(), cust: nm, change: 'Customer added with ' + andList(prodNames(ps)) + (st === 'Trial' ? ', on trial' : ', active') + ', on the standard package' + (by ? '; brought by ' + agentById(by).name : ''), reason: st === 'Trial' ? 'Trial' : 'New subscription' });
+      if (S.addFrom) {
+        en = enqById(S.addFrom); en.status = 'Converted'; en.cust = id;
+        if (by) agentById(by).invites.forEach(function (i) { if (i.name.toLowerCase() === en.biz.toLowerCase()) i.state = 'Became a customer'; });
+      }
+      S.addingCust = false; S.addFrom = null; S.saCustomer = id; S.aview = 'customer'; S.reason = 'Customer request';
+      renderAdmin(); $('sa-title').focus(); window.scrollTo(0, 0);
+      toast(nm + ' added. Evokes has emailed ' + ow + ' a link to set a password.');
+    }
+  });
+  admin.addEventListener('change', function (e) {
+    if (e.target.id !== 'c-by') return;
+    var c = custById(S.saCustomer), old = AGENT_OF[c.id], nv = e.target.value;
+    if (nv) AGENT_OF[c.id] = nv; else delete AGENT_OF[c.id];
+    var txt = nv ? agentById(nv).name : 'Direct';
+    LOG.unshift({ when: nowStr(), cust: c.name, change: 'Brought by changed from ' + (old ? agentById(old).name : 'Direct') + ' to ' + txt, reason: S.reason });
+    renderAdmin(); $('c-by').focus(); toast('Brought by is now ' + txt + ' for ' + c.name + '. Logged as: ' + S.reason + '.');
+  });
+
+  var rT, lastW = window.innerWidth;
   window.addEventListener('resize', function () {
     clearTimeout(rT);
     rT = setTimeout(function () {
-      if (!S.persona) return;
-      var ae = document.activeElement, aid = ae && ae.id;
+      if (!S.persona || window.innerWidth === lastW) return;
+      lastW = window.innerWidth;
+      var ae = document.activeElement, aid = ae && ae.id, keep = {};
+      document.querySelectorAll('#app [id]:is(input,textarea,select), #agent [id]:is(input,textarea,select), #admin [id]:is(input,textarea,select)').forEach(function (el) { keep[el.id] = el.type === 'checkbox' ? el.checked : el.value; });
       if (S.persona === 'admin') { if (S.aview === 'overview') renderAdmin(); }
       else if (S.persona === 'agent') { if (S.agview === 'overview') renderAgent(); }
       else if (S.cview === 'insights' || S.cview === 'home') renderCustomer();
+      Object.keys(keep).forEach(function (id) { var el = $(id); if (el) { if (el.type === 'checkbox') el.checked = keep[id]; else el.value = keep[id]; } });
       if (aid && $(aid)) $(aid).focus({ preventScroll: true });
     }, 180);
   });
+
+  /* ---------- the public join page, reached through a partner's link ---------- */
+  function showJoin(code, from) {
+    closeMenus();
+    signin.hidden = true; app.hidden = true; admin.hidden = true; agentEl.hidden = true;
+    dock.hidden = true; document.body.classList.remove('has-dock');
+    S.joinFrom = from; joinEl.hidden = false; renderJoin(code, null);
+    document.title = 'Evokes Business Software · Tell Evokes about your business';
+    window.scrollTo(0, 0); if (from) $('join-h').focus({ preventScroll: true });
+  }
+  function joinBack() {
+    joinEl.hidden = true;
+    if (S.joinFrom === 'agent') { setPersona('agent'); return; }
+    signin.hidden = false; document.title = 'Evokes Business Software — sign in'; window.scrollTo(0, 0); $('email').focus();
+  }
+  function renderJoin(code, done) {
+    var by = null; AGENTS.forEach(function (x) { if (x.code === code && x.status !== 'Ended') by = x; });
+    S.joinCode = code;
+    var brand = document.querySelector('#signin .signin-brand').cloneNode(true);
+    brand.querySelector('h1').innerHTML = 'Tell Evokes about<br>your business.';
+    brand.querySelector('.sub').textContent = (by ? 'Introduced by ' + by.name + ', ' + by.profession.toLowerCase() + '. ' : '') +
+      'Evokes will contact you to set up the products you need: Orbit, Pulse, Compass or Ledger, on one sign-in.';
+    var back = S.joinFrom === 'agent' ? 'Back to your partner portal' : 'Back to EBS sign-in';
+    var f;
+    if (done) {
+      f = '<h2 id="join-h" tabindex="-1" style="font-size:29px;letter-spacing:-.03em;font-weight:650;margin-bottom:12px">Thank you, ' + esc(done.contact.split(' ')[0]) + '.</h2>' +
+        '<p style="font-size:15.5px;line-height:1.6;color:var(--muted);margin-bottom:28px">Evokes has your details and will contact you at ' + esc(done.email) + '. Nothing is set up until you agree it with Evokes.</p>' +
+        '<button type="button" class="btn ghost-btn" style="width:100%" data-joinback>' + back + '</button>';
+    } else {
+      var opt = function (arr, sel) { return arr.map(function (o) { return '<option' + (o === sel ? ' selected' : '') + '>' + o + '</option>'; }).join(''); };
+      f = '<h2 id="join-h" tabindex="-1" style="font-size:29px;letter-spacing:-.03em;font-weight:650;margin-bottom:9px">Your business</h2>' +
+        '<p style="font-size:15.5px;color:var(--muted);margin-bottom:28px">It takes a minute. Nothing is set up until you agree it with Evokes.</p>' +
+        '<form id="join-form" novalidate>' +
+        '<div class="field"><label for="jn-biz">Business name</label><input id="jn-biz" type="text" autocomplete="organization" required></div>' +
+        '<div class="field"><label for="jn-form">Legal form</label><select id="jn-form">' + opt(FORMS, 'Private limited company') + '</select></div>' +
+        '<div class="fgrid"><div class="field"><label for="jn-city">City</label><input id="jn-city" type="text" autocomplete="address-level2"></div>' +
+        '<div class="field"><label for="jn-size">Number of people</label><select id="jn-size">' + opt(['1–5', '6–20', '21–50', 'More than 50'], '6–20') + '</select></div></div>' +
+        '<div class="fgrid"><div class="field"><label for="jn-name">Your name</label><input id="jn-name" type="text" autocomplete="name" required></div>' +
+        '<div class="field"><label for="jn-phone">Phone <span style="font-weight:400;color:var(--dim)">(optional)</span></label><input id="jn-phone" type="tel" autocomplete="tel"></div></div>' +
+        '<div class="field"><label for="jn-email">Email</label><input id="jn-email" type="email" autocomplete="email" required></div>' +
+        '<fieldset class="field"><legend>Products you are interested in</legend><div class="checks">' + SOLD.map(function (x) { return '<label><input type="checkbox" data-jnp="' + x + '">' + findProduct(x).name + '</label>'; }).join('') + '</div></fieldset>' +
+        '<div class="field"><label for="jn-msg">Anything else Evokes should know <span style="font-weight:400;color:var(--dim)">(optional)</span></label><textarea id="jn-msg" rows="3"></textarea></div>' +
+        '<p class="join-note">Evokes uses these details only to contact you about EBS.' + (by ? ' Because ' + esc(by.name) + ' introduced you, they will see that you have been in touch and, if you become a customer, your subscription and whether your team uses EBS. Never your records.' : '') + '</p>' +
+        '<button class="btn" type="submit" style="width:100%">Send to Evokes</button>' +
+        '<p id="join-msg" role="status" style="font-size:14px;color:var(--compass);margin-top:12px;min-height:21px"></p></form>';
+    }
+    joinEl.innerHTML = '';
+    joinEl.appendChild(brand);
+    var side = document.createElement('div'); side.className = 'signin-form';
+    side.innerHTML = '<button class="themebtn corner" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to light mode" title="Switch to light mode">' + document.querySelector('#signin .themebtn').innerHTML + '</button>' +
+      '<div class="inner" style="max-width:460px"><button type="button" class="linkbtn" data-joinback style="margin-bottom:22px">← ' + back + '</button>' + f + '</div>';
+    joinEl.appendChild(side);
+    syncTheme();
+  }
+  joinEl.addEventListener('click', function (e) { if (e.target.closest('[data-joinback]')) joinBack(); });
+  joinEl.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var m = $('join-msg'), biz = $('jn-biz').value.trim(), nm = $('jn-name').value.trim(), em = $('jn-email').value.trim(), ps = [];
+    document.querySelectorAll('[data-jnp]').forEach(function (cb) { if (cb.checked) ps.push(cb.getAttribute('data-jnp')); });
+    if (!biz) { m.textContent = 'Enter your business name.'; $('jn-biz').focus(); return; }
+    if (!nm) { m.textContent = 'Enter your name.'; $('jn-name').focus(); return; }
+    if (em.indexOf('@') < 1) { m.textContent = 'Enter an email address Evokes can reply to.'; $('jn-email').focus(); return; }
+    var by = null; AGENTS.forEach(function (x) { if (x.code === S.joinCode && x.status !== 'Ended') by = x; });
+    var en = { id: 'e' + Date.now().toString(36), when: nowStr(), src: by ? 'Partner link' : 'EBS join page', partner: by ? by.id : null, biz: biz, form: $('jn-form').value, city: $('jn-city').value.trim(),
+      contact: nm, email: em, phone: $('jn-phone').value.trim(), products: ps, size: $('jn-size').value, msg: $('jn-msg').value.trim(), status: 'New' };
+    ENQ.unshift(en);
+    if (by) {
+      var hit = by.invites.filter(function (i) { return i.name.toLowerCase() === biz.toLowerCase(); })[0];
+      if (hit) hit.state = 'Enquired'; else by.invites.unshift({ name: biz, who: nm, sent: today(), via: true, state: 'Enquired' });
+    }
+    renderJoin(S.joinCode, en); window.scrollTo(0, 0); $('join-h').focus({ preventScroll: true });
+  });
+  (function () { var hm = location.hash.match(/^#join\/([a-z0-9]+)$/i); if (hm) showJoin(hm[1], null); })();
 
   /* clone brand marks into the Super Admin header */
   var lock = document.querySelector('#app .topbar .lock');
