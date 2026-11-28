@@ -557,6 +557,24 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
 .corporate-signature svg{width:77px;height:auto}
 .corporate-signature:hover{color:#fff;text-decoration:none}
 .corporate-signature:focus-visible{outline:2px solid #fff;outline-offset:3px;border-radius:2px}
+
+/* ===== Partner agent (28 Nov 2026) ===== */
+.ag-badge{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:100px;
+  color:#A8E6DC;background:rgba(26,158,143,.14);border:1px solid rgba(95,207,191,.38);white-space:nowrap}
+html.light .ag-badge{color:#00624F;background:rgba(0,137,111,.08);border-color:rgba(0,137,111,.35)}
+.share{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;white-space:nowrap}
+.share.none{color:var(--dim);font-weight:500}
+.reflink{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.reflink code{font:600 14px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;padding:9px 12px;border-radius:10px;
+  border:1px solid var(--line-2);background:rgba(255,255,255,.03);color:var(--ink);word-break:break-all}
+html.light .reflink code{background:#F7F9FB}
+.req-areas{display:flex;flex-wrap:wrap;gap:16px;margin:12px 0 4px}
+.req-areas label{display:inline-flex;align-items:center;gap:8px;font-size:14px}
+.req-areas input{width:17px;height:17px;accent-color:var(--sky)}
+.partner-card{border:1px solid rgba(95,207,191,.32);background:linear-gradient(158deg,rgba(26,158,143,.10),rgba(255,255,255,.02) 60%)}
+html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradient(158deg,rgba(0,137,111,.06),#fff 60%)}
+.btnrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.btn.sm{min-height:40px;padding:8px 16px;font-size:14px}
 </style>
 </head>
 <body>
@@ -635,6 +653,7 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
           <button type="button" data-persona="owner">Nuwan Perera<small>Managing Director, customer</small></button>
           <button type="button" data-persona="staff">Dinithi Wickramasinghe<small>Accounts Executive, customer</small></button>
           <button type="button" data-persona="admin">Vihan Nanayakkara<small>Evokes Super Admin</small></button>
+          <button type="button" data-persona="agent">Malith Gunasekara<small>Partner agent, chartered accountant</small></button>
         </div>
       </div>
     </div>
@@ -845,6 +864,7 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
       <nav class="nav" aria-label="Super Admin" id="sa-nav">
         <button type="button" data-view="overview" aria-current="page">Overview</button>
         <button type="button" data-view="customers">Customers</button>
+        <button type="button" data-view="agents">Agents</button>
         <button type="button" data-view="catalogue">Feature catalogue</button>
         <button type="button" data-view="activity">Activity</button>
       </nav>
@@ -883,11 +903,59 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
   </main>
 </div>
 
+
+<!-- ============ PARTNER AGENT ============ -->
+<div id="agent" hidden>
+  <header class="topbar">
+    <div class="inner">
+      <span class="lock" id="ag-lock"></span>
+      <span class="ag-badge">Partner</span>
+      <nav class="nav" aria-label="Partner" id="ag-nav">
+        <button type="button" data-view="overview" aria-current="page">Overview</button>
+        <button type="button" data-view="customers">My customers</button>
+        <button type="button" data-view="commission">Commission</button>
+      </nav>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <button class="themebtn" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to light mode" title="Switch to light mode"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 1 A7 7 0 0 1 8 15 Z" fill="currentColor"/></svg></button>
+        <button class="chipbtn" type="button" id="ag-acct" aria-expanded="false" aria-controls="ag-menu" style="padding:5px 12px 5px 5px">
+          <span class="avatar" style="background:linear-gradient(140deg,#00896F,#3258D1)">MG</span> Malith
+        </button>
+      </div>
+    </div>
+    <div class="menu" id="ag-menu" hidden>
+      <p>Signed in as<br><strong style="color:var(--ink);font-weight:600">Malith Gunasekara</strong><br>Partner agent, Gunasekara &amp; Co.</p>
+      <button type="button" id="ag-signout">Sign out</button>
+    </div>
+  </header>
+
+  <section class="hero scene prism">
+    <div class="layer">
+      <div class="prism-img"></div>
+      <div class="prism-veil"></div>
+    </div>
+    <div class="inner">
+      <div>
+        <h1 id="ag-title" tabindex="-1">Partner</h1>
+        <p class="sub" id="ag-sub"></p>
+        <p style="font-size:13px;color:var(--dim);margin-top:18px">Evokes Business Software &middot; partner programme</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="body">
+    <div id="ag-view"></div>
+    <div class="foot">
+      <p>Demonstration only. Companies, names and figures on this page are illustrative, and commission amounts are samples, not Evokes prices or terms. Nothing here connects to a live system.</p>
+    </div>
+  </main>
+</div>
+
 <div class="dock" id="dock" role="group" aria-label="Demo view" hidden>
   <span class="lbl">Demo view</span>
   <button type="button" data-persona="owner" aria-pressed="false"><span class="lg">Managing Director</span><span class="sm">Director</span></button>
   <button type="button" data-persona="staff" aria-pressed="false"><span class="lg">Staff member</span><span class="sm">Staff</span></button>
   <button type="button" data-persona="admin" aria-pressed="false">Super Admin</button>
+  <button type="button" data-persona="agent" aria-pressed="false"><span class="lg">Partner agent</span><span class="sm">Agent</span></button>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
@@ -1035,6 +1103,52 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
     { id: 'vertex', name: 'Vertex Engineering (Pvt) Ltd', form: 'Private limited company', city: 'Kelaniya', products: ['pulse', 'ledger'], band: '6–20', seats: 14, status: 'Active', since: '2026-11', used: true, off: {} },
     { id: 'northgate', name: 'Northgate Logistics', form: 'Partnership', city: 'Jaffna', products: ['orbit', 'pulse', 'compass', 'ledger'], band: 'Above 50', seats: 64, status: 'Active', since: '2026-10', used: true, off: {} }
   ];
+  /* ---------- partner agents ---------- */
+  var AGENTS = [
+    { id: 'malith', name: 'Malith Gunasekara', firm: 'Gunasekara & Co.', kind: 'Chartered accountants', industry: 'Accounting', city: 'Colombo', since: '2026-02', rate: 5, code: 'GUNASEKARA',
+      invites: [{ name: 'Kelani Bakers', who: 'Chamari Perera, owner', sent: '20 Nov 2026', state: 'Invite sent' }, { name: 'Sunrise Pharmacy', who: 'Dilan Rodrigo, owner', sent: '24 Nov 2026', state: 'Opened the invite' }] },
+    { id: 'nadeesha', name: 'Nadeesha Perera', firm: 'Perera Trade Advisory', kind: 'Import and export consultants', industry: 'Import and export', city: 'Negombo', since: '2026-05', rate: 5, code: 'PERERATRADE', invites: [{ name: 'Ocean Spice Exports', who: 'Owner', sent: '22 Nov 2026', state: 'Invite sent' }] },
+    { id: 'roshan', name: 'Roshan de Silva', firm: 'Hospitality Partners Lanka', kind: 'Hotel consultants', industry: 'Hotels and hospitality', city: 'Bentota', since: '2026-10', rate: 5, code: 'HOSPLANKA', invites: [] }
+  ];
+  var AGENT_OF = { acme: 'malith', coastline: 'malith', harbour: 'malith', summit: 'malith', vertex: 'malith', meridian: 'malith', bluewave: 'nadeesha', northgate: 'nadeesha', palm: 'roshan' };
+  /* sample monthly amounts, used only to show how commission adds up */
+  var FEE = { acme: 96000, coastline: 4000, harbour: 5000, summit: 12000, vertex: 22400, meridian: 15800, bluewave: 18400, northgate: 142000, palm: 28000 };
+  /* what each customer has chosen to share with its partner; only the customer's account holder changes this */
+  var SHARE = {
+    acme: { state: 'none', areas: [] },
+    harbour: { state: 'shared', areas: ['orbit'], since: 'Sep 2026' },
+    vertex: { state: 'shared', areas: ['pulse', 'ledger'], since: 'Nov 2026' },
+    summit: { state: 'none', areas: [] }, coastline: { state: 'none', areas: [] }, meridian: { state: 'declined', areas: [] }
+  };
+  var SHARE_NAMES = { overview: 'Overview Insights', orbit: 'Orbit Insights', pulse: 'Pulse Insights', compass: 'Compass Insights', ledger: 'Ledger, to work in the books' };
+  function rs(v) { return 'LKR ' + fmtInt(v); }
+  function agentById(id) { for (var i = 0; i < AGENTS.length; i++) if (AGENTS[i].id === id) return AGENTS[i]; return null; }
+  function agentCustomers(a) { return CUSTOMERS.filter(function (c) { return AGENT_OF[c.id] === a.id; }); }
+  function earns(c) { return c.status === 'Active'; }
+  function commissionOf(c, a) { return earns(c) ? Math.round((FEE[c.id] || 0) * a.rate / 100) : 0; }
+  function shareOptions(c) {
+    var o = [];
+    if (c.products.length > 1) o.push('overview');
+    ['orbit', 'pulse', 'compass'].forEach(function (p) { if (holds(c, p)) o.push(p); });
+    if (holds(c, 'ledger')) o.push('ledger');
+    return o;
+  }
+  function shareOf(c) { return SHARE[c.id] || { state: 'none', areas: [] }; }
+  function shareText(c) {
+    var sh = shareOf(c);
+    if (sh.state === 'shared') return sh.areas.map(function (a) { return SHARE_NAMES[a]; }).join(', ');
+    if (sh.state === 'requested') return 'Asked, waiting for the account holder';
+    if (sh.state === 'declined') return 'Not shared (declined)';
+    return 'Not shared';
+  }
+  function shareHTML(c) {
+    var sh = shareOf(c);
+    var ic = sh.state === 'shared' ? '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#3DBE5C" stroke-width="2.4"><path d="M5 12.5l4.2 4.2L19 7"/></svg>'
+      : sh.state === 'requested' ? '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#fab219" stroke-width="2.4"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>'
+      : '<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#A9B6C4" stroke-width="2.2"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>';
+    return '<span class="share' + (sh.state === 'shared' || sh.state === 'requested' ? '' : ' none') + '">' + ic + esc(sh.state === 'shared' ? 'Shared' : sh.state === 'requested' ? 'Asked' : 'Not shared') + '</span>';
+  }
+
   function custById(id) { for (var i = 0; i < CUSTOMERS.length; i++) if (CUSTOMERS[i].id === id) return CUSTOMERS[i]; return null; }
   var ACME = custById('acme');
   function holds(c, p) { return c.products.indexOf(p) >= 0; }
@@ -1087,7 +1201,8 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
     persona: null, cview: 'home', aview: 'overview', period: 3, itab: null,
     saCustomer: null, expanded: { 'orbit.ins': true, 'pulse.ins': true, 'compass.ins': true, 'cross.exec': true },
     catProduct: 'all', catGroup: 'product', catQuery: '',
-    cProduct: 'all', cStatus: 'all', cQuery: '', reason: 'Customer request', adding: false
+    cProduct: 'all', cStatus: 'all', cQuery: '', reason: 'Customer request', adding: false,
+    agview: 'overview', agCustomer: null, asking: false
   };
   var LOG = [
     { when: '25 Nov 2026, 10:15 am', cust: 'Vertex Engineering (Pvt) Ltd', change: 'Pulse and Ledger added', reason: 'New subscription' },
@@ -1302,7 +1417,7 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
   }
 
   /* ---------- views: show/hide ---------- */
-  var signin = $('signin'), app = $('app'), admin = $('admin'), dock = $('dock');
+  var signin = $('signin'), app = $('app'), admin = $('admin'), dock = $('dock'), agentEl = $('agent');
   var Q = [];
   function flush() { var q = Q; Q = []; q.forEach(function (f) { f(); }); }
   function toast(msg) {
@@ -1317,7 +1432,14 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
     dock.hidden = false; document.body.classList.add('has-dock');
     dock.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-persona') === p)); });
     closeMenus();
-    if (p === 'admin') {
+    agentEl.hidden = p !== 'agent';
+    if (p === 'agent') {
+      app.hidden = true; admin.hidden = true;
+      document.title = 'Evokes Business Software \u00B7 Partner';
+      renderAgent();
+      if (focus !== false) $('ag-title').focus({ preventScroll: true });
+      window.scrollTo(0, 0);
+    } else if (p === 'admin') {
       app.hidden = true; admin.hidden = false;
       document.title = 'Evokes Business Software — Super Admin';
       renderAdmin(); window.scrollTo(0, 0);
@@ -1335,7 +1457,7 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
   }
   function signOut() {
     closeMenus();
-    app.hidden = true; admin.hidden = true; dock.hidden = true; document.body.classList.remove('has-dock');
+    app.hidden = true; admin.hidden = true; agentEl.hidden = true; dock.hidden = true; document.body.classList.remove('has-dock');
     signin.hidden = false; S.persona = null;
     document.title = 'Evokes Business Software — sign in';
     window.scrollTo(0, 0); $('email').focus();
@@ -1650,6 +1772,7 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
       h += '</tr>';
     });
     h += '</tbody></table></div>';
+    h += partnerPanel(me);
     h += '<section class="panel" style="margin-top:22px"><h2 class="sechead">Set by Evokes for Acme Traders</h2><p style="font-size:14px;color:var(--muted);margin-bottom:12px">You can’t change these here. They follow your subscription.</p>';
     SOLD.forEach(function (p) {
       var pr = findProduct(p), on = holds(ACME, p);
@@ -1657,6 +1780,147 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
     });
     h += '<div class="kv"><span style="color:var(--muted)">Overview across products</span><span style="font-weight:550">' + (companyHas('overview') ? 'On' : ACME.products.length < 2 ? 'Turns on with a second product' : 'Off') + '</span></div></section>';
     host.innerHTML = h;
+  }
+
+  function partnerPanel(me) {
+    var a = agentById(AGENT_OF.acme), sh = shareOf(ACME), owner = me.role === 'Owner';
+    var h = '<section class="panel partner-card" style="margin-top:22px"><h2 class="sechead">Your Evokes partner</h2>' +
+      '<p style="font-size:14.5px;color:var(--ink-2);margin-bottom:6px"><b style="color:var(--ink);font-weight:650">' + esc(a.name) + '</b>, ' + esc(a.firm) + ' (' + esc(a.kind.toLowerCase()) + '), brought Acme Traders to EBS. Your partner sees your subscription and whether your team is using EBS, never your records, unless you share them here.</p>';
+    if (sh.state === 'requested') {
+      h += '<div class="note" style="margin:14px 0 0">' + IC.info + '<span><b style="color:var(--ink);font-weight:600">' + esc(a.name) + ' asks to see:</b> ' + esc(sh.areas.map(function (x) { return SHARE_NAMES[x]; }).join(', ')) + '. Sharing lets your partner open these areas in read-only form. Every visit appears in your activity log, and you can stop sharing at any time.</span></div>';
+      h += owner ? '<div class="btnrow"><button type="button" class="btn sm" data-pshare="approve">Share these with ' + esc(a.name.split(' ')[0]) + '</button><button type="button" class="btn ghost-btn sm" data-pshare="decline">Decline</button></div>'
+        : '<p style="font-size:13.5px;color:var(--dim);margin-top:10px">Waiting for the account holder, Nuwan Perera, to decide.</p>';
+    } else if (sh.state === 'shared') {
+      h += '<p style="font-size:13.5px;color:var(--muted);margin:12px 0 8px">Shared with your partner since ' + esc(sh.since) + '. ' + (owner ? 'Switch any area off to stop sharing it.' : 'Only the account holder can change this.') + '</p><div style="display:flex;flex-wrap:wrap;gap:18px">' +
+        shareOptions(ACME).map(function (x) {
+          return '<span class="swrow"><button class="sw" role="switch" aria-checked="' + (sh.areas.indexOf(x) >= 0) + '" data-parea="' + x + '" aria-label="' + esc(SHARE_NAMES[x] + ' shared with ' + a.name) + '"' + (owner ? '' : ' disabled') + '></button><small>' + esc(SHARE_NAMES[x]) + '</small></span>';
+        }).join('') + '</div>';
+      if (owner) h += '<div class="btnrow"><button type="button" class="btn ghost-btn sm" data-pshare="stop">Stop sharing everything</button></div>';
+    } else {
+      h += '<p style="font-size:13.5px;color:var(--dim);margin-top:10px">Nothing is shared with your partner. If ' + esc(a.name.split(' ')[0]) + ' asks for access, the request appears here for the account holder.</p>';
+    }
+    h += '<p style="font-size:12.5px;color:var(--dim);margin-top:12px">Your partner does not use one of your seats.</p></section>';
+    return h;
+  }
+
+  /* ---------- partner agent side ---------- */
+  function me_agent() { return agentById('malith'); }
+  function renderAgent() {
+    var a = me_agent(), v = S.agview, host = $('ag-view'), t = $('ag-title'), sub = $('ag-sub');
+    document.querySelectorAll('#ag-nav button').forEach(function (b) {
+      var bv = b.getAttribute('data-view');
+      if (bv === v || (v === 'customer' && bv === 'customers')) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
+    });
+    var cs = agentCustomers(a), by = function (st) { return cs.filter(function (c) { return c.status === st; }).length; };
+    if (v === 'overview') {
+      t.textContent = greet() + ', ' + a.name.split(' ')[0] + '.';
+      sub.textContent = cs.length + ' customers came to EBS through you: ' + by('Active') + ' active, ' + by('Trial') + ' on trial, ' + by('Overdue') + ' overdue. ' + a.invites.length + ' more have your invite.';
+      host.innerHTML = agOverview(a, cs);
+    } else if (v === 'customers') {
+      t.textContent = 'My customers'; sub.textContent = 'Every business that subscribed through your invite. Open one to see its subscription and what it shares with you.';
+      host.innerHTML = agCustomers(a, cs);
+    } else if (v === 'customer') {
+      var c = custById(S.agCustomer); t.textContent = c.name; sub.textContent = c.city + ' · ' + c.form + ' · customer since ' + monthName(c.since);
+      host.innerHTML = agDetail(a, c);
+    } else {
+      t.textContent = 'Commission'; sub.textContent = 'What you earn on the customers you brought. Paid monthly by Evokes.';
+      host.innerHTML = agCommission(a, cs);
+    }
+    flush();
+  }
+  function agNote() {
+    return '<div class="note" style="margin-bottom:22px">' + IC.shield + '<span>You see each customer’s subscription: products, seats, status and whether their team is using EBS. Their records and figures stay private unless their account holder shares them with you, and they can stop sharing at any time.</span></div>';
+  }
+  function agMonthly(a, cs) {
+    var mk = ['2026-06', '2026-07', '2026-08', '2026-09', '2026-10', '2026-11'];
+    return { mk: mk, values: mk.map(function (m) {
+      var v = 0;
+      if (m === '2026-11') { cs.forEach(function (c) { v += commissionOf(c, a); }); return v; }
+      cs.forEach(function (c) { if (c.since < m && c.status !== 'Trial') v += Math.round((FEE[c.id] || 0) * a.rate / 100); });
+      return v;
+    }) };
+  }
+  function agOverview(a, cs) {
+    var month = 0; cs.forEach(function (c) { month += commissionOf(c, a); });
+    var shared = cs.filter(function (c) { return shareOf(c).state === 'shared'; }).length;
+    var h = agNote() + '<div class="stats">' +
+      stat('Customers', String(cs.length), '<span class="d flat"><small>' + cs.filter(function (c) { return c.status === 'Active'; }).length + ' paying · ' + cs.filter(function (c) { return c.status !== 'Active'; }).length + ' not paying yet or overdue</small></span>') +
+      stat('Invites waiting', String(a.invites.length), '<span class="d flat"><small>not subscribed yet</small></span>') +
+      stat('Commission this month', rs(month), '<span class="d flat"><small>' + a.rate + '% of what they pay · sample</small></span>') +
+      stat('Sharing with you', shared + ' of ' + cs.length, '<span class="d flat"><small>customers who share records</small></span>') + '</div>';
+    var att = [];
+    cs.forEach(function (c) {
+      if (c.status === 'Overdue') att.push({ ic: IC.clock, t: c.name + ' has an overdue payment.', s: 'No commission until they pay. If the account is suspended, their team loses access.', id: c.id });
+      if (c.status === 'Trial') att.push({ ic: IC.clock, t: c.name + ' is on its free trial' + (c.used ? '.' : ', and nobody has signed in yet.'), s: c.used ? 'Commission starts with their first paid month.' : 'A call from you now is the best way to get them started.', id: c.id });
+      if (c.status === 'Active' && !c.used) att.push({ ic: IC.trend, t: 'Nobody at ' + c.name + ' has opened Insights in 30 days.', s: 'They pay for graphs they are not using. A short walkthrough may help them keep the subscription.', id: c.id });
+    });
+    var noLedger = cs.filter(function (c) { return !holds(c, 'ledger') && c.status !== 'Suspended'; });
+    if (noLedger.length) att.push({ ic: IC.box, t: noLedger.length + ' of your customers do not have Ledger.', s: 'As their accountant, Ledger is where you would work in their books, once they share it with you.', go: 'customers' });
+    h += '<section class="card"><h3>Needs your attention</h3><p class="cs">From your customers’ subscriptions only. Nothing here comes from their records.</p><div style="margin-top:8px">' +
+      att.map(function (x) { return '<div class="hl"><span class="ic">' + x.ic + '</span><span style="flex:1;min-width:0"><span class="t">' + esc(x.t) + '</span><span class="s">' + esc(x.s) + '</span></span><button type="button" class="linkbtn" ' + (x.id ? 'data-agopen="' + x.id + '"' : 'data-agview="' + x.go + '"') + '>Open</button></div>'; }).join('') + '</div></section>';
+    h += grid([card('ag-comm', 'Commission by month', 'Jun to Nov 2026 · sample figures'),
+      '<section class="card"><h3>Invite a customer</h3><p class="cs">Anyone who subscribes through your link is added to your customers.</p>' +
+      '<div class="reflink"><code id="ag-link">ebs.evokestech.com/join/' + esc(a.code) + '</code><button type="button" class="btn ghost-btn sm" data-agcopy>Copy link</button></div>' +
+      '<div style="margin-top:16px">' + a.invites.map(function (i) { return '<div class="kv"><span><span style="font-weight:600;color:var(--ink)">' + esc(i.name) + '</span><br><span style="font-size:12.5px;color:var(--dim)">' + esc(i.who) + ' · sent ' + esc(i.sent) + '</span></span><span style="font-size:13px;color:var(--muted)">' + esc(i.state) + '</span></div>'; }).join('') + '</div></section>']);
+    Q.push(function () {
+      var m = agMonthly(a, cs);
+      colChart($('ag-comm'), { labels: m.mk.map(function (x) { return monthName(x).slice(0, 3); }), fullLabels: m.mk.map(function (x) { return monthName(x); }), tableHead: 'Month',
+        series: [{ name: 'Commission', color: 'var(--c-pulse)', values: m.values }], fmt: rs, short: rs, tick: function (v) { return v >= 1000 ? (v / 1000) + 'K' : String(v); }, aria: 'Commission by month, sample figures' });
+    });
+    return h;
+  }
+  function agCustomers(a, cs) {
+    return agNote() + '<div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Customer</th><th scope="col">Products</th><th scope="col">Seats used</th><th scope="col">Status</th><th scope="col">Using EBS</th><th scope="col">Shared with you</th><th class="n" scope="col">Commission this month</th></tr></thead><tbody>' +
+      cs.map(function (c) {
+        return '<tr class="clickable" data-agrow="' + c.id + '"><td class="first" data-h="Customer"><button type="button" class="linkbtn" data-agopen="' + c.id + '" style="color:var(--ink);font-size:14.5px;text-align:left;padding:0">' + esc(c.name) + '</button><span class="sub">' + esc(c.city) + ' · ' + esc(c.form) + ' · since ' + monthName(c.since) + '</span></td>' +
+          '<td data-h="Products">' + pills(c) + '</td><td data-h="Seats used">' + esc(seatText(c)) + '</td><td data-h="Status">' + statusHTML(c.status) + '</td>' +
+          '<td data-h="Using EBS">' + (c.used ? 'Yes, this month' : '<span style="color:var(--dim)">No sign-in in 30 days</span>') + '</td><td data-h="Shared with you">' + shareHTML(c) + '</td><td class="n" data-h="Commission">' + (earns(c) ? rs(commissionOf(c, a)) : '<span style="color:var(--dim)">None yet</span>') + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+  function agDetail(a, c) {
+    var sh = shareOf(c), opts = shareOptions(c);
+    var h = '<button type="button" class="linkbtn" data-agview="customers" style="margin-bottom:16px">← All my customers</button>';
+    h += '<div class="stats">' + stat('Status', c.status, '') + stat('Seat band', c.band, '<span class="d flat"><small>' + esc(seatText(c)) + ' used</small></span>') +
+      stat('Products', String(c.products.length), '<span class="d flat"><small>' + esc(c.products.map(function (p) { return findProduct(p).name; }).join(', ')) + '</small></span>') +
+      stat('Commission this month', earns(c) ? rs(commissionOf(c, a)) : 'None yet', '<span class="d flat"><small>' + a.rate + '% · sample</small></span>') + '</div>';
+    h += '<section class="panel" style="margin-bottom:18px"><h2 class="sechead">What ' + esc(c.name) + ' shares with you</h2>';
+    if (sh.state === 'shared') {
+      h += '<p style="font-size:14.5px;color:var(--ink-2)">Shared by their account holder since ' + esc(sh.since) + ': <b style="color:var(--ink);font-weight:600">' + esc(shareText(c)) + '</b>.</p>' +
+        '<div class="btnrow"><button type="button" class="btn sm" data-agvisit="' + c.id + '">Open shared areas</button></div>' +
+        '<p style="font-size:12.5px;color:var(--dim);margin-top:10px">Read-only. Each visit appears in ' + esc(c.name) + '’s activity log.</p>';
+    } else if (sh.state === 'requested') {
+      h += '<p style="font-size:14.5px;color:var(--ink-2)">You asked for: <b style="color:var(--ink);font-weight:600">' + esc(sh.areas.map(function (x) { return SHARE_NAMES[x]; }).join(', ')) + '</b>. Waiting for their account holder to decide.</p>';
+    } else if (S.asking) {
+      h += '<p style="font-size:14.5px;color:var(--ink-2)">Choose what to ask for. Their account holder decides, and can stop sharing at any time.</p><div class="req-areas" role="group" aria-label="Areas to ask for">' +
+        opts.map(function (x) { return '<label><input type="checkbox" data-askarea="' + x + '"' + (x === 'overview' || x === 'ledger' ? ' checked' : '') + '>' + esc(SHARE_NAMES[x]) + '</label>'; }).join('') + '</div>' +
+        '<p id="ag-msg" role="status" style="font-size:13.5px;color:var(--bad);min-height:20px"></p>' +
+        '<div class="btnrow" style="margin-top:4px"><button type="button" class="btn sm" data-agsend="' + c.id + '">Send request</button><button type="button" class="btn ghost-btn sm" data-agcancel>Cancel</button></div>';
+    } else {
+      h += '<p style="font-size:14.5px;color:var(--ink-2)">' + (sh.state === 'declined' ? 'Their account holder declined your last request. You can ask again if their needs change.' : 'Nothing is shared with you yet. You see their subscription only.') + '</p>' +
+        '<div class="btnrow"><button type="button" class="btn ghost-btn sm" data-agask="' + c.id + '">Ask for access</button></div>';
+    }
+    h += '</section>';
+    h += '<section class="panel"><h2 class="sechead">Subscription</h2>' +
+      '<div class="kv"><span style="color:var(--muted)">Products</span><span style="font-weight:550">' + pills(c) + '</span></div>' +
+      '<div class="kv"><span style="color:var(--muted)">Not yet held</span><span style="font-weight:550">' + (esc(SOLD.filter(function (p) { return !holds(c, p); }).map(function (p) { return findProduct(p).name; }).join(', ')) || 'Every product') + '</span></div>' +
+      '<div class="kv"><span style="color:var(--muted)">Seats</span><span style="font-weight:550">' + esc(seatText(c)) + ', band ' + esc(c.band) + '</span></div>' +
+      '<div class="kv"><span style="color:var(--muted)">Using EBS</span><span style="font-weight:550">' + (c.used ? 'Yes, people signed in this month' : 'No sign-in in the last 30 days') + '</span></div>' +
+      '<div class="kv"><span style="color:var(--muted)">Customer since</span><span style="font-weight:550">' + monthName(c.since) + '</span></div></section>';
+    return h;
+  }
+  function agCommission(a, cs) {
+    var month = 0, todate = 0, m = agMonthly(a, cs);
+    cs.forEach(function (c) { month += commissionOf(c, a); });
+    m.values.forEach(function (v) { todate += v; });
+    var h = '<div class="note" style="margin-bottom:22px">' + IC.info + '<span>Proposed terms, to be confirmed by Evokes: ' + a.rate + '% of what each customer you brought pays Evokes each month, after discounts and before VAT, from their first paid month while the account stays active. Free trial months earn nothing; an overdue month is paid once the customer pays. All amounts on this page are samples.</span></div>';
+    h += '<div class="stats">' + stat('Your rate', a.rate + '%', '<span class="d flat"><small>set by Evokes</small></span>') + stat('This month', rs(month), '<span class="d flat"><small>November 2026 · sample</small></span>') +
+      stat('Jun to Nov 2026', rs(todate), '<span class="d flat"><small>sample</small></span>') + stat('Next payment', '10 Dec 2026', '<span class="d flat"><small>for November</small></span>') + '</div>';
+    h += '<div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Customer</th><th scope="col">Status</th><th scope="col">Earns commission</th><th class="n" scope="col">This month</th></tr></thead><tbody>' +
+      cs.map(function (c) {
+        var why = c.status === 'Active' ? 'Yes' : c.status === 'Trial' ? 'After the free trial' : c.status === 'Overdue' ? 'Held until they pay' : 'No, account suspended';
+        return '<tr><td class="first" data-h="Customer"><span style="font-weight:600">' + esc(c.name) + '</span><span class="sub">' + esc(c.products.map(function (p) { return findProduct(p).name; }).join(', ')) + ' · ' + esc(c.band) + ' seats</span></td><td data-h="Status">' + statusHTML(c.status) + '</td><td data-h="Earns commission">' + why + '</td><td class="n" data-h="This month">' + rs(commissionOf(c, a)) + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+    return h;
   }
 
   /* ---------- Super Admin side ---------- */
@@ -1676,8 +1940,11 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
       t.textContent = 'Customers'; sub.textContent = 'Open a company to see its products and switch modules or features on or off for the whole company.';
       host.innerHTML = saCustomers();
     } else if (v === 'customer') {
-      var c = custById(S.saCustomer); t.textContent = c.name; sub.textContent = c.city + ' · ' + c.form + ' · customer since ' + monthName(c.since);
+      var c = custById(S.saCustomer); t.textContent = c.name; sub.textContent = c.city + ' · ' + c.form + ' · customer since ' + monthName(c.since) + ' · ' + (AGENT_OF[c.id] ? 'brought by ' + agentById(AGENT_OF[c.id]).name + ', partner agent' : 'came to Evokes directly');
       host.innerHTML = saDetail(c);
+    } else if (v === 'agents') {
+      t.textContent = 'Agents'; sub.textContent = 'Partners who bring customers to EBS. You set each agent\u2019s commission rate; agents see their customers\u2019 subscriptions, never their records.';
+      host.innerHTML = saAgents();
     } else if (v === 'catalogue') {
       t.textContent = 'Feature catalogue'; sub.textContent = 'Every module and feature, grouped by product. Sales and marketing work from this list.';
       host.innerHTML = saCatalogue();
@@ -1718,6 +1985,26 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
     return h;
   }
 
+  function saAgents() {
+    var brought = CUSTOMERS.filter(function (c) { return AGENT_OF[c.id]; }).length, due = 0, inv = 0;
+    AGENTS.forEach(function (a) { agentCustomers(a).forEach(function (c) { due += commissionOf(c, a); }); inv += a.invites.length; });
+    var h = '<div class="note" style="margin-bottom:22px">' + IC.shield + '<span>An agent sees each of their customers’ products, seats, status and whether people are using EBS, and earns commission on what those customers pay. An agent sees a customer’s records only if that customer’s account holder shares them, and the customer can stop sharing at any time.</span></div>';
+    h += '<div class="stats">' + stat('Agents', String(AGENTS.length), '<span class="d flat"><small>' + AGENTS.map(function (a) { return a.industry; }).join(' · ') + '</small></span>') +
+      stat('Customers brought by agents', brought + ' of ' + CUSTOMERS.length, '<span class="d flat"><small>the rest came to Evokes directly</small></span>') +
+      stat('Invites waiting', String(inv), '<span class="d flat"><small>sent by agents, not yet subscribed</small></span>') +
+      stat('Commission this month', rs(due), '<span class="d flat"><small>sample figure · terms not final</small></span>') + '</div>';
+    h += '<div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Agent</th><th scope="col">Industry</th><th scope="col">Customers</th><th class="n" scope="col">Invites</th><th class="n" scope="col">Rate</th><th class="n" scope="col">Commission this month</th><th scope="col">Partner since</th></tr></thead><tbody>' +
+      AGENTS.map(function (a) {
+        var cs = agentCustomers(a), by = function (st) { return cs.filter(function (c) { return c.status === st; }).length; }, cm = 0;
+        cs.forEach(function (c) { cm += commissionOf(c, a); });
+        var mix = ['Active', 'Trial', 'Overdue', 'Suspended'].filter(function (st) { return by(st); }).map(function (st) { return by(st) + ' ' + st.toLowerCase(); }).join(' · ');
+        return '<tr><td class="first" data-h="Agent"><span style="font-weight:600">' + esc(a.name) + '</span><span class="sub">' + esc(a.firm) + ' · ' + esc(a.city) + '</span></td><td data-h="Industry">' + esc(a.industry) + '</td>' +
+          '<td data-h="Customers">' + cs.length + (mix ? ' <span style="color:var(--dim)">(' + mix + ')</span>' : '') + '</td><td class="n" data-h="Invites">' + a.invites.length + '</td><td class="n" data-h="Rate">' + a.rate + '%</td><td class="n" data-h="Commission">' + rs(cm) + '</td><td data-h="Partner since">' + monthName(a.since) + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+    h += '<p style="font-size:13px;color:var(--dim);margin-top:12px">The 5% rate is a placeholder until Evokes works out its margins. Commission amounts here are samples.</p>';
+    return h;
+  }
+
   function saCustomers() {
     var h = '<div class="filters" role="group" aria-label="Filters"><span class="lbl">Product</span>' +
       [['all', 'All']].concat(SOLD.map(function (p) { return [p, findProduct(p).name]; })).map(function (o) {
@@ -1734,10 +2021,10 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
       return (S.cProduct === 'all' || holds(c, S.cProduct)) && (S.cStatus === 'all' || c.status === S.cStatus) && (!q || c.name.toLowerCase().indexOf(q) >= 0 || c.city.toLowerCase().indexOf(q) >= 0);
     });
     if (!rows.length) return '<p style="font-size:14px;color:var(--muted);padding:18px 0">No companies match these filters.</p>';
-    return '<p style="font-size:13px;color:var(--dim);margin-bottom:10px">' + rows.length + ' of ' + CUSTOMERS.length + ' companies</p><div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Company</th><th scope="col">Products</th><th scope="col">Seat band</th><th scope="col">Seats used</th><th scope="col">Status</th><th class="n" scope="col">Changes from standard</th><th scope="col">Since</th></tr></thead><tbody>' +
+    return '<p style="font-size:13px;color:var(--dim);margin-bottom:10px">' + rows.length + ' of ' + CUSTOMERS.length + ' companies</p><div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Company</th><th scope="col">Products</th><th scope="col">Seat band</th><th scope="col">Seats used</th><th scope="col">Status</th><th class="n" scope="col">Changes from standard</th><th scope="col">Brought by</th><th scope="col">Since</th></tr></thead><tbody>' +
       rows.map(function (c) {
         return '<tr class="clickable" data-row="' + c.id + '"><td class="first" data-h="Company"><button type="button" class="linkbtn" data-open="' + c.id + '" style="color:var(--ink);font-size:14.5px;text-align:left;padding:0">' + esc(c.name) + '</button><span class="sub">' + esc(c.city) + ' \u00B7 ' + esc(c.form) + '</span></td>' +
-          '<td data-h="Products">' + pills(c) + '</td><td data-h="Seat band">' + esc(c.band) + '</td><td data-h="Seats used">' + esc(seatText(c)) + '</td><td data-h="Status">' + statusHTML(c.status) + '</td><td class="n" data-h="Changes">' + (offCount(c) || '—') + '</td><td data-h="Since">' + monthName(c.since) + '</td></tr>';
+          '<td data-h="Products">' + pills(c) + '</td><td data-h="Seat band">' + esc(c.band) + '</td><td data-h="Seats used">' + esc(seatText(c)) + '</td><td data-h="Status">' + statusHTML(c.status) + '</td><td class="n" data-h="Changes">' + (offCount(c) || '—') + '</td><td data-h="Brought by">' + (AGENT_OF[c.id] ? esc(agentById(AGENT_OF[c.id]).name) : '<span style="color:var(--dim)">Direct</span>') + '</td><td data-h="Since">' + monthName(c.since) + '</td></tr>';
       }).join('') + '</tbody></table></div>';
   }
 
@@ -1859,33 +2146,34 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
     if (!email || email.indexOf('@') < 1) { msg.textContent = 'Enter a work email address to continue.'; $('email').focus(); return; }
     msg.textContent = '';
     S.cview = 'home'; S.aview = 'overview';
-    setPersona(/@evokestech\.com$/.test(email) ? 'admin' : /dinithi/.test(email) ? 'staff' : 'owner');
+    setPersona(/@evokestech\.com$/.test(email) ? 'admin' : /gunasekara|partner/.test(email) ? 'agent' : /dinithi/.test(email) ? 'staff' : 'owner');
   });
   $('sso').addEventListener('click', function () { S.cview = 'home'; setPersona('owner'); });
   document.querySelectorAll('[data-persona]').forEach(function (b) {
     b.addEventListener('click', function () {
       var p = b.getAttribute('data-persona');
-      if (signin.hidden === false) { S.cview = 'home'; S.aview = 'overview'; }
+      if (signin.hidden === false) { S.cview = 'home'; S.aview = 'overview'; S.agview = 'overview'; }
       setPersona(p);
     });
   });
 
   function closeMenus() {
-    [['acct', 'acct-menu'], ['sa-acct', 'sa-menu']].forEach(function (m) { $(m[1]).hidden = true; $(m[0]).setAttribute('aria-expanded', 'false'); });
+    [['acct', 'acct-menu'], ['sa-acct', 'sa-menu'], ['ag-acct', 'ag-menu']].forEach(function (m) { $(m[1]).hidden = true; $(m[0]).setAttribute('aria-expanded', 'false'); });
   }
-  [['acct', 'acct-menu'], ['sa-acct', 'sa-menu']].forEach(function (m) {
+  [['acct', 'acct-menu'], ['sa-acct', 'sa-menu'], ['ag-acct', 'ag-menu']].forEach(function (m) {
     $(m[0]).addEventListener('click', function (e) {
       e.stopPropagation(); var menu = $(m[1]), open = menu.hidden; closeMenus(); menu.hidden = !open; $(m[0]).setAttribute('aria-expanded', String(open));
     });
   });
   document.addEventListener('click', function (e) {
-    ['acct-menu', 'sa-menu'].forEach(function (id) { var mn = $(id); if (!mn.hidden && !mn.contains(e.target)) closeMenus(); });
+    ['acct-menu', 'sa-menu', 'ag-menu'].forEach(function (id) { var mn = $(id); if (!mn.hidden && !mn.contains(e.target)) closeMenus(); });
   });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { var was = !$('acct-menu').hidden ? 'acct' : !$('sa-menu').hidden ? 'sa-acct' : null; closeMenus(); if (was) $(was).focus(); }
+    if (e.key === 'Escape') { var was = !$('acct-menu').hidden ? 'acct' : !$('sa-menu').hidden ? 'sa-acct' : !$('ag-menu').hidden ? 'ag-acct' : null; closeMenus(); if (was) $(was).focus(); }
   });
   $('signout').addEventListener('click', signOut);
   $('sa-signout').addEventListener('click', signOut);
+  $('ag-signout').addEventListener('click', signOut);
 
   $('cust-nav').addEventListener('click', function (e) {
     var b = e.target.closest('button[data-view]'); if (!b) return;
@@ -1932,6 +2220,54 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
       toast(u.name + (GRANTS[uid][a] ? ' can now see ' : ' no longer sees ') + areaById(a).name + ' Insights.');
     }
   });
+  app.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-pshare]');
+    if (b) {
+      var act = b.getAttribute('data-pshare'), sh = shareOf(ACME), a = agentById(AGENT_OF.acme);
+      if (act === 'approve') { sh.state = 'shared'; sh.since = 'Nov 2026'; toast('Shared with ' + a.name + '. Each visit will appear in your activity log.'); }
+      else if (act === 'decline') { sh.state = 'declined'; sh.areas = []; toast('Request declined. ' + a.name + ' sees your subscription only.'); }
+      else { sh.state = 'none'; sh.areas = []; toast(a.name + ' no longer sees any of your records.'); }
+      SHARE.acme = sh; renderCustomer(); return;
+    }
+    var pa = e.target.closest('[data-parea]');
+    if (pa && !pa.disabled) {
+      var x = pa.getAttribute('data-parea'), s2 = shareOf(ACME), ix = s2.areas.indexOf(x);
+      if (ix >= 0) s2.areas.splice(ix, 1); else s2.areas.push(x);
+      if (!s2.areas.length) s2.state = 'none';
+      renderCustomer(); var again = document.querySelector('[data-parea="' + x + '"]'); if (again) again.focus();
+      toast(SHARE_NAMES[x] + (ix >= 0 ? ' is no longer shared with ' : ' is now shared with ') + agentById(AGENT_OF.acme).name + '.');
+    }
+  });
+
+  agentEl.addEventListener('click', function (e) {
+    var t = e.target, b;
+    if ((b = t.closest('[data-agopen]')) || (b = t.closest('tr[data-agrow]'))) {
+      S.agCustomer = b.getAttribute('data-agopen') || b.getAttribute('data-agrow'); S.agview = 'customer'; S.asking = false; renderAgent(); $('ag-title').focus({ preventScroll: true }); window.scrollTo(0, 0); return;
+    }
+    if ((b = t.closest('[data-agview]'))) { S.agview = b.getAttribute('data-agview'); renderAgent(); $('ag-title').focus({ preventScroll: true }); window.scrollTo(0, 0); return; }
+    if (t.closest('[data-agcopy]')) {
+      var link = 'https://' + $('ag-link').textContent;
+      try { navigator.clipboard.writeText(link); } catch (err) { /* clipboard unavailable */ }
+      toast('Invite link copied: ' + link); return;
+    }
+    if ((b = t.closest('[data-agask]'))) { S.asking = true; renderAgent(); var f = document.querySelector('[data-askarea]'); if (f) f.focus(); return; }
+    if (t.closest('[data-agcancel]')) { S.asking = false; renderAgent(); return; }
+    if ((b = t.closest('[data-agsend]'))) {
+      var id = b.getAttribute('data-agsend'), picked = [];
+      document.querySelectorAll('[data-askarea]').forEach(function (cb) { if (cb.checked) picked.push(cb.getAttribute('data-askarea')); });
+      if (!picked.length) { $('ag-msg').textContent = 'Choose at least one area to ask for.'; return; }
+      SHARE[id] = { state: 'requested', areas: picked }; S.asking = false; renderAgent();
+      toast('Request sent to ' + (id === 'acme' ? 'Nuwan Perera, the account holder' : 'the account holder') + '. You will see their answer here.'); return;
+    }
+    if ((b = t.closest('[data-agvisit]'))) {
+      toast('In the live platform this opens ' + custById(b.getAttribute('data-agvisit')).name + '’s shared areas, read-only. The prototype stops here.'); return;
+    }
+  });
+  $('ag-nav').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-view]'); if (!b) return;
+    S.agview = b.getAttribute('data-view'); S.asking = false; renderAgent(); $('ag-title').focus({ preventScroll: true }); window.scrollTo(0, 0);
+  });
+
   app.addEventListener('keydown', function (e) {
     var t = e.target; if (!t.matches || !t.matches('[role="tab"]')) return;
     if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
@@ -1983,6 +2319,7 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
       if (!S.persona) return;
       var ae = document.activeElement, aid = ae && ae.id;
       if (S.persona === 'admin') { if (S.aview === 'overview') renderAdmin(); }
+      else if (S.persona === 'agent') { if (S.agview === 'overview') renderAgent(); }
       else if (S.cview === 'insights' || S.cview === 'home') renderCustomer();
       if (aid && $(aid)) $(aid).focus({ preventScroll: true });
     }, 180);
@@ -1990,7 +2327,7 @@ html.light .dock button[aria-pressed="true"]{background:#EEF2F6;border-color:rgb
 
   /* clone brand marks into the Super Admin header */
   var lock = document.querySelector('#app .topbar .lock');
-  if (lock) $('sa-lock').innerHTML = lock.innerHTML;
+  if (lock) { $('sa-lock').innerHTML = lock.innerHTML; $('ag-lock').innerHTML = lock.innerHTML; }
   var ghost = document.querySelector('#app .hero .ghost');
   if (ghost) document.querySelector('#admin .hero .layer').appendChild(ghost.cloneNode(true));
 })();
