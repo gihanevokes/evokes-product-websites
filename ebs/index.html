@@ -1791,7 +1791,6 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       h += '</tr>';
     });
     h += '</tbody></table></div>';
-    h += partnerPanel(me);
     h += '<section class="panel" style="margin-top:22px"><h2 class="sechead">Set by Evokes for Acme Traders</h2><p style="font-size:14px;color:var(--muted);margin-bottom:12px">You can’t change these here. They follow your subscription.</p>';
     SOLD.forEach(function (p) {
       var pr = findProduct(p), on = holds(ACME, p);
@@ -1801,11 +1800,6 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     host.innerHTML = h;
   }
 
-  function partnerPanel(me) {
-    var a = agentById(AGENT_OF.acme);
-    return '<section class="panel partner-card" style="margin-top:22px"><h2 class="sechead">Your Evokes partner</h2>' +
-      '<p style="font-size:14.5px;color:var(--ink-2)"><b style="color:var(--ink);font-weight:650">' + esc(a.name) + '</b>, ' + esc(a.firm) + ' (' + esc(a.kind.toLowerCase()) + '), brought Acme Traders to EBS. Your partner sees your subscription and whether your team is using EBS, never your records or figures.</p></section>';
-  }
 
   /* ---------- partner agent side ---------- */
   function me_agent() { return agentById('malith'); }
