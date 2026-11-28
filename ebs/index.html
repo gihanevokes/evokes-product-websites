@@ -1126,8 +1126,6 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   var PARTNER_FEATS = [
     ['invite', 'Invite customers with a personal link'],
     ['usage', 'See whether each customer’s team is using EBS'],
-    ['ask', 'Ask customers to share records'],
-    ['figures', 'See figures from customers who share them'],
     ['commission', 'Commission statement']
   ];
   function pOn(a, f) { return a.status === 'Active' && !a.off[f] || (f === 'commission' && !a.off[f]); }
@@ -1804,24 +1802,9 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   }
 
   function partnerPanel(me) {
-    var a = agentById(AGENT_OF.acme), sh = shareOf(ACME), owner = me.role === 'Owner';
-    var h = '<section class="panel partner-card" style="margin-top:22px"><h2 class="sechead">Your Evokes partner</h2>' +
-      '<p style="font-size:14.5px;color:var(--ink-2);margin-bottom:6px"><b style="color:var(--ink);font-weight:650">' + esc(a.name) + '</b>, ' + esc(a.firm) + ' (' + esc(a.kind.toLowerCase()) + '), brought Acme Traders to EBS. Your partner sees your subscription and whether your team is using EBS, never your records, unless you share them here.</p>';
-    if (sh.state === 'requested') {
-      h += '<div class="note" style="margin:14px 0 0">' + IC.info + '<span><b style="color:var(--ink);font-weight:600">' + esc(a.name) + ' asks to see:</b> ' + esc(sh.areas.map(function (x) { return SHARE_NAMES[x]; }).join(', ')) + '. Sharing lets your partner open these areas in read-only form. Every visit appears in your activity log, and you can stop sharing at any time.</span></div>';
-      h += owner ? '<div class="btnrow"><button type="button" class="btn sm" data-pshare="approve">Share these with ' + esc(a.name.split(' ')[0]) + '</button><button type="button" class="btn ghost-btn sm" data-pshare="decline">Decline</button></div>'
-        : '<p style="font-size:13.5px;color:var(--dim);margin-top:10px">Waiting for the account holder, Nuwan Perera, to decide.</p>';
-    } else if (sh.state === 'shared') {
-      h += '<p style="font-size:13.5px;color:var(--muted);margin:12px 0 8px">Shared with your partner since ' + esc(sh.since) + '. ' + (owner ? 'Switch any area off to stop sharing it.' : 'Only the account holder can change this.') + '</p><div style="display:flex;flex-wrap:wrap;gap:18px">' +
-        shareOptions(ACME).map(function (x) {
-          return '<span class="swrow"><button class="sw" role="switch" aria-checked="' + (sh.areas.indexOf(x) >= 0) + '" data-parea="' + x + '" aria-label="' + esc(SHARE_NAMES[x] + ' shared with ' + a.name) + '"' + (owner ? '' : ' disabled') + '></button><small>' + esc(SHARE_NAMES[x]) + '</small></span>';
-        }).join('') + '</div>';
-      if (owner) h += '<div class="btnrow"><button type="button" class="btn ghost-btn sm" data-pshare="stop">Stop sharing everything</button></div>';
-    } else {
-      h += '<p style="font-size:13.5px;color:var(--dim);margin-top:10px">Nothing is shared with your partner. If ' + esc(a.name.split(' ')[0]) + ' asks for access, the request appears here for the account holder.</p>';
-    }
-    h += '<p style="font-size:12.5px;color:var(--dim);margin-top:12px">Your partner does not use one of your seats.</p></section>';
-    return h;
+    var a = agentById(AGENT_OF.acme);
+    return '<section class="panel partner-card" style="margin-top:22px"><h2 class="sechead">Your Evokes partner</h2>' +
+      '<p style="font-size:14.5px;color:var(--ink-2)"><b style="color:var(--ink);font-weight:650">' + esc(a.name) + '</b>, ' + esc(a.firm) + ' (' + esc(a.kind.toLowerCase()) + '), brought Acme Traders to EBS. Your partner sees your subscription and whether your team is using EBS, never your records or figures.</p></section>';
   }
 
   /* ---------- partner agent side ---------- */
@@ -1838,7 +1821,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       sub.textContent = cs.length + ' customers came to EBS through you: ' + by('Active') + ' active, ' + by('Trial') + ' on trial, ' + by('Overdue') + ' overdue. ' + a.invites.length + ' more have your invite.';
       host.innerHTML = agOverview(a, cs);
     } else if (v === 'customers') {
-      t.textContent = 'My customers'; sub.textContent = 'Every business that subscribed through your invite. Open one to see its subscription and what it shares with you.';
+      t.textContent = 'My customers'; sub.textContent = 'Every business that subscribed through your invite. Open one to see its subscription.';
       host.innerHTML = agCustomers(a, cs);
     } else if (v === 'customer') {
       var c = custById(S.agCustomer); t.textContent = c.name; sub.textContent = c.city + ' · ' + c.form + ' · customer since ' + monthName(c.since);
@@ -1851,8 +1834,8 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   }
   function agNote() {
     var a = me_agent();
-    return (a.status !== 'Active' ? '<div class="note" style="margin-bottom:14px">' + IC.info + '<span><b style="color:var(--ink);font-weight:600">Evokes has paused your partner account.</b> You can still see your customers and commission, but you can’t invite or ask customers for now.</span></div>' : '') +
-      '<div class="note" style="margin-bottom:22px">' + IC.shield + '<span>You see each customer’s subscription: products, seats, status and whether their team is using EBS. Their records and figures stay private unless their account holder shares them with you, and they can stop sharing at any time.</span></div>';
+    return (a.status !== 'Active' ? '<div class="note" style="margin-bottom:14px">' + IC.info + '<span><b style="color:var(--ink);font-weight:600">Evokes has paused your partner account.</b> You can still see your customers and commission, but you can’t invite new customers for now.</span></div>' : '') +
+      '<div class="note" style="margin-bottom:22px">' + IC.shield + '<span>You see each customer’s subscription: products, seats, status and whether their team is using EBS. Their records and figures stay private to them.</span></div>';
   }
   function agMonthly(a, cs) {
     var mk = ['2026-06', '2026-07', '2026-08', '2026-09', '2026-10', '2026-11'];
@@ -1870,15 +1853,15 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       stat('Customers', String(cs.length), '<span class="d flat"><small>' + cs.filter(function (c) { return c.status === 'Active'; }).length + ' paying · ' + cs.filter(function (c) { return c.status !== 'Active'; }).length + ' not paying yet or overdue</small></span>') +
       stat('Earned since June', a.off.commission ? 'Hidden' : rs(agMonthly(a, cs).values.reduce(function (x, y) { return x + y; }, 0)), '<span class="d flat"><small>commission on your customers \u00B7 sample</small></span>') +
       stat('Commission this month', a.off.commission ? 'Hidden' : rs(month), '<span class="d flat"><small>' + a.rate + '% of what they pay \u00B7 sample</small></span>') +
-      stat('Sharing with you', shared + ' of ' + cs.length, '<span class="d flat"><small>customers who share records</small></span>') + '</div>';
+      stat('Invites waiting', String(a.invites.length), '<span class="d flat"><small>not subscribed yet</small></span>') + '</div>';
     var att = [];
     cs.forEach(function (c) {
       if (c.status === 'Overdue') att.push({ ic: IC.clock, t: c.name + ' has an overdue payment.', s: 'No commission until they pay. If the account is suspended, their team loses access.', id: c.id });
-      if (c.status === 'Trial') att.push({ ic: IC.clock, t: c.name + ' is on its free trial' + (c.used ? '.' : ', and nobody has signed in yet.'), s: c.used ? 'Commission starts with their first paid month.' : 'A call from you now is the best way to get them started.', id: c.id });
-      if (c.status === 'Active' && !c.used) att.push({ ic: IC.trend, t: 'Nobody at ' + c.name + ' has opened Insights in 30 days.', s: 'They pay for graphs they are not using. A short walkthrough may help them keep the subscription.', id: c.id });
+      if (c.status === 'Trial') att.push({ ic: IC.clock, t: c.name + ' is on its free trial' + (c.used || !pOn(a, 'usage') ? '.' : ', and nobody has signed in yet.'), s: c.used || !pOn(a, 'usage') ? 'Commission starts with their first paid month.' : 'A call from you now is the best way to get them started.', id: c.id });
+      if (c.status === 'Active' && !c.used && pOn(a, 'usage')) att.push({ ic: IC.trend, t: 'Nobody at ' + c.name + ' has opened Insights in 30 days.', s: 'They pay for graphs they are not using. A short walkthrough may help them keep the subscription.', id: c.id });
     });
     var noLedger = cs.filter(function (c) { return !holds(c, 'ledger') && c.status !== 'Suspended'; });
-    if (noLedger.length) att.push({ ic: IC.box, t: noLedger.length + ' of your customers do not have Ledger.', s: 'As their accountant, Ledger is where you would work in their books, once they share it with you.', go: 'customers' });
+    if (noLedger.length) att.push({ ic: IC.box, t: noLedger.length + ' of your customers do not have Ledger.', s: 'As their accountant, you can recommend Ledger where it fits.', go: 'customers' });
     h += '<section class="card"><h3>Needs your attention</h3><p class="cs">From your customers’ subscriptions only. Nothing here comes from their records.</p><div style="margin-top:8px">' +
       att.map(function (x) { return '<div class="hl"><span class="ic">' + x.ic + '</span><span style="flex:1;min-width:0"><span class="t">' + esc(x.t) + '</span><span class="s">' + esc(x.s) + '</span></span><button type="button" class="linkbtn" ' + (x.id ? 'data-agopen="' + x.id + '"' : 'data-agview="' + x.go + '"') + '>Open</button></div>'; }).join('') + '</div></section>';
     h += grid([card('ag-comm', 'Commission by month', 'Jun to Nov 2026 · sample figures'),
@@ -1893,17 +1876,11 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     return h;
   }
   function agCustomers(a, cs) {
-    var sharing = cs.filter(function (c) { return shareOf(c).state === 'shared'; });
-    var figs = pOn(a, 'figures') && sharing.length ? '<section class="card" style="margin-bottom:18px"><h3>From customers who share with you</h3><p class="cs">Read-only figures your customers chose to share. Only you and they can see these.</p><div style="margin-top:8px">' +
-      sharing.map(function (c) {
-        var items = []; shareOf(c).areas.forEach(function (ar) { sharedFigures(c, ar).forEach(function (f) { items.push(f[0] + ': ' + f[1]); }); });
-        return '<div class="hl"><span class="ic">' + IC.trend + '</span><span style="flex:1;min-width:0"><span class="t">' + esc(c.name) + '</span><span class="s">' + esc(items.join(' \u00B7 ')) + '</span></span><button type="button" class="linkbtn" data-agopen="' + c.id + '">Open</button></div>';
-      }).join('') + '</div></section>' : '';
-    return agNote() + figs + '<div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Customer</th><th scope="col">Products</th><th scope="col">Seats used</th><th scope="col">Status</th><th scope="col">Using EBS</th><th scope="col">Shared with you</th><th class="n" scope="col">Commission this month</th></tr></thead><tbody>' +
+    return agNote() + '<div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Customer</th><th scope="col">Products</th><th scope="col">Seats used</th><th scope="col">Status</th><th scope="col">Using EBS</th><th class="n" scope="col">Commission this month</th></tr></thead><tbody>' +
       cs.map(function (c) {
         return '<tr class="clickable" data-agrow="' + c.id + '"><td class="first" data-h="Customer"><button type="button" class="linkbtn" data-agopen="' + c.id + '" style="color:var(--ink);font-size:14.5px;text-align:left;padding:0">' + esc(c.name) + '</button><span class="sub">' + esc(c.city) + ' · ' + esc(c.form) + ' · since ' + monthName(c.since) + '</span></td>' +
           '<td data-h="Products">' + pills(c) + '</td><td data-h="Seats used">' + esc(seatText(c)) + '</td><td data-h="Status">' + statusHTML(c.status) + '</td>' +
-          '<td data-h="Using EBS">' + (!pOn(a, 'usage') ? '<span style="color:var(--dim)">Hidden by Evokes</span>' : c.used ? 'Yes, this month' : '<span style="color:var(--dim)">No sign-in in 30 days</span>') + '</td><td data-h="Shared with you">' + shareHTML(c) + '</td><td class="n" data-h="Commission">' + (earns(c) ? rs(commissionOf(c, a)) : '<span style="color:var(--dim)">None yet</span>') + '</td></tr>';
+          '<td data-h="Using EBS">' + (!pOn(a, 'usage') ? '<span style="color:var(--dim)">Hidden by Evokes</span>' : c.used ? 'Yes, this month' : '<span style="color:var(--dim)">No sign-in in 30 days</span>') + '</td><td class="n" data-h="Commission">' + (earns(c) ? rs(commissionOf(c, a)) : '<span style="color:var(--dim)">None yet</span>') + '</td></tr>';
       }).join('') + '</tbody></table></div>';
   }
   function agDetail(a, c) {
@@ -1912,29 +1889,11 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     h += '<div class="stats">' + stat('Status', c.status, '') + stat('Seat band', c.band, '<span class="d flat"><small>' + esc(seatText(c)) + ' used</small></span>') +
       stat('Products', String(c.products.length), '<span class="d flat"><small>' + esc(c.products.map(function (p) { return findProduct(p).name; }).join(', ')) + '</small></span>') +
       stat('Commission this month', earns(c) ? rs(commissionOf(c, a)) : 'None yet', '<span class="d flat"><small>' + a.rate + '% · sample</small></span>') + '</div>';
-    h += '<section class="panel" style="margin-bottom:18px"><h2 class="sechead">What ' + esc(c.name) + ' shares with you</h2>';
-    if (sh.state === 'shared') {
-      h += '<p style="font-size:14.5px;color:var(--ink-2)">Shared by their account holder since ' + esc(sh.since) + ': <b style="color:var(--ink);font-weight:600">' + esc(shareText(c)) + '</b>.</p>' +
-        (pOn(a, 'figures') ? '<div class="stats" style="margin-top:16px">' + sh.areas.map(function (ar) { return sharedFigures(c, ar).map(function (f) { return stat(f[0], f[1], '<span class="d flat"><small>' + esc(SHARE_NAMES[ar]) + '</small></span>'); }).join(''); }).join('') + '</div>' : '') +
-        '<div class="btnrow"><button type="button" class="btn sm" data-agvisit="' + c.id + '">Open shared areas</button></div>' +
-        '<p style="font-size:12.5px;color:var(--dim);margin-top:10px">Read-only. Each visit appears in ' + esc(c.name) + '’s activity log.</p>';
-    } else if (sh.state === 'requested') {
-      h += '<p style="font-size:14.5px;color:var(--ink-2)">You asked for: <b style="color:var(--ink);font-weight:600">' + esc(sh.areas.map(function (x) { return SHARE_NAMES[x]; }).join(', ')) + '</b>. Waiting for their account holder to decide.</p>';
-    } else if (S.asking) {
-      h += '<p style="font-size:14.5px;color:var(--ink-2)">Choose what to ask for. Their account holder decides, and can stop sharing at any time.</p><div class="req-areas" role="group" aria-label="Areas to ask for">' +
-        opts.map(function (x) { return '<label><input type="checkbox" data-askarea="' + x + '"' + (x === 'overview' || x === 'ledger' ? ' checked' : '') + '>' + esc(SHARE_NAMES[x]) + '</label>'; }).join('') + '</div>' +
-        '<p id="ag-msg" role="status" style="font-size:13.5px;color:var(--bad);min-height:20px"></p>' +
-        '<div class="btnrow" style="margin-top:4px"><button type="button" class="btn sm" data-agsend="' + c.id + '">Send request</button><button type="button" class="btn ghost-btn sm" data-agcancel>Cancel</button></div>';
-    } else {
-      h += '<p style="font-size:14.5px;color:var(--ink-2)">' + (sh.state === 'declined' ? 'Their account holder declined your last request. You can ask again if their needs change.' : 'Nothing is shared with you yet. You see their subscription only.') + '</p>' +
-        (pOn(a, 'ask') ? '<div class="btnrow"><button type="button" class="btn ghost-btn sm" data-agask="' + c.id + '">Ask for access</button></div>' : '<p style="font-size:13.5px;color:var(--dim);margin-top:10px">Asking customers to share is turned off by Evokes for now.</p>');
-    }
-    h += '</section>';
     h += '<section class="panel"><h2 class="sechead">Subscription</h2>' +
       '<div class="kv"><span style="color:var(--muted)">Products</span><span style="font-weight:550">' + pills(c) + '</span></div>' +
       '<div class="kv"><span style="color:var(--muted)">Not yet held</span><span style="font-weight:550">' + (esc(SOLD.filter(function (p) { return !holds(c, p); }).map(function (p) { return findProduct(p).name; }).join(', ')) || 'Every product') + '</span></div>' +
       '<div class="kv"><span style="color:var(--muted)">Seats</span><span style="font-weight:550">' + esc(seatText(c)) + ', band ' + esc(c.band) + '</span></div>' +
-      '<div class="kv"><span style="color:var(--muted)">Using EBS</span><span style="font-weight:550">' + (c.used ? 'Yes, people signed in this month' : 'No sign-in in the last 30 days') + '</span></div>' +
+      '<div class="kv"><span style="color:var(--muted)">Using EBS</span><span style="font-weight:550">' + (!pOn(a, 'usage') ? 'Hidden by Evokes' : c.used ? 'Yes, people signed in this month' : 'No sign-in in the last 30 days') + '</span></div>' +
       '<div class="kv"><span style="color:var(--muted)">Customer since</span><span style="font-weight:550">' + monthName(c.since) + '</span></div></section>';
     return h;
   }
@@ -2022,7 +1981,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   function saAgents() {
     var brought = CUSTOMERS.filter(function (c) { return AGENT_OF[c.id]; }).length, due = 0, inv = 0;
     AGENTS.forEach(function (a) { agentCustomers(a).forEach(function (c) { due += commissionOf(c, a); }); inv += a.invites.length; });
-    var h = '<div class="note" style="margin-bottom:22px">' + IC.shield + '<span>An agent sees each of their customers’ products, seats, status and whether people are using EBS, and earns commission on what those customers pay. An agent sees a customer’s records only if that customer’s account holder shares them, and the customer can stop sharing at any time.</span></div>';
+    var h = '<div class="note" style="margin-bottom:22px">' + IC.shield + '<span>An agent sees each of their customers’ products, seats, status and whether people are using EBS, and earns commission on what those customers pay. An agent never sees a customer\u2019s records or figures.</span></div>';
     h += '<div class="stats">' + stat('Agents', String(AGENTS.length), '<span class="d flat"><small>' + AGENTS.map(function (a) { return a.industry; }).join(' · ') + '</small></span>') +
       stat('Customers brought by agents', brought + ' of ' + CUSTOMERS.length, '<span class="d flat"><small>the rest came to Evokes directly</small></span>') +
       stat('Invites waiting', String(inv), '<span class="d flat"><small>sent by agents, not yet subscribed</small></span>') +
@@ -2054,23 +2013,23 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     var cs = agentCustomers(a), cm = 0; cs.forEach(function (c) { cm += commissionOf(c, a); });
     var shared = cs.filter(function (c) { return shareOf(c).state === 'shared'; }).length;
     var h = '<button type="button" class="linkbtn" data-aview="agents" style="margin-bottom:16px">← All agents</button>';
-    h += '<div class="stats">' + stat('Status', a.status, '<span class="d flat"><small>' + (a.status === 'Active' ? 'partner portal open' : 'can view, cannot invite or ask') + '</small></span>') +
-      stat('Customers', String(cs.length), '<span class="d flat"><small>' + shared + ' share records with this partner</small></span>') +
+    h += '<div class="stats">' + stat('Status', a.status, '<span class="d flat"><small>' + (a.status === 'Active' ? 'partner portal open' : 'can view, cannot invite') + '</small></span>') +
+      stat('Customers', String(cs.length), '<span class="d flat"><small>' + cs.filter(function (c) { return c.status === 'Active'; }).length + ' paying</small></span>') +
       stat('Commission rate', a.rate + '%', '<span class="d flat"><small>placeholder until margins are set</small></span>') +
       stat('Commission this month', rs(cm), '<span class="d flat"><small>sample figure</small></span>') + '</div>';
     h += '<div class="filters" style="justify-content:space-between"><span style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><label class="lbl" for="reason">Reason logged with each change</label><select class="select" id="reason">' +
       ['Partner request', 'Performance review', 'Terms changed', 'Compliance', 'Correction'].map(function (r) { return '<option' + (S.reason === r ? ' selected' : '') + '>' + r + '</option>'; }).join('') + '</select></span>' +
       '<span style="display:flex;align-items:center;gap:10px"><label class="lbl" for="pa-rate">Commission rate</label><select class="select" id="pa-rate">' + [3, 5, 7, 10].map(function (r) { return '<option value="' + r + '"' + (a.rate === r ? ' selected' : '') + '>' + r + '%</option>'; }).join('') + '</select></span></div>';
-    h += '<div class="note" style="margin-bottom:20px">' + IC.shield + '<span>You control this partner the way you control a customer: every change takes effect on their next page load and is logged with its reason. You see which customers share records with this partner, never what they share.</span></div>';
+    h += '<div class="note" style="margin-bottom:20px">' + IC.shield + '<span>You control this partner the way you control a customer: every change takes effect on their next page load and is logged with its reason. Partners see subscriptions and usage only, never a customer\u2019s records.</span></div>';
     h += '<section class="prod"><div class="prod-h"><span><span class="nm">Partner portal</span> <span class="ds2">' + esc(a.firm) + '</span></span><span class="sp"><span class="swrow"><small>' + (a.status === 'Active' ? 'Active' : 'Paused') + '</small>' +
       sw('data-pstatus="' + a.id + '"', a.status === 'Active', 'Partner account for ' + a.name) + '</span></span></div>' +
       PARTNER_FEATS.map(function (f) {
         return '<div class="mod" style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0"><span class="feat" style="font-size:14px">' + esc(f[1]) + (a.off[f[0]] ? ' <span class="dev-mark">· off: ' + esc(a.off[f[0]]) + '</span>' : '') + '</span>' +
           sw('data-pfeat="' + f[0] + '"', !a.off[f[0]], f[1] + ' for ' + a.name, a.status !== 'Active' && f[0] !== 'commission') + '</div>';
       }).join('') + '</section>';
-    h += '<h2 class="sechead" style="margin:26px 0 12px">Customers this partner brought</h2><div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Customer</th><th scope="col">Products</th><th scope="col">Status</th><th scope="col">Shares records</th><th class="n" scope="col">Commission this month</th></tr></thead><tbody>' +
+    h += '<h2 class="sechead" style="margin:26px 0 12px">Customers this partner brought</h2><div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Customer</th><th scope="col">Products</th><th scope="col">Status</th><th class="n" scope="col">Commission this month</th></tr></thead><tbody>' +
       cs.map(function (c) {
-        return '<tr class="clickable" data-row="' + c.id + '"><td class="first" data-h="Customer"><button type="button" class="linkbtn" data-open="' + c.id + '" style="color:var(--ink);font-size:14.5px;text-align:left;padding:0">' + esc(c.name) + '</button><span class="sub">' + esc(c.city) + ' · since ' + monthName(c.since) + '</span></td><td data-h="Products">' + pills(c) + '</td><td data-h="Status">' + statusHTML(c.status) + '</td><td data-h="Shares records">' + (shareOf(c).state === 'shared' ? 'Yes' : shareOf(c).state === 'requested' ? 'Asked' : 'No') + '</td><td class="n" data-h="Commission">' + rs(commissionOf(c, a)) + '</td></tr>';
+        return '<tr class="clickable" data-row="' + c.id + '"><td class="first" data-h="Customer"><button type="button" class="linkbtn" data-open="' + c.id + '" style="color:var(--ink);font-size:14.5px;text-align:left;padding:0">' + esc(c.name) + '</button><span class="sub">' + esc(c.city) + ' · since ' + monthName(c.since) + '</span></td><td data-h="Products">' + pills(c) + '</td><td data-h="Status">' + statusHTML(c.status) + '</td><td class="n" data-h="Commission">' + rs(commissionOf(c, a)) + '</td></tr>';
       }).join('') + '</tbody></table></div>';
     return h;
   }
@@ -2391,7 +2350,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       a = agentById(b.getAttribute('data-pstatus')); a.status = a.status === 'Active' ? 'Paused' : 'Active';
       LOG.unshift({ when: nowStr(), cust: 'Partner: ' + a.name, change: 'Partner account ' + (a.status === 'Active' ? 'reactivated' : 'paused'), reason: S.reason });
       renderAdmin(); var ag = document.querySelector('[data-pstatus]'); if (ag) ag.focus();
-      toast(a.name + (a.status === 'Active' ? ' is active again.' : ' is paused: they can view, but cannot invite or ask customers.') + ' Logged as: ' + S.reason + '.'); return;
+      toast(a.name + (a.status === 'Active' ? ' is active again.' : ' is paused: they can view, but cannot invite customers.') + ' Logged as: ' + S.reason + '.'); return;
     }
     if ((b = t.closest('[data-pfeat]')) && !b.disabled) {
       a = agentById(S.saAgent); var f = b.getAttribute('data-pfeat'), nmf = PARTNER_FEATS.filter(function (x) { return x[0] === f; })[0][1];
