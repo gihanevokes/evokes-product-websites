@@ -653,7 +653,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
           <button type="button" data-persona="owner">Nuwan Perera<small>Managing Director, customer</small></button>
           <button type="button" data-persona="staff">Dinithi Wickramasinghe<small>Accounts Executive, customer</small></button>
           <button type="button" data-persona="admin">Vihan Nanayakkara<small>Evokes Super Admin</small></button>
-          <button type="button" data-persona="agent">Malith Gunasekara<small>Partner agent, chartered accountant</small></button>
+          <button type="button" data-persona="agent">Malith Gunasekara<small>Partner, chartered accountant</small></button>
         </div>
       </div>
     </div>
@@ -864,7 +864,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       <nav class="nav" aria-label="Super Admin" id="sa-nav">
         <button type="button" data-view="overview" aria-current="page">Overview</button>
         <button type="button" data-view="customers">Customers</button>
-        <button type="button" data-view="agents">Agents</button>
+        <button type="button" data-view="agents">Partners</button>
         <button type="button" data-view="catalogue">Feature catalogue</button>
         <button type="button" data-view="activity">Activity</button>
       </nav>
@@ -923,7 +923,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       </div>
     </div>
     <div class="menu" id="ag-menu" hidden>
-      <p>Signed in as<br><strong style="color:var(--ink);font-weight:600">Malith Gunasekara</strong><br>Partner agent, Gunasekara &amp; Co.</p>
+      <p>Signed in as<br><strong style="color:var(--ink);font-weight:600">Malith Gunasekara</strong><br>Partner &middot; chartered accountant</p>
       <button type="button" id="ag-signout">Sign out</button>
     </div>
   </header>
@@ -937,7 +937,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       <div>
         <h1 id="ag-title" tabindex="-1">Partner</h1>
         <p class="sub" id="ag-sub"></p>
-        <p style="font-size:13px;color:var(--dim);margin-top:18px">Evokes Business Software &middot; partner programme</p>
+        <p style="font-size:13px;color:var(--dim);margin-top:18px" id="ag-cap">Evokes Business Software &middot; partner privilege</p>
       </div>
     </div>
   </section>
@@ -955,7 +955,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   <button type="button" data-persona="owner" aria-pressed="false"><span class="lg">Managing Director</span><span class="sm">Director</span></button>
   <button type="button" data-persona="staff" aria-pressed="false"><span class="lg">Staff member</span><span class="sm">Staff</span></button>
   <button type="button" data-persona="admin" aria-pressed="false">Super Admin</button>
-  <button type="button" data-persona="agent" aria-pressed="false"><span class="lg">Partner agent</span><span class="sm">Agent</span></button>
+  <button type="button" data-persona="agent" aria-pressed="false"><span class="lg">Partner</span><span class="sm">Partner</span></button>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
@@ -1105,10 +1105,10 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   ];
   /* ---------- partner agents ---------- */
   var AGENTS = [
-    { id: 'malith', name: 'Malith Gunasekara', firm: 'Gunasekara & Co.', kind: 'Chartered accountants', industry: 'Accounting', city: 'Colombo', since: '2026-02', rate: 5, code: 'GUNASEKARA',
+    { id: 'malith', name: 'Malith Gunasekara', profession: 'Chartered accountant', email: 'malith.g@gmail.com', industry: 'Accounting', city: 'Colombo', since: '2026-02', rate: 5, code: 'GUNASEKARA',
       invites: [{ name: 'Kelani Bakers', who: 'Chamari Perera, owner', sent: '20 Nov 2026', state: 'Invite sent' }, { name: 'Sunrise Pharmacy', who: 'Dilan Rodrigo, owner', sent: '24 Nov 2026', state: 'Opened the invite' }] },
-    { id: 'nadeesha', name: 'Nadeesha Perera', firm: 'Perera Trade Advisory', kind: 'Import and export consultants', industry: 'Import and export', city: 'Negombo', since: '2026-05', rate: 5, code: 'PERERATRADE', invites: [{ name: 'Ocean Spice Exports', who: 'Owner', sent: '22 Nov 2026', state: 'Invite sent' }] },
-    { id: 'roshan', name: 'Roshan de Silva', firm: 'Hospitality Partners Lanka', kind: 'Hotel consultants', industry: 'Hotels and hospitality', city: 'Bentota', since: '2026-10', rate: 5, code: 'HOSPLANKA', invites: [] }
+    { id: 'nadeesha', name: 'Nadeesha Perera', profession: 'Import and export consultant', email: 'nadeesha.perera@yahoo.com', industry: 'Import and export', city: 'Negombo', since: '2026-05', rate: 5, code: 'PERERATRADE', invites: [{ name: 'Ocean Spice Exports', who: 'Owner', sent: '22 Nov 2026', state: 'Invite sent' }] },
+    { id: 'roshan', name: 'Roshan de Silva', profession: 'Hotel consultant', email: 'roshan.ds@outlook.com', industry: 'Hotels and hospitality', city: 'Bentota', since: '2026-10', rate: 5, code: 'HOSPLANKA', invites: [] }
   ];
   var AGENT_OF = { acme: 'malith', coastline: 'malith', harbour: 'malith', summit: 'malith', vertex: 'malith', meridian: 'malith', bluewave: 'nadeesha', northgate: 'nadeesha', palm: 'roshan' };
   /* sample monthly amounts, used only to show how commission adds up */
@@ -1144,7 +1144,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   function agentById(id) { for (var i = 0; i < AGENTS.length; i++) if (AGENTS[i].id === id) return AGENTS[i]; return null; }
   function agentCustomers(a) { return CUSTOMERS.filter(function (c) { return AGENT_OF[c.id] === a.id; }); }
   function earns(c) { return c.status === 'Active'; }
-  function commissionOf(c, a) { return earns(c) ? Math.round((FEE[c.id] || 0) * a.rate / 100) : 0; }
+  function commissionOf(c, a) { return earns(c) && a.status !== 'Ended' ? Math.round((FEE[c.id] || 0) * a.rate / 100) : 0; }
   function shareOptions(c) {
     var o = [];
     if (c.products.length > 1) o.push('overview');
@@ -1805,6 +1805,14 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   function me_agent() { return agentById('malith'); }
   function renderAgent() {
     var a = me_agent(), v = S.agview, host = $('ag-view'), t = $('ag-title'), sub = $('ag-sub');
+    $('ag-cap').textContent = 'Evokes Business Software \u00B7 partner privilege since ' + monthName(a.since) + ', granted by Evokes';
+    if (a.status === 'Ended') {
+      t.textContent = 'Your partner privilege has ended'; sub.textContent = 'Evokes has ended your partner privilege, so the partner portal is closed.';
+      host.innerHTML = '<div class="note">' + IC.info + '<span>If you think this is a mistake, contact your Evokes contact. Commission already earned is settled under the partner terms.</span></div>';
+      document.querySelectorAll('#ag-nav button').forEach(function (b) { b.hidden = true; });
+      return;
+    }
+    document.querySelectorAll('#ag-nav button').forEach(function (b) { b.hidden = false; });
     document.querySelectorAll('#ag-nav button').forEach(function (b) {
       var bv = b.getAttribute('data-view');
       if (bv === v || (v === 'customer' && bv === 'customers')) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
@@ -1828,7 +1836,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   }
   function agNote() {
     var a = me_agent();
-    return (a.status !== 'Active' ? '<div class="note" style="margin-bottom:14px">' + IC.info + '<span><b style="color:var(--ink);font-weight:600">Evokes has paused your partner account.</b> You can still see your customers and commission, but you can’t invite new customers for now.</span></div>' : '') +
+    return (a.status !== 'Active' ? '<div class="note" style="margin-bottom:14px">' + IC.info + '<span><b style="color:var(--ink);font-weight:600">Evokes has paused your partner privilege.</b> You can still see your customers and commission, but you can’t invite new customers for now.</span></div>' : '') +
       '<div class="note" style="margin-bottom:22px">' + IC.shield + '<span>You see each customer’s subscription: products, seats, status and whether their team is using EBS. Their records and figures stay private to them.</span></div>';
   }
   function agMonthly(a, cs) {
@@ -1844,7 +1852,7 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     var month = 0; cs.forEach(function (c) { month += commissionOf(c, a); });
     var shared = cs.filter(function (c) { return shareOf(c).state === 'shared'; }).length;
     var h = agNote() + '<div class="stats">' +
-      stat('Customers', String(cs.length), '<span class="d flat"><small>' + cs.filter(function (c) { return c.status === 'Active'; }).length + ' paying · ' + cs.filter(function (c) { return c.status !== 'Active'; }).length + ' not paying yet or overdue</small></span>') +
+      stat('Customers you brought', String(cs.length), '<span class="d flat"><small>' + cs.filter(function (c) { return c.status === 'Active'; }).length + ' paying · ' + cs.filter(function (c) { return c.status !== 'Active'; }).length + ' not paying yet or overdue</small></span>') +
       stat('Earned since June', a.off.commission ? 'Hidden' : rs(agMonthly(a, cs).values.reduce(function (x, y) { return x + y; }, 0)), '<span class="d flat"><small>commission on your customers \u00B7 sample</small></span>') +
       stat('Commission this month', a.off.commission ? 'Hidden' : rs(month), '<span class="d flat"><small>' + a.rate + '% of what they pay \u00B7 sample</small></span>') +
       stat('Invites waiting', String(a.invites.length), '<span class="d flat"><small>not subscribed yet</small></span>') + '</div>';
@@ -1924,13 +1932,13 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       t.textContent = 'Customers'; sub.textContent = 'Open a company to see its products and switch modules or features on or off for the whole company.';
       host.innerHTML = saCustomers();
     } else if (v === 'customer') {
-      var c = custById(S.saCustomer); t.textContent = c.name; sub.textContent = c.city + ' · ' + c.form + ' · customer since ' + monthName(c.since) + ' · ' + (AGENT_OF[c.id] ? 'brought by ' + agentById(AGENT_OF[c.id]).name + ', partner agent' : 'came to Evokes directly');
+      var c = custById(S.saCustomer); t.textContent = c.name; sub.textContent = c.city + ' · ' + c.form + ' · customer since ' + monthName(c.since) + ' · ' + (AGENT_OF[c.id] ? 'brought by ' + agentById(AGENT_OF[c.id]).name + ', partner' : 'came to Evokes directly');
       host.innerHTML = saDetail(c);
     } else if (v === 'agent') {
-      var pa = agentById(S.saAgent); t.textContent = pa.name; sub.textContent = pa.firm + ' · ' + pa.industry + ' · partner since ' + monthName(pa.since);
+      var pa = agentById(S.saAgent); t.textContent = pa.name; sub.textContent = pa.profession + ' · ' + pa.city + ' · partner privilege since ' + monthName(pa.since);
       host.innerHTML = saAgentDetail(pa);
     } else if (v === 'agents') {
-      t.textContent = 'Agents'; sub.textContent = 'Partners who bring customers to EBS. You set each agent\u2019s commission rate; agents see their customers\u2019 subscriptions, never their records.';
+      t.textContent = 'Partners'; sub.textContent = 'Individuals who bring business to EBS. A partner account is a privilege Evokes grants, and can pause or end.';
       host.innerHTML = saAgents();
     } else if (v === 'catalogue') {
       t.textContent = 'Feature catalogue'; sub.textContent = 'Every module and feature, grouped by product. Sales and marketing work from this list.';
@@ -1975,28 +1983,28 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   function saAgents() {
     var brought = CUSTOMERS.filter(function (c) { return AGENT_OF[c.id]; }).length, due = 0, inv = 0;
     AGENTS.forEach(function (a) { agentCustomers(a).forEach(function (c) { due += commissionOf(c, a); }); inv += a.invites.length; });
-    var h = '<div class="note" style="margin-bottom:22px">' + IC.shield + '<span>An agent sees each of their customers’ products, seats, status and whether people are using EBS, and earns commission on what those customers pay. An agent never sees a customer\u2019s records or figures.</span></div>';
-    h += '<div class="stats">' + stat('Agents', String(AGENTS.length), '<span class="d flat"><small>' + AGENTS.map(function (a) { return a.industry; }).join(' · ') + '</small></span>') +
-      stat('Customers brought by agents', brought + ' of ' + CUSTOMERS.length, '<span class="d flat"><small>the rest came to Evokes directly</small></span>') +
-      stat('Invites waiting', String(inv), '<span class="d flat"><small>sent by agents, not yet subscribed</small></span>') +
+    var h = '<div class="note" style="margin-bottom:22px">' + IC.shield + '<span>A partner sees each of their customers’ products, seats, status and whether people are using EBS, and earns commission on what those customers pay. A partner never sees a customer\u2019s records or figures.</span></div>';
+    h += '<div class="stats">' + stat('Partners', String(AGENTS.filter(function (a) { return a.status !== 'Ended'; }).length), '<span class="d flat"><small>' + AGENTS.map(function (a) { return a.industry; }).join(' · ') + '</small></span>') +
+      stat('Customers brought by partners', brought + ' of ' + CUSTOMERS.length, '<span class="d flat"><small>the rest came to Evokes directly</small></span>') +
+      stat('Invites waiting', String(inv), '<span class="d flat"><small>sent by partners, not yet subscribed</small></span>') +
       stat('Commission this month', rs(due), '<span class="d flat"><small>sample figure · terms not final</small></span>') + '</div>';
-    h += '<div class="filters" style="justify-content:space-between;margin-bottom:14px"><span style="font-size:14px;color:var(--muted)">Open a partner to set their rate, pause them, or switch parts of the partner portal off.</span><button type="button" class="btn ghost-btn sm" data-addpartner' + (S.addingPartner ? ' disabled' : '') + '>Add partner</button></div>';
+    h += '<div class="filters" style="justify-content:space-between;margin-bottom:14px"><span style="font-size:14px;color:var(--muted)">Each partner is managed as an individual member. Open one to set their rate, pause or end their privilege, or switch parts of their portal off.</span><button type="button" class="btn ghost-btn sm" data-addpartner' + (S.addingPartner ? ' disabled' : '') + '>Grant partner privilege</button></div>';
     if (S.addingPartner) {
-      h += '<section class="panel" style="margin-bottom:18px"><h2 class="sechead">Add a partner</h2><div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end">' +
+      h += '<section class="panel" style="margin-bottom:18px"><h2 class="sechead">Grant partner privilege to a person</h2><div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end">' +
         '<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)">Full name<input class="search" id="pp-name" autocomplete="off"></label>' +
-        '<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)">Firm<input class="search" id="pp-firm" autocomplete="off"></label>' +
-        '<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)">Industry<input class="search" id="pp-ind" autocomplete="off" placeholder="For example, Accounting"></label>' +
+        '<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)">Email<input class="search" id="pp-firm" type="email" autocomplete="off"></label>' +
+        '<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)">Profession<input class="search" id="pp-ind" autocomplete="off" placeholder="For example, accountant"></label>' +
         '<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)">Commission rate<select class="select" id="pp-rate">' + [3, 5, 7, 10].map(function (r) { return '<option value="' + r + '"' + (r === 5 ? ' selected' : '') + '>' + r + '%</option>'; }).join('') + '</select></label></div>' +
         '<p id="pp-msg" role="status" style="font-size:13.5px;color:var(--bad);min-height:20px;margin-top:10px"></p>' +
-        '<div class="btnrow" style="margin-top:4px"><button type="button" class="btn sm" data-savepartner>Add partner</button><button type="button" class="btn ghost-btn sm" data-cancelpartner>Cancel</button></div>' +
-        '<p style="font-size:12.5px;color:var(--dim);margin-top:12px">They get an email to set their password, and a personal invite link.</p></section>';
+        '<div class="btnrow" style="margin-top:4px"><button type="button" class="btn sm" data-savepartner>Grant privilege</button><button type="button" class="btn ghost-btn sm" data-cancelpartner>Cancel</button></div>' +
+        '<p style="font-size:12.5px;color:var(--dim);margin-top:12px">The person gets an email to set their password, and a personal invite link. Partners are individuals, not companies.</p></section>';
     }
-    h += '<div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Agent</th><th scope="col">Industry</th><th scope="col">Customers</th><th class="n" scope="col">Invites</th><th class="n" scope="col">Rate</th><th class="n" scope="col">Commission this month</th><th scope="col">Partner since</th></tr></thead><tbody>' +
+    h += '<div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Partner</th><th scope="col">Industry</th><th scope="col">Customers</th><th class="n" scope="col">Invites</th><th class="n" scope="col">Rate</th><th class="n" scope="col">Commission this month</th><th scope="col">Partner since</th></tr></thead><tbody>' +
       AGENTS.map(function (a) {
         var cs = agentCustomers(a), by = function (st) { return cs.filter(function (c) { return c.status === st; }).length; }, cm = 0;
         cs.forEach(function (c) { cm += commissionOf(c, a); });
         var mix = ['Active', 'Trial', 'Overdue', 'Suspended'].filter(function (st) { return by(st); }).map(function (st) { return by(st) + ' ' + st.toLowerCase(); }).join(' · ');
-        return '<tr class="clickable" data-agentrow="' + a.id + '"><td class="first" data-h="Agent"><button type="button" class="linkbtn" data-openagent="' + a.id + '" style="color:var(--ink);font-size:14.5px;text-align:left;padding:0">' + esc(a.name) + (a.status !== 'Active' ? ' <span class="tag">' + esc(a.status) + '</span>' : '') + '</button><span class="sub">' + esc(a.firm) + ' \u00B7 ' + esc(a.city) + '</span></td><td data-h="Industry">' + esc(a.industry) + '</td>' +
+        return '<tr class="clickable" data-agentrow="' + a.id + '"><td class="first" data-h="Partner"><button type="button" class="linkbtn" data-openagent="' + a.id + '" style="color:var(--ink);font-size:14.5px;text-align:left;padding:0">' + esc(a.name) + (a.status !== 'Active' ? ' <span class="tag">' + esc(a.status === 'Ended' ? 'Privilege ended' : 'Paused') + '</span>' : '') + '</button><span class="sub">' + esc(a.profession) + ' \u00B7 ' + esc(a.city) + '</span></td><td data-h="Industry">' + esc(a.industry) + '</td>' +
           '<td data-h="Customers">' + cs.length + (mix ? ' <span style="color:var(--dim)">(' + mix + ')</span>' : '') + '</td><td class="n" data-h="Invites">' + a.invites.length + '</td><td class="n" data-h="Rate">' + a.rate + '%</td><td class="n" data-h="Commission">' + rs(cm) + '</td><td data-h="Partner since">' + monthName(a.since) + '</td></tr>';
       }).join('') + '</tbody></table></div>';
     h += '<p style="font-size:13px;color:var(--dim);margin-top:12px">The 5% rate is a placeholder until Evokes works out its margins. Commission amounts here are samples.</p>';
@@ -2006,8 +2014,8 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
   function saAgentDetail(a) {
     var cs = agentCustomers(a), cm = 0; cs.forEach(function (c) { cm += commissionOf(c, a); });
     var shared = cs.filter(function (c) { return shareOf(c).state === 'shared'; }).length;
-    var h = '<button type="button" class="linkbtn" data-aview="agents" style="margin-bottom:16px">← All agents</button>';
-    h += '<div class="stats">' + stat('Status', a.status, '<span class="d flat"><small>' + (a.status === 'Active' ? 'partner portal open' : 'can view, cannot invite') + '</small></span>') +
+    var h = '<button type="button" class="linkbtn" data-aview="agents" style="margin-bottom:16px">← All partners</button>';
+    h += '<div class="stats">' + stat('Status', a.status, '<span class="d flat"><small>' + (a.status === 'Active' ? a.status === 'Active' ? 'privilege active' : 'privilege ended' : a.status === 'Paused' ? 'can view, cannot invite' : 'cannot sign in') + '</small></span>') +
       stat('Customers', String(cs.length), '<span class="d flat"><small>' + cs.filter(function (c) { return c.status === 'Active'; }).length + ' paying</small></span>') +
       stat('Commission rate', a.rate + '%', '<span class="d flat"><small>placeholder until margins are set</small></span>') +
       stat('Commission this month', rs(cm), '<span class="d flat"><small>sample figure</small></span>') + '</div>';
@@ -2015,12 +2023,14 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
       ['Partner request', 'Performance review', 'Terms changed', 'Compliance', 'Correction'].map(function (r) { return '<option' + (S.reason === r ? ' selected' : '') + '>' + r + '</option>'; }).join('') + '</select></span>' +
       '<span style="display:flex;align-items:center;gap:10px"><label class="lbl" for="pa-rate">Commission rate</label><select class="select" id="pa-rate">' + [3, 5, 7, 10].map(function (r) { return '<option value="' + r + '"' + (a.rate === r ? ' selected' : '') + '>' + r + '%</option>'; }).join('') + '</select></span></div>';
     h += '<div class="note" style="margin-bottom:20px">' + IC.shield + '<span>You control this partner the way you control a customer: every change takes effect on their next page load and is logged with its reason. Partners see subscriptions and usage only, never a customer\u2019s records.</span></div>';
-    h += '<section class="prod"><div class="prod-h"><span><span class="nm">Partner portal</span> <span class="ds2">' + esc(a.firm) + '</span></span><span class="sp"><span class="swrow"><small>' + (a.status === 'Active' ? 'Active' : 'Paused') + '</small>' +
-      sw('data-pstatus="' + a.id + '"', a.status === 'Active', 'Partner account for ' + a.name) + '</span></span></div>' +
+    h += '<section class="prod"><div class="prod-h"><span><span class="nm">Partner privilege</span> <span class="ds2">' + esc(a.profession) + ', partner since ' + monthName(a.since) + '</span></span><span class="sp"><span class="swrow"><small>' + (a.status === 'Active' ? 'Active' : 'Paused') + '</small>' +
+      (a.status === 'Ended' ? '' : sw('data-pstatus="' + a.id + '"', a.status === 'Active', 'Partner privilege for ' + a.name)) + '</span></span></div>' +
       PARTNER_FEATS.map(function (f) {
         return '<div class="mod" style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0"><span class="feat" style="font-size:14px">' + esc(f[1]) + (a.off[f[0]] ? ' <span class="dev-mark">· off: ' + esc(a.off[f[0]]) + '</span>' : '') + '</span>' +
           sw('data-pfeat="' + f[0] + '"', !a.off[f[0]], f[1] + ' for ' + a.name, a.status !== 'Active' && f[0] !== 'commission') + '</div>';
       }).join('') + '</section>';
+    h += a.status === 'Ended' ? '<p style="font-size:13.5px;color:var(--muted);margin-top:12px">This privilege has ended. The customers below stay with Evokes, and commission has stopped.</p>'
+      : '<div class="btnrow"><button type="button" class="btn ghost-btn sm" data-pend="' + a.id + '">End partner privilege</button></div><p style="font-size:12.5px;color:var(--dim);margin-top:8px">Ending it stops sign-in and commission. Customers this person brought stay with Evokes.</p>';
     h += '<h2 class="sechead" style="margin:26px 0 12px">Customers this partner brought</h2><div class="tbl-wrap"><table class="tbl cards"><thead><tr><th scope="col">Customer</th><th scope="col">Products</th><th scope="col">Status</th><th class="n" scope="col">Commission this month</th></tr></thead><tbody>' +
       cs.map(function (c) {
         return '<tr class="clickable" data-row="' + c.id + '"><td class="first" data-h="Customer"><button type="button" class="linkbtn" data-open="' + c.id + '" style="color:var(--ink);font-size:14.5px;text-align:left;padding:0">' + esc(c.name) + '</button><span class="sub">' + esc(c.city) + ' · since ' + monthName(c.since) + '</span></td><td data-h="Products">' + pills(c) + '</td><td data-h="Status">' + statusHTML(c.status) + '</td><td class="n" data-h="Commission">' + rs(commissionOf(c, a)) + '</td></tr>';
@@ -2336,15 +2346,20 @@ html.light .partner-card{border-color:rgba(0,137,111,.3);background:linear-gradi
     if (t.closest('[data-savepartner]')) {
       var nm = $('pp-name').value.trim(), fm = $('pp-firm').value.trim(), ind = $('pp-ind').value.trim();
       if (!nm) { $('pp-msg').textContent = 'Enter the partner’s full name.'; $('pp-name').focus(); return; }
-      var np = { id: 'p' + Date.now().toString(36), name: nm, firm: fm || nm, kind: ind || 'Partner', industry: ind || 'Not set', city: 'Sri Lanka', since: '2026-11', rate: +$('pp-rate').value, code: nm.split(' ')[0].toUpperCase(), invites: [], status: 'Active', off: {} };
-      AGENTS.push(np); LOG.unshift({ when: nowStr(), cust: 'Partner: ' + nm, change: 'Partner added at ' + np.rate + '% commission', reason: 'Partner request' });
-      S.addingPartner = false; renderAdmin(); toast(nm + ' added as a partner. They get an email to set their password.'); return;
+      var np = { id: 'p' + Date.now().toString(36), name: nm, email: fm, profession: ind || 'Partner', industry: ind || 'Not set', city: 'Sri Lanka', since: '2026-11', rate: +$('pp-rate').value, code: nm.split(' ')[0].toUpperCase(), invites: [], status: 'Active', off: {} };
+      AGENTS.push(np); LOG.unshift({ when: nowStr(), cust: 'Partner: ' + nm, change: 'Partner privilege granted at ' + np.rate + '% commission', reason: 'Partner request' });
+      S.addingPartner = false; renderAdmin(); toast('Partner privilege granted to ' + nm + '. They get an email to set their password.'); return;
+    }
+    if ((b = t.closest('[data-pend]'))) {
+      a = agentById(b.getAttribute('data-pend')); a.status = 'Ended';
+      LOG.unshift({ when: nowStr(), cust: 'Partner: ' + a.name, change: 'Partner privilege ended', reason: S.reason });
+      renderAdmin(); toast(a.name + '\u2019s partner privilege has ended. Logged as: ' + S.reason + '.'); return;
     }
     if ((b = t.closest('[data-pstatus]'))) {
       a = agentById(b.getAttribute('data-pstatus')); a.status = a.status === 'Active' ? 'Paused' : 'Active';
-      LOG.unshift({ when: nowStr(), cust: 'Partner: ' + a.name, change: 'Partner account ' + (a.status === 'Active' ? 'reactivated' : 'paused'), reason: S.reason });
+      LOG.unshift({ when: nowStr(), cust: 'Partner: ' + a.name, change: 'Partner privilege ' + (a.status === 'Active' ? 'restored' : 'paused'), reason: S.reason });
       renderAdmin(); var ag = document.querySelector('[data-pstatus]'); if (ag) ag.focus();
-      toast(a.name + (a.status === 'Active' ? ' is active again.' : ' is paused: they can view, but cannot invite customers.') + ' Logged as: ' + S.reason + '.'); return;
+      toast(a.name + (a.status === 'Active' ? ' \u2019s privilege is active again.' : ' \u2019s privilege is paused: they can view, but cannot invite customers.') + ' Logged as: ' + S.reason + '.'); return;
     }
     if ((b = t.closest('[data-pfeat]')) && !b.disabled) {
       a = agentById(S.saAgent); var f = b.getAttribute('data-pfeat'), nmf = PARTNER_FEATS.filter(function (x) { return x[0] === f; })[0][1];
